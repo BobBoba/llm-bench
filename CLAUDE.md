@@ -14,7 +14,7 @@ This directory is a PUBLIC GitHub repository (BobBoba/llm-bench). Everything com
 The full playbook lives in the `bench-model` skill (`~/.claude/skills/bench-model/`). Short version:
 
 1. Probe the model with one cheap call first (routing/endpoint/auth confirmed before a campaign).
-2. `node run-hard.mjs --selftest` before every campaign — references must pass their own oracles.
+2. `node runners/run-hard.mjs --selftest` before every campaign — references must pass their own oracles.
 3. Run the batteries with a fresh `OUT=results-….json`; runs are crash-safe and resumable.
 4. Update the sheet via the `gsheets_*.py` scripts (they preserve manual formatting — never delete conditional-format rules blindly).
 5. Commit results + any script changes: one commit per campaign, message names the model(s). Git history is the benchmarking journal.

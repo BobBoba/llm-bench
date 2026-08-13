@@ -38,7 +38,7 @@ A task is **solved** only if the language gate passes *and* 100% of hidden tests
 
 Design rules that turned out to matter:
 
-- **Every task ships a reference solution, and `node run-hard.mjs --selftest` runs all references through the production oracles.** A buggy hidden test fails every model at once and reads as their weakness — self-test catches harness/task drift before a campaign does.
+- **Every task ships a reference solution, and `node runners/run-hard.mjs --selftest` runs all references through the production oracles.** A buggy hidden test fails every model at once and reads as their weakness — self-test catches harness/task drift before a campaign does.
 - **Code extraction takes the *largest* fenced block, tolerates answers formatted as the input repo dump (`===== FILE: … =====` header, no fence), and strips trailing `Export-ModuleMember`** (legal in a `.psm1`, fatal when dot-sourcing a `.ps1`). A harness that only accepts tidy markdown measures formatting habits, not coding ability.
 - **Raw responses of failed units are dumped to disk.** Three kinds of silent failure were caught only this way: API errors returned as HTTP-200 "empty successes" in streaming mode, engine errors delivered *as response content*, and dump-format answers broken by the extractor.
 - **Failed *calls* (routing errors, timeouts) are not failed *tasks*** — they are recorded as errors and excluded from denominators.
@@ -55,13 +55,13 @@ Requirements: Node 20+, plus per-language toolchains you intend to grade (`cargo
 
 ```bash
 # validate all reference solutions against the oracles first
-node run-hard.mjs --selftest
+node runners/run-hard.mjs --selftest
 
 # cloud models via OpenRouter (key in OPENROUTER_API_KEY or /tmp/.orkey)
-LLM_CLIENT=openrouter OUT=results-my-run.json node run-hard.mjs openai/gpt-5.6-luna deepseek/deepseek-v3.2
+LLM_CLIENT=openrouter OUT=results-my-run.json node runners/run-hard.mjs openai/gpt-5.6-luna deepseek/deepseek-v3.2
 
 # local models via any OpenAI-compatible server (LM Studio, llama-server, etc.)
-LMSTUDIO_BASE=http://localhost:1234/v1 OUT=results-local.json node run-hard.mjs my-local-model
+LMSTUDIO_BASE=http://localhost:1234/v1 OUT=results-local.json node runners/run-hard.mjs my-local-model
 ```
 
 Runs are crash-safe (results are flushed after every unit) and resumable (`model|lang|task|run` keys are skipped when present). Useful knobs: `MAX_TOKENS` (default 40000), `LLM_DEADLINE_MS` (default 20 min per call), `BENCH_NO_STREAM=1` for servers whose streaming path is broken, `SINGLE_RUNS=N` to grow the sample.
@@ -72,40 +72,40 @@ Runs are crash-safe (results are flushed after every unit) and resumable (`model
 
 | File | Purpose |
 |---|---|
-| `tasks-hard-{rust,ts,julia,csharp,bash,pwsh}.js` | Task sets: spec, starter (for `edit`), visible tests, hidden tests, reference solution |
-| `tasks-hard-long.js` | Assembles the full 22-task set and builds `edit-long` prompts |
-| `context-filler.js` | Deterministic generator of plausible repository filler for `edit-long` (~63k tokens, target file at 2/3 depth) |
-| `run-hard.mjs` | Runner: prompt assembly, oracles, extraction, self-test, crash-safe resumable driver |
+| `tasks/tasks-hard-{rust,ts,julia,csharp,bash,pwsh}.js` | Task sets: spec, starter (for `edit`), visible tests, hidden tests, reference solution |
+| `tasks/tasks-hard-long.js` | Assembles the full 22-task set and builds `edit-long` prompts |
+| `tasks/context-filler.js` | Deterministic generator of plausible repository filler for `edit-long` (~63k tokens, target file at 2/3 depth) |
+| `runners/run-hard.mjs` | Runner: prompt assembly, oracles, extraction, self-test, crash-safe resumable driver |
 
 ### Standard batteries and probes
 
 | File | Purpose |
 |---|---|
-| `tasks-rust.js` + `run-rust.mjs` | Original Rust battery (3 tasks: expression parser, LRU, wordcount), single-shot ×2 + agentic tool-loop, cargo oracle + clippy |
-| `tasks-ts.js` + `run-ts.mjs` | TypeScript battery, dual gate (`tsc --strict` + tests), single-shot + agentic |
-| `tasks-knowledge.js` + `run-knowledge.mjs` + `judge-knowledge*.mjs` | Knowledge battery (5 axes: facts, reasoning, style, safety, long-form), graded 0–10 by a frontier judge — the one battery that is LLM-judged |
-| `run-tooluse*.mjs` | Tool-calling reliability probes (simple, calculator chain, hard multi-step, long-context) |
-| `run-longctx.mjs`, `run-multineedle.mjs` | NIAH and multi-needle retrieval at up to 262k context |
-| `probe-speed.mjs`, `run-temp-sweep.mjs`, `or-verify.mjs`, `fact-probe-detail.mjs` | Throughput probe, temperature sweep, OpenRouter routing/pricing verification, per-fact drilldown |
-| `run-*.sh` | Historical campaign orchestration (parallel groups, model lists, environment) — kept as provenance for every row in the results sheet |
+| `tasks/tasks-rust.js` + `runners/run-rust.mjs` | Original Rust battery (3 tasks: expression parser, LRU, wordcount), single-shot ×2 + agentic tool-loop, cargo oracle + clippy |
+| `tasks/tasks-ts.js` + `runners/run-ts.mjs` | TypeScript battery, dual gate (`tsc --strict` + tests), single-shot + agentic |
+| `tasks/tasks-knowledge.js` + `runners/run-knowledge.mjs` + `runners/judge-knowledge*.mjs` | Knowledge battery (5 axes: facts, reasoning, style, safety, long-form), graded 0–10 by a frontier judge — the one battery that is LLM-judged |
+| `runners/run-tooluse*.mjs` | Tool-calling reliability probes (simple, calculator chain, hard multi-step, long-context) |
+| `runners/run-longctx.mjs`, `runners/run-multineedle.mjs` | NIAH and multi-needle retrieval at up to 262k context |
+| `runners/probe-speed.mjs`, `runners/run-temp-sweep.mjs`, `runners/or-verify.mjs`, `runners/fact-probe-detail.mjs` | Throughput probe, temperature sweep, OpenRouter routing/pricing verification, per-fact drilldown |
+| `campaigns/*.sh` | Historical campaign orchestration (parallel groups, model lists, environment) — kept as provenance for every row in the results sheet |
 | `templates/` | Corrected Jinja chat templates for models whose upstream templates break tool-calling |
 
 ### Reporting
 
 | File | Purpose |
 |---|---|
-| `gsheets_hard_tab.py` | Aggregates hard-bench results into the public sheet tab (per-language medians, `long ×`, legend, header tooltips) |
-| `gsheets_add_models.py`, `gsheets_update_model_row.py`, `gsheets_add_ttc_column.py` | Standard-battery rows and time-to-correct columns |
-| `gsheets_common.py` | Shared sheet helpers, incl. gradient-rule sync that never touches manually-created formatting |
+| `reporting/gsheets_hard_tab.py` | Aggregates hard-bench results into the public sheet tab (per-language medians, `long ×`, legend, header tooltips) |
+| `reporting/gsheets_add_models.py`, `reporting/gsheets_update_model_row.py`, `reporting/gsheets_add_ttc_column.py` | Standard-battery rows and time-to-correct columns |
+| `reporting/gsheets_common.py` | Shared sheet helpers, incl. gradient-rule sync that never touches manually-created formatting |
 
 ### Clients
 
 | File | Purpose |
 |---|---|
-| `openrouter-client.mjs` | OpenRouter client (streaming TTFT/tok/s measurement, real `usage.cost`, privacy routing `data_collection: deny`) |
-| `lmstudio-client.mjs` | Client for any OpenAI-compatible local server (optional bearer auth, tool-call accumulation from stream deltas) |
-| `claudecode-client.mjs` | Runs prompts through a Claude Code subscription (`claude -p`) so subscription-only models can join the same tables |
-| `morph-client.mjs` | Morph fast-apply specialist client |
+| `clients/openrouter-client.mjs` | OpenRouter client (streaming TTFT/tok/s measurement, real `usage.cost`, privacy routing `data_collection: deny`) |
+| `clients/lmstudio-client.mjs` | Client for any OpenAI-compatible local server (optional bearer auth, tool-call accumulation from stream deltas) |
+| `clients/claudecode-client.mjs` | Runs prompts through a Claude Code subscription (`claude -p`) so subscription-only models can join the same tables |
+| `clients/morph-client.mjs` | Morph fast-apply specialist client |
 
 Results live in `results/*.json`, one record per unit: pass counts, gate status, latency, TTFT, tok/s, token usage, cost. Raw dumps of failed answers land under `results/hard-dumps/` (not committed). **Every new model benchmarked shows up in git history as a results commit** — the log doubles as a benchmarking journal.
 
