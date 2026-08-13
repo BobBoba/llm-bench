@@ -54,6 +54,7 @@ DOC_HUM = ("Медианная задержка ответа по пяти ос�
 # Ключ — имя в первом столбце таблицы (сравнивается ПОСЛЕ нормализации, поэтому украшения
 # вида «⭐» в ключе писать не нужно), значение — идентификатор в файлах результатов.
 ALIASES = {
+    "Muse-Glimmer-30B UD-Q4_K_XL": "unsloth/Muse-Glimmer-30B-GGUF",
     "DS-V3.2": "deepseek/deepseek-v3.2",
     "DeepSeek-V3.2": "deepseek/deepseek-v3.2",
     "DS-V4-Pro": "deepseek/deepseek-v4-pro",
