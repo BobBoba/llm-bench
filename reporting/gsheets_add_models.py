@@ -25,9 +25,9 @@ SID = open(os.path.join(HERE, "gsheets-sheet-id.txt")).read().strip()
 
 # ---- configure the batch to add ----
 MODELS = [
-    "unsloth/Muse-Glimmer-30B-GGUF",
+    "unsloth/Muse-Glimmer-30B-GGUF:UD-Q4_K_XL",
 ]
-SUFFIX = "muse0813"                      # results-<SUFFIX>-{rust,ts,knowledge}.json + -humscores.json
+SUFFIX = "muse0813rec"                      # results-<SUFFIX>-{rust,ts,knowledge}.json + -humscores.json
 GROUP = "local"                             # 'группа' label (non-local/ref => treated as cloud)
 PROV = "local (Unsloth Studio)"
 MODEL_META = {
@@ -45,13 +45,16 @@ MODEL_META = {
     # Muse-Glimmer (Meta MSL): окно 131072 родное, GQA 16:1 + скользящее окно => KV крошечный,
     # полное окно живёт на 24 ГиБ. Tool-use подтверждён агентной фазой (green=true).
     "unsloth/Muse-Glimmer-30B-GGUF": {"ctx": 131072, "tools": True},
+    "unsloth/Muse-Glimmer-30B-GGUF:UD-Q4_K_XL": {"ctx": 131072, "tools": True},
 }
 
 # Необязательное переопределение имени строки. По умолчанию имя = short(mid), но у локальных
 # моделей идентификатор несёт репозиторий и квант (`unsloth/Repo-GGUF:UD-Q4_K_M`) — как заголовок
 # строки это нечитаемо, а квант при этом принципиален и потерять его нельзя.
 DISPLAY = {
+    # Пара строк одной модели: контрольная t=0.2 (вся таблица) и рекомендованные настройки Meta.
     "unsloth/Muse-Glimmer-30B-GGUF": "Muse-Glimmer-30B UD-Q4_K_XL",
+    "unsloth/Muse-Glimmer-30B-GGUF:UD-Q4_K_XL": "Muse-Glimmer-30B UD-Q4_K_XL (реком. t=1.0)",
     "unsloth/Seed-OSS-36B-Instruct-GGUF:UD-Q4_K_XL": "Seed-OSS-36B UD-Q4_K_XL",
     "unsloth/Seed-OSS-36B-Instruct-GGUF:UD-Q3_K_XL": "Seed-OSS-36B UD-Q3_K_XL",
     "unsloth/gemma-4-31B-it-qat-GGUF:UD-Q4_K_XL": "Gemma-4-31B-QAT UD-Q4_K_XL",

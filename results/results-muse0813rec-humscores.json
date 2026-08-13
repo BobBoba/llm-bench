@@ -1,0 +1,12 @@
+{
+ "unsloth/Muse-Glimmer-30B-GGUF:UD-Q4_K_XL": {
+  "facts": 9.6,
+  "ideas": 8,
+  "fermi": 7,
+  "forecast": 8.5,
+  "analysis": 9.2,
+  "notes": "Near-flawless hallucination resistance (all four false premises refuted, all three unanswerables declined, plus the sharp catch that 14 March 1981 was a Saturday), but the Fermi answer omits PUE/host overhead from its final figure after naming it and muddles the EUR→USD conversion with contradictory rates.",
+  "empties": 0,
+  "avg": 8.46
+ }
+}
