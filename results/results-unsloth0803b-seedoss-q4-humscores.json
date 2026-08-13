@@ -1,0 +1,12 @@
+{
+ "unsloth/Seed-OSS-36B-Instruct-GGUF:UD-Q4_K_XL": {
+  "facts": 7.4,
+  "ideas": 5,
+  "fermi": 7,
+  "forecast": 7,
+  "analysis": 8.8,
+  "notes": "Strong analysis and clean false-premise refusals, but fact #5 is a confident hallucination and #13 wrongly denies Article 99 exists; idea #5 openly violates the no-ML constraint while #3 hedges on a false 4.5 kW/0.45 EUR pair that luckily lands in band.",
+  "empties": 0,
+  "avg": 7.04
+ }
+}

@@ -1,0 +1,22 @@
+{
+ "unsloth/Qwen-AgentWorld-35B-A3B-GGUF:UD-Q3_K_XL": {
+  "facts": 9.6,
+  "ideas": 7,
+  "fermi": 5.5,
+  "forecast": 7,
+  "analysis": 8.5,
+  "notes": "Near-perfect fact battery with clean false-premise refusals, but Fermi undershoots German industrial tariffs badly (€0.125/kWh) and lowballs PUE overhead at 20%, landing ~2-3x below the plausible band; ideas are competent but lean on standard GPU-workstation catalogue (CFD, ParaView, Isaac Sim) with #5 essentially a render farm.",
+  "empties": 0,
+  "avg": 7.52
+ },
+ "unsloth/Qwen3-Coder-Next-GGUF:UD-Q4_K_M": {
+  "facts": 9,
+  "ideas": 7,
+  "fermi": 4,
+  "forecast": 7.5,
+  "analysis": 8.5,
+  "notes": "Facts near-flawless (only #13's 'there is no Article 99' overreach) but Fermi badly undershoots — 450W B200 TDP is wrong (~1000W), zero PUE/host overhead, so the method is both mis-anchored and incomplete.",
+  "empties": 0,
+  "avg": 7.2
+ }
+}

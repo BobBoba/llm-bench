@@ -1,0 +1,12 @@
+{
+ "qwen3-coder-next": {
+  "facts": 9.5,
+  "ideas": 6.5,
+  "fermi": 7.5,
+  "forecast": 8.5,
+  "analysis": 9,
+  "notes": "Facts near-perfect (only Q8 slightly muddles visibility wording); Fermi used ~450W B200 TDP which is low but method sound and lands in band; ideas competent but some drift toward research-grade rather than home-lab feasibility.",
+  "empties": 0,
+  "avg": 8.2
+ }
+}

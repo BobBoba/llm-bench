@@ -1,0 +1,12 @@
+{
+ "unsloth/gemma-4-31B-it-qat-GGUF:UD-Q4_K_XL": {
+  "facts": 9.2,
+  "ideas": 8.5,
+  "fermi": 9.3,
+  "forecast": 8.7,
+  "analysis": 8.8,
+  "notes": "Terse but correctly-calibrated fact battery (all 4 false premises refuted, all 4 unanswerables declined, though the volatile answer is register-caching-only and misses reordering, and probe 10's blanket 'I don't know' forgoes the known ~5.7B Polaris-10 hedge); the Fermi chain is textbook (per-GPU TDP → host overhead → PUE → hours → EUR → USD) and the GPU ideas are genuinely non-clichéd.",
+  "empties": 0,
+  "avg": 8.9
+ }
+}

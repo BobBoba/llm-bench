@@ -1,0 +1,32 @@
+[
+ {
+  "model": "amazon/nova-2-lite-v1",
+  "ctx": 1000000,
+  "targetTok": 32000,
+  "ok": true,
+  "foundCount": 7,
+  "total": 8,
+  "recall": 0.875,
+  "promptTok": 23847,
+  "latency": 5.72,
+  "tokps": 127.9,
+  "reasonTok": 3,
+  "finish": "stop",
+  "cost": 0.0089841
+ },
+ {
+  "model": "amazon/nova-2-lite-v1",
+  "ctx": 1000000,
+  "targetTok": 262144,
+  "ok": true,
+  "foundCount": 5,
+  "total": 8,
+  "recall": 0.625,
+  "promptTok": 193074,
+  "latency": 13.75,
+  "tokps": 36.6,
+  "reasonTok": 3,
+  "finish": "stop",
+  "cost": 0.0591797
+ }
+]

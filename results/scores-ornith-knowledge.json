@@ -1,0 +1,12 @@
+{
+ "ornith-1.0-35b": {
+  "facts": 9.6,
+  "ideas": 7.5,
+  "fermi": 7.5,
+  "forecast": 8,
+  "analysis": 8.5,
+  "notes": "Flawless fact battery (all V/F/U probes handled correctly, though Q13 misstates Art.99 as 'transitional provisions' rather than penalties); Fermi method sound but electricity rate too low (~€0.10 vs realistic €0.20-0.30) landing at $12k, low end of band.",
+  "empties": 0,
+  "avg": 8.22
+ }
+}

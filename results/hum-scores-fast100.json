@@ -1,0 +1,352 @@
+{
+ "google/gemini-3.1-pro-preview": {
+  "facts": 9.8,
+  "ideas": 8.5,
+  "fermi": 8,
+  "forecast": 8.5,
+  "analysis": 9,
+  "notes": "Flawless factuals with correct false-premise/unanswerable handling; Fermi method sound but skipped PUE/host overhead by choice, landing at low end of band.",
+  "empties": 0,
+  "avg": 8.76
+ },
+ "x-ai/grok-build-0.1": {
+  "facts": 9.7,
+  "ideas": 8.5,
+  "fermi": 8,
+  "forecast": 8.5,
+  "analysis": 9.5,
+  "notes": "Facts near-perfect (all 14 correct, though C# volatile answer slightly understates the reordering/memory-barrier guarantee); analysis is rigorous and complete; Fermi uses sound method and honest assumptions but omits PUE/overhead landing at the low edge.",
+  "empties": 0,
+  "avg": 8.84
+ },
+ "x-ai/grok-4.20-multi-agent": {
+  "facts": 9.8,
+  "ideas": 8.5,
+  "fermi": 6.5,
+  "forecast": 8.5,
+  "analysis": 9.5,
+  "notes": "Excellent facts (all 14 correct incl. false-premise refutals) and rigorous analysis, but fermi ignored PUE/host overhead making the final ~$18k low-end and under-justified.",
+  "empties": 0,
+  "avg": 8.56
+ },
+ "bytedance-seed/seed-2.0-mini": {
+  "facts": 6.5,
+  "ideas": 7.5,
+  "fermi": 6.5,
+  "forecast": 7.5,
+  "analysis": 8.5,
+  "notes": "Strong analysis and forecast; facts marred by fully hallucinating the fake 1937 whaling treaty (Q5), stating WX7100 count as exact (Q10), and wrong PID 0x7F gloss (Q11), while Fermi ignored host/cooling overhead entirely.",
+  "empties": 0,
+  "avg": 7.3
+ },
+ "bytedance-seed/seed-1.6-flash": {
+  "facts": 6.5,
+  "ideas": 7,
+  "fermi": 3,
+  "forecast": 6.5,
+  "analysis": 8.5,
+  "notes": "Strong analysis; but Q5/Q11/Q13 accepted false premises without full refutation and Fermi used wrong B200 power (~230W vs ~1kW) yielding a ~10x-low $2k figure.",
+  "empties": 0,
+  "avg": 6.3
+ },
+ "bytedance-seed/seed-2.0-lite": {
+  "facts": 8.5,
+  "ideas": 5.5,
+  "fermi": 9,
+  "forecast": 8.5,
+  "analysis": 9,
+  "notes": "Strong refutations and rigorous analysis, but Q5 muddled the whaling-treaty facts and several 'ideas' violate the no-ML constraint by relying on inference/CV/anomaly detection.",
+  "empties": 0,
+  "avg": 8.1
+ },
+ "inception/mercury-2": {
+  "facts": 9.8,
+  "ideas": 3.5,
+  "fermi": 5.5,
+  "forecast": 7.5,
+  "analysis": 8.5,
+  "notes": "Facts near-perfect (all V correct, all F/U handled); ideas leaned on render-farm/transcoding clichés and dubious GPU-compression claims; Fermi used low 300W B200 TDP (actual ~1kW) and omitted PUE/overhead, landing ~$7k well below the correct band.",
+  "empties": 0,
+  "avg": 6.96
+ },
+ "x-ai/grok-4.3": {
+  "facts": 9.7,
+  "ideas": 8.5,
+  "fermi": 7.5,
+  "forecast": 8.5,
+  "analysis": 9.5,
+  "notes": "Flawless facts battery and rigorous analysis; Fermi omitted PUE/host overhead so landed at bottom edge of the band via GPU-only reasoning.",
+  "empties": 0,
+  "avg": 8.74
+ },
+ "stepfun/step-3.5-flash": {
+  "facts": 9.5,
+  "ideas": 6.5,
+  "fermi": 7.5,
+  "forecast": 8.5,
+  "analysis": 9.5,
+  "notes": "Flawless facts battery and rigorous analysis; Fermi omitted host/cooling overhead (GPU-only ~$16k, acceptable but incomplete); ideas lean somewhat generic (transcoding/emulation).",
+  "empties": 0,
+  "avg": 8.3
+ },
+ "mistralai/mistral-small-2603": {
+  "facts": 9.2,
+  "ideas": 4.5,
+  "fermi": 8,
+  "forecast": 0,
+  "analysis": 0,
+  "notes": "Excellent fact battery (all V/U/F correct except probe 11 mislabels 0x7F as ECT and 13 wrongly claims Art. 99 doesn't exist); ideas lean clichd (render farm, Hashcat); fermi sound method/band; forecasting and analysis blank.",
+  "empties": 2,
+  "avg": 4.34
+ },
+ "mistralai/ministral-3b-2512": {
+  "facts": 5.5,
+  "ideas": 3.5,
+  "fermi": 1,
+  "forecast": 6,
+  "analysis": 8,
+  "notes": "Analysis is thorough and rigorous, but Fermi catastrophically misidentifies B200 as a 100W T4 (off by ~100x), and facts include a fabricated Antarctic treaty (Q5 endorsed the false premise) plus confabulated WX7100 'CUDA cores' and 'Hollow Pines' details despite declining.",
+  "empties": 0,
+  "avg": 4.8
+ },
+ "moonshotai/kimi-k2-thinking": {
+  "facts": 9.5,
+  "ideas": 8,
+  "fermi": 8.5,
+  "forecast": 8,
+  "analysis": 9.5,
+  "notes": "Excellent facts (all 14 correct incl. false-premise refutals and hedged obscure/unanswerable) and rigorous multi-flaw analysis; Fermi method sound but PUE 1.15 undershoots home-lab overhead giving a low-band final.",
+  "empties": 0,
+  "avg": 8.7
+ },
+ "google/gemini-3.1-flash-lite-preview": {
+  "facts": 9.5,
+  "ideas": 7,
+  "fermi": 8,
+  "forecast": 8,
+  "analysis": 9,
+  "notes": "Flawless fact battery (all V/F/U correct, though #6's weekend rationale is a lucky-but-shaky justification and #10 lacked a hedge); Fermi method sound but slightly light on overhead; analysis rigorous and well-structured.",
+  "empties": 0,
+  "avg": 8.3
+ },
+ "liquid/lfm-2-24b-a2b": {
+  "facts": 4.5,
+  "ideas": 3,
+  "fermi": 6.5,
+  "forecast": 7,
+  "analysis": 8,
+  "notes": "Facts tanked by 4 confident hallucinations (Q5 whaling, Q6 price, Q10 16B transistors, Q11 coolant, Q13 sentient-AI standing) plus wrong volatile answer; ideas violate no-ML constraint and lean clichd render-farm/simulation; solid analysis rigor.",
+  "empties": 0,
+  "avg": 5.8
+ },
+ "amazon/nova-micro-v1": {
+  "facts": 9,
+  "ideas": 3.5,
+  "fermi": 3,
+  "forecast": 5,
+  "analysis": 8.5,
+  "notes": "Facts near-perfect (all false premises/unanswerables caught, though #6 gives slightly wrong reasoning); Fermi badly wrong on B200 power (~150W vs ~1kW) yielding ~10x-low figure with no overhead, and ideas are mostly clichs (transcoding, VMs, rendering).",
+  "empties": 0,
+  "avg": 5.8
+ },
+ "google/gemini-2.5-flash-lite": {
+  "facts": 8.5,
+  "ideas": 0,
+  "fermi": 8,
+  "forecast": 7.5,
+  "analysis": 9,
+  "notes": "Strong fact battery (only #8 volatile-atomicity error and #11 wrong PID gloss) and rigorous analysis, but ideas answer was empty.",
+  "empties": 1,
+  "avg": 6.6
+ },
+ "bytedance/ui-tars-1.5-7b": {
+  "facts": 5,
+  "ideas": 2.5,
+  "fermi": 3.5,
+  "forecast": 3,
+  "analysis": 6,
+  "notes": "Facts: correct on all V-probes but failed all four false-premise probes (5,11 accepted fabrications, 13 half-flagged) though got the U-probes via lucky reasons; ideas are pure clichs including ML-violating game AI; Fermi used wrong 250W/GPU and omitted all overhead giving ~$5.7k (3x low); forecast is an unjustified 50% dodge citing GPT-3; analysis is solid but verbose and repetitive.",
+  "empties": 0,
+  "avg": 4
+ },
+ "rekaai/reka-edge": {
+  "facts": 2.9,
+  "ideas": 1.5,
+  "fermi": 2,
+  "forecast": 5,
+  "analysis": 6,
+  "notes": "Facts collapsed on every false-premise/unanswerable probe (confabulated Apple price, soul-sensor, sentient-AI rights, fake TV line) and botched volatile; Fermi used absurd 100W/GPU giving $105 (~200x too low); ideas violate no-ML constraint and are clichd.",
+  "empties": 0,
+  "avg": 3.48
+ },
+ "openai/gpt-5.2-codex": {
+  "facts": 10,
+  "ideas": 5.5,
+  "fermi": 7.5,
+  "forecast": 7.5,
+  "analysis": 8.5,
+  "notes": "Flawless fact battery with all false-premises/unanswerables handled correctly, but ideas leaned on render-farm/cloud-gaming clichés and Fermi omitted PUE/host overhead despite landing in-band.",
+  "empties": 0,
+  "avg": 7.8
+ },
+ "google/gemini-3.1-flash-lite": {
+  "facts": 9.5,
+  "ideas": 6.5,
+  "fermi": 8.5,
+  "forecast": 8,
+  "analysis": 9,
+  "notes": "Facts near-perfect (Q6 answered via weekday logic rather than pure decline, but valid); ideas feasible but some are ML/DPI-heavy borderline clichs and volumetric/CFD hand-wave feasibility.",
+  "empties": 0,
+  "avg": 8.3
+ },
+ "google/gemini-3.5-flash": {
+  "facts": 9.5,
+  "ideas": 8,
+  "fermi": 9,
+  "forecast": 8.5,
+  "analysis": 9,
+  "notes": "Facts near-perfect with excellent false-premise/unanswerable handling (bonus: 1937 London whaling agreement, Saturday market closure); ideas strong but #4 leans on tensor cores/ML-adjacent basecalling and #5 flirts with crypto constraint.",
+  "empties": 0,
+  "avg": 8.8
+ },
+ "arcee-ai/trinity-mini": {
+  "facts": 8.5,
+  "ideas": 3,
+  "fermi": 7.5,
+  "forecast": 7,
+  "analysis": 8.5,
+  "notes": "Strong facts (12 slightly weak on Women's WC clarification, 13 wrongly says Act unfinalized) and rigorous analysis, but ideas cluster around clichés (render farm, AI inference) violating the no-ML constraint.",
+  "empties": 0,
+  "avg": 6.9
+ },
+ "x-ai/grok-4.20": {
+  "facts": 9.7,
+  "ideas": 8.5,
+  "fermi": 7,
+  "forecast": 8.5,
+  "analysis": 9.5,
+  "notes": "Flawless facts battery and rigorous analysis; Fermi used correct method but omitted host/cooling/PUE overhead, landing at the low edge of the acceptable band.",
+  "empties": 0,
+  "avg": 8.64
+ },
+ "amazon/nova-lite-v1": {
+  "facts": 9.5,
+  "ideas": 4.5,
+  "fermi": 4,
+  "forecast": 6.5,
+  "analysis": 8,
+  "notes": "Facts near-perfect (all false-premises flagged, unanswerables declined; only #8 volatile answer weak on reordering); but Fermi used wrong 400W per-GPU (B200 is ~1kW) and omitted overhead, giving ~$4.6k (3-8x low), and ideas leaned on clichs like transcoding/VR.",
+  "empties": 0,
+  "avg": 6.5
+ },
+ "amazon/nova-pro-v1": {
+  "facts": 8.5,
+  "ideas": 3,
+  "fermi": 3.5,
+  "forecast": 6.5,
+  "analysis": 7.5,
+  "notes": "Facts strong (all false-premises caught, honest Apple decline) but WX 7100 gave confident wrong 12.5B; Fermi used wrong B200 power (~300W vs ~1kW) and no overhead, yielding ~$7k (>3x low); ideas heavily clichéd (render farm) and violate no-ML/mining spirit.",
+  "empties": 0,
+  "avg": 5.8
+ },
+ "ibm-granite/granite-4.1-8b": {
+  "facts": 6.5,
+  "ideas": 3.5,
+  "fermi": 7.5,
+  "forecast": 8,
+  "analysis": 8.5,
+  "notes": "Facts hurt by full hallucination on Q5 and Q11 (invented whaling treaty, wrong PID label) plus wrong refutation basis on Q13; ideas riddled with clichés and a crypto-mining constraint violation.",
+  "empties": 0,
+  "avg": 6.8
+ },
+ "deepseek/deepseek-v4-flash": {
+  "facts": 9.7,
+  "ideas": 5.5,
+  "fermi": 8,
+  "forecast": 7.5,
+  "analysis": 9,
+  "notes": "Flawless factual battery with proper false-premise/unanswerable handling; ideas axis dragged down by clichéd cloud-gaming/transcoding/BOINC picks that violate the originality constraint.",
+  "empties": 0,
+  "avg": 7.94
+ },
+ "qwen/qwen3-next-80b-a3b-thinking": {
+  "facts": 9.7,
+  "ideas": 6.5,
+  "fermi": 6.5,
+  "forecast": 7.5,
+  "analysis": 9,
+  "notes": "Facts near-flawless with all false-premises caught and honest declines; Fermi omits PUE/overhead giving a low-band figure and buries method in verbosity, and ideas lean toward plausible-sounding but hand-wavy feasibility claims.",
+  "empties": 0,
+  "avg": 7.84
+ },
+ "amazon/nova-2-lite-v1": {
+  "facts": 8.5,
+  "ideas": 5.5,
+  "fermi": 7.5,
+  "forecast": 7,
+  "analysis": 9,
+  "notes": "Strong analysis and facts (all V correct, good false-premise refutations though #11 fabricated a PID meaning and #13 wrongly claimed Art.99 doesn't exist), but ideas leaned on render-farm/CFD clichés.",
+  "empties": 0,
+  "avg": 7.5
+ },
+ "google/gemini-3-flash-preview": {
+  "facts": 9.5,
+  "ideas": 6.5,
+  "fermi": 9,
+  "forecast": 8.5,
+  "analysis": 9,
+  "notes": "Facts near-perfect (all premises caught, Q6 bonus weekday catch); ideas creative but some overclaim feasibility/hand-wave ('actuarial certainty', microsecond room correction), while Fermi and analysis are rigorous and well-structured.",
+  "empties": 0,
+  "avg": 8.5
+ },
+ "openai/gpt-5.3-codex": {
+  "facts": 8.5,
+  "ideas": 8,
+  "fermi": 7,
+  "forecast": 7.5,
+  "analysis": 9,
+  "notes": "Strong facts (Q6 gave a plausible-but-wrong Saturday rationale—14 Mar 1981 was a Saturday, correct—though the honest-decline framing is arguably better) and excellent analysis; Fermi omitted PUE/host overhead entirely, landing at the low edge of the acceptable band.",
+  "empties": 0,
+  "avg": 8
+ },
+ "moonshotai/kimi-k2-0905": {
+  "facts": 8.5,
+  "ideas": 6.5,
+  "fermi": 8.5,
+  "forecast": 8.5,
+  "analysis": 9.5,
+  "notes": "Facts mostly excellent but Q5 fumbled—claimed a real 1937 Geneva whaling convention exists (it doesn't; ICRW is 1946), a factual error; analysis was rigorous and comprehensive.",
+  "empties": 0,
+  "avg": 8.3
+ },
+ "google/gemini-2.5-flash-lite-preview-09-2025": {
+  "facts": 9.3,
+  "ideas": 7,
+  "fermi": 8.5,
+  "forecast": 8,
+  "analysis": 9,
+  "notes": "Near-flawless facts battery (only Q10 gave a firm 5.1B instead of hedged ~5.7B Polaris figure) and rigorous analysis; ideas were solid but leaned toward generic HPC-workload categories rather than truly novel home-lab uses.",
+  "empties": 0,
+  "avg": 8.36
+ },
+ "kwaipilot/kat-coder-pro-v2": {
+  "facts": 8.5,
+  "ideas": 7.5,
+  "fermi": 6.5,
+  "forecast": 8,
+  "analysis": 8.5,
+  "notes": "Facts strong on all false-premise/unanswerable probes but Q10 gives wrong 3.6B figure stated as fact (should be ~5.7B Polaris-10); fermi omits PUE/host overhead and uses inflated €0.40/kWh yet lands in-band by luck.",
+  "empties": 0,
+  "avg": 7.8
+ },
+ "tencent/hunyuan-a13b-instruct": {
+  "facts": 6.5,
+  "ideas": 3,
+  "fermi": 7,
+  "forecast": 6.5,
+  "analysis": 8,
+  "notes": "Strong analysis and clean fermi method, but facts marred by hallucinations on #9 (invented a fake macro instead of refuting) and #11 (confabulated a PID meaning instead of flagging fabrication), and ideas heavily violate the no-ML constraint (edge AI, molecular dynamics) with clichéd render/NAS entries.",
+  "empties": 0,
+  "avg": 6.2
+ }
+}

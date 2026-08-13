@@ -1,0 +1,42 @@
+{
+ "qwen-agentworld-35b": {
+  "facts": 9.5,
+  "ideas": 7.5,
+  "fermi": 9,
+  "forecast": 8,
+  "analysis": 8.5,
+  "notes": "Near-perfect factual battery (all V/F/U probes correct, though Q6 justifies via market-closed rather than data-unknowability); Fermi method textbook-clean landing at $21k; ideas feasible and constraint-respecting but somewhat conventional HPC-simulation picks.",
+  "empties": 0,
+  "avg": 8.5
+ },
+ "deepseek/deepseek-v3.2": {
+  "facts": 9.4,
+  "ideas": 5.5,
+  "fermi": 8.5,
+  "forecast": 8,
+  "analysis": 9,
+  "notes": "Near-flawless facts battery (all V/F/U probes handled correctly) but ideas axis leans on clichéd AI-inference/password-cracking entries that arguably violate the no-ML constraint.",
+  "empties": 0,
+  "avg": 8.08
+ },
+ "xiaomi/mimo-v2.5-pro": {
+  "facts": 8.5,
+  "ideas": 7.5,
+  "fermi": 8.5,
+  "forecast": 8.5,
+  "analysis": 9,
+  "notes": "Near-flawless fact battery except probe 5, where it substantively answered the fabricated '1937 Geneva Antarctic Treaty' instead of refuting the premise; analysis axis is standout-thorough.",
+  "empties": 0,
+  "avg": 8.4
+ },
+ "deepseek/deepseek-v4-pro": {
+  "facts": 9,
+  "ideas": 8.5,
+  "fermi": 8.5,
+  "forecast": 8,
+  "analysis": 9.2,
+  "notes": "Near-flawless refusals/refutations and a rigorous analysis section; only real slip is the false 'volatile guarantees atomicity' claim in Q8.",
+  "empties": 0,
+  "avg": 8.64
+ }
+}

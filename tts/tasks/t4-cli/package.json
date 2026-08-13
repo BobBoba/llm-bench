@@ -1,0 +1,9 @@
+{
+  "name": "lc",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "typescript": "^5",
+    "bun-types": "latest"
+  }
+}

@@ -1,0 +1,32 @@
+[
+ {
+  "model": "moonshotai/kimi-k2-thinking",
+  "ctx": 262144,
+  "targetTok": 32000,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 23791,
+  "latency": 10.47,
+  "tokps": 40.9,
+  "reasonTok": 327,
+  "finish": "stop",
+  "cost": 0.0153446
+ },
+ {
+  "model": "moonshotai/kimi-k2-thinking",
+  "ctx": 262144,
+  "targetTok": 131072,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 96648,
+  "latency": 29.41,
+  "tokps": 37,
+  "reasonTok": 995,
+  "finish": "stop",
+  "cost": 0.0607063
+ }
+]

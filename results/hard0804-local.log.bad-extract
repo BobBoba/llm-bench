@@ -1,0 +1,30 @@
+
+===== MODEL unsloth/Qwen3-Coder-Next-GGUF:UD-Q4_K_M =====
+rust/edit run1: 0/10 (0%) gate=false solved=false 77.37s tok/s=56.7 $0.0000 lib_compile_fail
+rust/edit-long run1: 0/10 (0%) gate=false solved=false 227.41s tok/s=54.3 $0.0000 lib_compile_fail
+rust/algo run1: 0/7 (0%) gate=false solved=false 62.58s tok/s=45.7 $0.0000 lib_compile_fail
+rust/conc run1: 6/6 (100%) gate=true solved=true 13.64s tok/s=45.4 $0.0000 
+ts/edit run1: 10/10 (100%) gate=true solved=true 17.06s tok/s=40.2 $0.0000 
+ts/edit-long run1: 10/10 (100%) gate=true solved=true 211.95s tok/s=45.9 $0.0000 
+ts/algo run1: 9/9 (100%) gate=true solved=true 49.69s tok/s=46.3 $0.0000 
+ts/conc run1: 6/7 (86%) gate=true solved=false 14.27s tok/s=45.7 $0.0000 
+julia/edit run1: 20/20 (100%) gate=true solved=true 18.7s tok/s=46.6 $0.0000 
+julia/edit-long run1: 0/20 (0%) gate=false solved=false 251.97s tok/s=34.9 $0.0000 load_fail: pts::Base.JLOptions) @ Base ./client.jl:317 [6] _start() @ Base ./client.jl:550 in expression starting at /tmp/hard_jl_uYNc9k/lib.jl:1 in expression starting at /tmp/hard_jl_uYNc9k/hidden.jl:1 
+julia/algo run1: 0/11 (0%) gate=false solved=false 29.95s tok/s=45.4 $0.0000 load_fail: pts::Base.JLOptions) @ Base ./client.jl:317 [6] _start() @ Base ./client.jl:550 in expression starting at /tmp/hard_jl_GuVC1p/lib.jl:1 in expression starting at /tmp/hard_jl_GuVC1p/hidden.jl:1 
+julia/conc run1: 6/14 (43%) gate=true solved=false 22.08s tok/s=35.9 $0.0000 
+
+===== MODEL unsloth/Qwen3-Coder-Next-GGUF:Q4_K_M =====
+rust/edit run1: 0/10 (0%) gate=false solved=false 69.26s tok/s=59 $0.0000 lib_compile_fail
+rust/edit-long run1: 0/10 (0%) gate=false solved=false 221.77s tok/s=60.5 $0.0000 lib_compile_fail
+rust/algo run1: 7/7 (100%) gate=true solved=true 24.81s tok/s=48.9 $0.0000 
+rust/conc run1: 0/6 (0%) gate=false solved=false 15.93s tok/s=48.6 $0.0000 lib_compile_fail
+ts/edit run1: 10/10 (100%) gate=true solved=true 13.2s tok/s=45.6 $0.0000 
+ts/edit-long run1: 10/10 (100%) gate=true solved=true 206.43s tok/s=46.2 $0.0000 
+ts/algo run1: 6/9 (67%) gate=true solved=false 61.63s tok/s=50.1 $0.0000 
+ts/conc run1: 0/1 (0%) gate=false solved=false 408.38s tok/s=98.3 $0.0000 tsc_fail
+julia/edit run1: 20/20 (100%) gate=true solved=true 19.2s tok/s=46.2 $0.0000 
+julia/edit-long run1: 0/20 (0%) gate=false solved=false 243.73s tok/s=37.4 $0.0000 load_fail: pts::Base.JLOptions) @ Base ./client.jl:317 [6] _start() @ Base ./client.jl:550 in expression starting at /tmp/hard_jl_59h2qh/lib.jl:1 in expression starting at /tmp/hard_jl_59h2qh/hidden.jl:1 
+julia/algo run1: 1/12 (8%) gate=true solved=false 28.32s tok/s=46.3 $0.0000 
+julia/conc run1: 14/14 (100%) gate=true solved=true 18.22s tok/s=38.1 $0.0000 
+
+DONE /code/work/llm-bench/results/results-hard0804-local.json (24 records)

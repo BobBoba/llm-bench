@@ -1,0 +1,102 @@
+{
+ "qcn-ud-iq1m": {
+  "facts": 8.5,
+  "ideas": 6.5,
+  "fermi": 5,
+  "forecast": 6.5,
+  "analysis": 9,
+  "notes": "Excellent facts (all V correct, all F/U handled well) and rigorous analysis, but Fermi used wrong B200 power (~450W vs ~1kW) and omitted PUE/overhead entirely, landing at ~$11.8k (below the 15-45k band); forecast invents fake benchmark numbers.",
+  "empties": 0,
+  "avg": 7.1
+ },
+ "qcn-ud-q2kxl": {
+  "facts": 8.5,
+  "ideas": 6.5,
+  "fermi": 6.5,
+  "forecast": 8,
+  "analysis": 9,
+  "notes": "Excellent analysis and honest declines on unanswerables, but facts marred by fabrications (Apple delisted-2019 falsehood, WX7100 Polaris 20/5.9B error, denying Article 99 exists) and Fermi omits all PUE/host overhead.",
+  "empties": 0,
+  "avg": 7.7
+ },
+ "qcn-q2k": {
+  "facts": 8.5,
+  "ideas": 4.5,
+  "fermi": 3.5,
+  "forecast": 7,
+  "analysis": 8.5,
+  "notes": "Facts strong with good false-premise/unanswerable handling (minor slip: Q12 called 2027 nonexistent rather than future Women's WC), but Fermi used wrong ~450W B200 spec and never reached the correct order-of-magnitude band, and ideas leaned on clich render farm plus vague constraint-agnostic pitches.",
+  "empties": 0,
+  "avg": 6.4
+ },
+ "qcn-ud-q3kxl": {
+  "facts": 9.3,
+  "ideas": 6.5,
+  "fermi": 7,
+  "forecast": 8,
+  "analysis": 9,
+  "notes": "Near-perfect facts (only Q13 slip claiming Art.99 doesn't exist), rigorous analysis, but Fermi omitted PUE/host overhead entirely and creative ideas leaned toward sensor/render clichés.",
+  "empties": 0,
+  "avg": 7.96
+ },
+ "qcn-q3km": {
+  "facts": 8.5,
+  "ideas": 6.5,
+  "fermi": 6,
+  "forecast": 8,
+  "analysis": 9,
+  "notes": "Strong analysis and clean fact battery, but fermi used too-low B200 power (~475W vs ~1kW) landing below the accepted band, and ideas skew clichd/hand-wavy.",
+  "empties": 0,
+  "avg": 7.6
+ },
+ "qcn-ud-q4km": {
+  "facts": 8.5,
+  "ideas": 4.5,
+  "fermi": 6,
+  "forecast": 8,
+  "analysis": 9,
+  "notes": "Excellent analysis and near-perfect facts (minor errors on Apple delisting/PID 0x7F rationale), but Fermi used wrong B200 wattage (~450W vs ~1kW) yielding a low final number and ideas leaned on clichs/ML violations.",
+  "empties": 0,
+  "avg": 7.2
+ },
+ "qcn-q4km": {
+  "facts": 9.5,
+  "ideas": 6.5,
+  "fermi": 6.5,
+  "forecast": 8.5,
+  "analysis": 9.5,
+  "notes": "Facts near-perfect and analysis exhaustive; Fermi used wrong B200 TDP (~1kW actual, not 450W) and omitted overhead in final figure, landing ~$12k just below the target band.",
+  "empties": 0,
+  "avg": 8.1
+ },
+ "aw-ud-q2kxl": {
+  "facts": 9.7,
+  "ideas": 6.5,
+  "fermi": 7.5,
+  "forecast": 8,
+  "analysis": 8.5,
+  "notes": "Flawless factual battery (all V correct, all F/U properly refuted/declined); Fermi method sound but understated German industrial rate at 0.13-0.15 EUR dragged final to bottom of band, and ideas leaned on standard HPC/vGPU applications rather than truly novel uses.",
+  "empties": 0,
+  "avg": 8.04
+ },
+ "aw-ud-q3kxl": {
+  "facts": 9.5,
+  "ideas": 7.5,
+  "fermi": 6.5,
+  "forecast": 8.5,
+  "analysis": 9,
+  "notes": "Facts near-perfect (Q12 missed the 2027 Women's WC nuance but correctly refuses a winner); Fermi used too-low 0.13 EUR/kWh giving ~$12k, just under the accepted band, though method is sound.",
+  "empties": 0,
+  "avg": 8.2
+ },
+ "aw-ud-q4km": {
+  "facts": 8.5,
+  "ideas": 6.5,
+  "fermi": 8.5,
+  "forecast": 8,
+  "analysis": 9,
+  "notes": "Facts strong but #12 missed that 2027 IS a real Women's WC year and #6 gave a weaker (Saturday) rather than the intended unknowability rationale; analysis is thorough and rigorous.",
+  "empties": 0,
+  "avg": 8.1
+ }
+}

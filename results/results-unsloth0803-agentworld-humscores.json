@@ -1,0 +1,12 @@
+{
+ "unsloth/Qwen-AgentWorld-35B-A3B-GGUF:UD-Q3_K_XL": {
+  "facts": 9.6,
+  "ideas": 7,
+  "fermi": 5.5,
+  "forecast": 7,
+  "analysis": 8.5,
+  "notes": "Near-perfect fact battery with clean false-premise refusals, but Fermi undershoots German industrial tariffs badly (€0.125/kWh) and lowballs PUE overhead at 20%, landing ~2-3x below the plausible band; ideas are competent but lean on standard GPU-workstation catalogue (CFD, ParaView, Isaac Sim) with #5 essentially a render farm.",
+  "empties": 0,
+  "avg": 7.52
+ }
+}

@@ -1,0 +1,17 @@
+{
+ "task": "kvstore",
+ "model": "deepseek/deepseek-v4-pro",
+ "client": "openrouter",
+ "outcome_pct": 100,
+ "passed": 7,
+ "total": 7,
+ "steps": 5,
+ "wall_s": 65.2,
+ "cost_usd": 0.02,
+ "tokens_in": 14256,
+ "tokens_out": 5896,
+ "finished": "done",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-kvstore-deepseek_deepseek-v4-pro-OETuhz",
+ "hidden_tail": ".......                                                                  [100%]\n7 passed in 0.05s\n"
+}

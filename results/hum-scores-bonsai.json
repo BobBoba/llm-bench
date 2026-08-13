@@ -1,0 +1,82 @@
+{
+ "Ternary-Bonsai-1.7B": {
+  "facts": 2.5,
+  "ideas": 2,
+  "fermi": 1.5,
+  "forecast": 4,
+  "analysis": 6,
+  "notes": "Facts battery is a disaster—wrong verifiables (12 zones), confabulated all U/F probes, and endorsed absurd fabrications ('engine soul'); Fermi used 180W instead of ~1kW/GPU and dropped a 365x24 factor giving $578; analysis is solid but padded and repetitive.",
+  "empties": 0,
+  "avg": 3.2
+ },
+ "Ternary-Bonsai-4B": {
+  "facts": 7.5,
+  "ideas": 3.5,
+  "fermi": 2,
+  "forecast": 6,
+  "analysis": 7.5,
+  "notes": "Facts battery mostly correct with good false-premise flagging but Q6 rationale wrong (Apple WAS listed by 1981) and Q14 is incoherent gibberish; Fermi tanks by inventing wrong B200 specs (120W vs ~1kW) yielding ~$4.1k, ~5-9x too low; ideas violate the no-ML constraint spirit and lean on render/video clichés.",
+  "empties": 0,
+  "avg": 5.3
+ },
+ "Bonsai-4B": {
+  "facts": 6.5,
+  "ideas": 3.5,
+  "fermi": 1.5,
+  "forecast": 5,
+  "analysis": 8,
+  "notes": "Facts: correct declines on all 3 unanswerables and refuted premises 5/13, but hallucinated confidently on false-premise probes 5 and 11; Fermi catastrophically wrong (invented 120W/2008 B200 specs, no overhead, $2900 vs ~$25k); analysis is thorough and rigorous though verbose.",
+  "empties": 0,
+  "avg": 4.9
+ },
+ "Ternary-Bonsai-8B": {
+  "facts": 5,
+  "ideas": 3,
+  "fermi": 2.5,
+  "forecast": 6,
+  "analysis": 7,
+  "notes": "Facts: got all V/U right but fully hallucinated on all 4 false-premise probes (5,9,11,13); Fermi badly wrong via 150W TDP error and zero overhead giving ~10x-low $3.6k; ideas mostly clichd/violate no-ML constraint; analysis is rigorous though repetitive.",
+  "empties": 0,
+  "avg": 4.7
+ },
+ "Bonsai-8B": {
+  "facts": 6.5,
+  "ideas": 3,
+  "fermi": 3,
+  "forecast": 4,
+  "analysis": 7.5,
+  "notes": "Facts: correct declines on U-probes but hallucinated all four false-premise items (5,9,11,13); Fermi badly wrong B200 wattage (~1000W not 375W) yielding ~7x-too-low figure; ideas violate no-ML constraint and lean on clichés.",
+  "empties": 0,
+  "avg": 4.8
+ },
+ "Ternary-Bonsai-27B": {
+  "facts": 5.5,
+  "ideas": 0,
+  "fermi": 4.5,
+  "forecast": 8,
+  "analysis": 9,
+  "notes": "Facts hurt by confident confabulations on Q5, Q11, Q13(wrongly denies Art.99 exists), Q14; Fermi omits overhead/PUE and uses too-low €0.12 rate; strong analysis and calibrated forecast; ideas empty.",
+  "empties": 1,
+  "avg": 5.4
+ },
+ "Bonsai-27B": {
+  "facts": 6.5,
+  "ideas": 0,
+  "fermi": 2,
+  "forecast": 7.5,
+  "analysis": 9,
+  "notes": "Excellent analysis and solid forecast, but Fermi used a fabricated 100W B200 TDP yielding ~$1k (20x too low), several fact errors (Apple $1.10 confabulation, wrong C# volatile/PID 0x7F/Art.99 details), and ideas answer empty.",
+  "empties": 1,
+  "avg": 5
+ },
+ "Bonsai-1.7B": {
+  "facts": 2.5,
+  "ideas": 3,
+  "fermi": 1.5,
+  "forecast": 1,
+  "analysis": 6,
+  "notes": "Facts: got 1,2,3,7 right but blew all 4 false-premise/unanswerable probes plus wrong on Russia timezones and volatile; Fermi used absurd 150W/GPU and €1.20/kWh yielding ~$460 (off by ~50x); forecast was incoherent contradictory mush; analysis was the lone bright spot though verbose and repetitive.",
+  "empties": 0,
+  "avg": 2.8
+ }
+}

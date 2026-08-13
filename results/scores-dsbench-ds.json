@@ -1,0 +1,12 @@
+{
+ "deepseek/deepseek-v3.2": {
+  "facts": 9.8,
+  "ideas": 5.5,
+  "fermi": 8.5,
+  "forecast": 8,
+  "analysis": 9,
+  "notes": "Flawless fact battery (all V correct, all F/U properly refuted/declined) and rigorous analysis; ideas axis dragged down by the LLM-cluster idea violating the no-ML constraint plus surveillance/streaming clichés.",
+  "empties": 0,
+  "avg": 8.16
+ }
+}

@@ -1,0 +1,89 @@
+[
+ {
+  "model": "unsloth/Apriel-1.5-15b-Thinker-GGUF:UD-Q8_K_XL",
+  "task": "expr",
+  "mode": "single",
+  "run": 1,
+  "ok": true,
+  "compiles": true,
+  "passed": 0,
+  "total": 25,
+  "pct": 0,
+  "clippy": 1,
+  "note": "test_compile_fail",
+  "finish": "length",
+  "tokIn": 461,
+  "tokOut": 90000,
+  "reasonTok": 0,
+  "latency": 659.35,
+  "ttft": 8.351,
+  "tokps": 138.2,
+  "codeLen": 13,
+  "cost": 0
+ },
+ {
+  "model": "unsloth/Apriel-1.5-15b-Thinker-GGUF:UD-Q8_K_XL",
+  "task": "expr",
+  "mode": "single",
+  "run": 2,
+  "ok": false,
+  "error": "timeout>1200s",
+  "timeout": true
+ },
+ {
+  "model": "unsloth/Apriel-1.5-15b-Thinker-GGUF:UD-Q8_K_XL",
+  "task": "lru",
+  "mode": "single",
+  "run": 1,
+  "ok": false,
+  "error": "skipped_after_timeout"
+ },
+ {
+  "model": "unsloth/Apriel-1.5-15b-Thinker-GGUF:UD-Q8_K_XL",
+  "task": "lru",
+  "mode": "single",
+  "run": 2,
+  "ok": false,
+  "error": "skipped_after_timeout"
+ },
+ {
+  "model": "unsloth/Apriel-1.5-15b-Thinker-GGUF:UD-Q8_K_XL",
+  "task": "wordcount",
+  "mode": "single",
+  "run": 1,
+  "ok": false,
+  "error": "skipped_after_timeout"
+ },
+ {
+  "model": "unsloth/Apriel-1.5-15b-Thinker-GGUF:UD-Q8_K_XL",
+  "task": "wordcount",
+  "mode": "single",
+  "run": 2,
+  "ok": false,
+  "error": "skipped_after_timeout"
+ },
+ {
+  "model": "unsloth/Apriel-1.5-15b-Thinker-GGUF:UD-Q8_K_XL",
+  "task": "expr",
+  "mode": "agentic",
+  "run": 1,
+  "ok": false,
+  "error": "skipped_after_timeout"
+ },
+ {
+  "model": "unsloth/Apriel-1.5-15b-Thinker-GGUF:UD-Q8_K_XL",
+  "task": "lru",
+  "mode": "agentic",
+  "run": 1,
+  "ok": false,
+  "error": "skipped_after_timeout"
+ },
+ {
+  "model": "unsloth/Apriel-1.5-15b-Thinker-GGUF:UD-Q8_K_XL",
+  "task": "wordcount",
+  "mode": "agentic",
+  "run": 1,
+  "ok": false,
+  "error": "skipped_after_timeout"
+ }
+]

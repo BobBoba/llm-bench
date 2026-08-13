@@ -1,0 +1,17 @@
+{
+ "task": "calc",
+ "model": "deepseek/deepseek-v4-pro",
+ "client": "openrouter",
+ "outcome_pct": 100,
+ "passed": 8,
+ "total": 8,
+ "steps": 6,
+ "wall_s": 85.8,
+ "cost_usd": 0.0236,
+ "tokens_in": 16287,
+ "tokens_out": 5586,
+ "finished": "done",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-calc-deepseek_deepseek-v4-pro-LKKrQE",
+ "hidden_tail": "........                                                                 [100%]\n8 passed in 0.03s\n"
+}

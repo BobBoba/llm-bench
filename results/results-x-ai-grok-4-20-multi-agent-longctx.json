@@ -1,0 +1,62 @@
+[
+ {
+  "model": "x-ai/grok-4.20-multi-agent",
+  "ctx": 2000000,
+  "targetTok": 8000,
+  "depth": 10,
+  "ok": true,
+  "found": true,
+  "promptTok": 27459,
+  "latency": 1.55,
+  "tokps": 482,
+  "reasonTok": 729,
+  "finish": "stop",
+  "cost": 0.03243055,
+  "answer": "QX-73519-ZP"
+ },
+ {
+  "model": "x-ai/grok-4.20-multi-agent",
+  "ctx": 2000000,
+  "targetTok": 8000,
+  "depth": 50,
+  "ok": true,
+  "found": true,
+  "promptTok": 48880,
+  "latency": 1.95,
+  "tokps": 592.8,
+  "reasonTok": 1137,
+  "finish": "stop",
+  "cost": 0.045846,
+  "answer": "QX-73519-ZP"
+ },
+ {
+  "model": "x-ai/grok-4.20-multi-agent",
+  "ctx": 2000000,
+  "targetTok": 8000,
+  "depth": 90,
+  "ok": true,
+  "found": true,
+  "promptTok": 71342,
+  "latency": 4.22,
+  "tokps": 530.2,
+  "reasonTok": 2206,
+  "finish": "stop",
+  "cost": 0.0469883,
+  "answer": "QX-73519-ZP\n\n\nThe code is explicitly stated in the provided document."
+ },
+ {
+  "model": "x-ai/grok-4.20-multi-agent",
+  "ctx": 2000000,
+  "targetTok": 500000,
+  "depth": 50,
+  "ok": true,
+  "found": true,
+  "promptTok": 2950022,
+  "latency": 21.07,
+  "tokps": 46.4,
+  "reasonTok": 958,
+  "finish": "stop",
+  "cost": 5.8295478,
+  "answer": "QX-73519-ZP"
+ }
+]

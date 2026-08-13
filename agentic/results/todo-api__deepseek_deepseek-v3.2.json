@@ -1,0 +1,17 @@
+{
+ "task": "todo-api",
+ "model": "deepseek/deepseek-v3.2",
+ "client": "openrouter",
+ "outcome_pct": 100,
+ "passed": 6,
+ "total": 6,
+ "steps": 20,
+ "wall_s": 484.9,
+ "cost_usd": 0.0415,
+ "tokens_in": 230456,
+ "tokens_out": 16252,
+ "finished": "done",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-todo-api-deepseek_deepseek-v3.2-WswPWl",
+ "hidden_tail": "......                                                                   [100%]\n6 passed in 3.14s\n"
+}

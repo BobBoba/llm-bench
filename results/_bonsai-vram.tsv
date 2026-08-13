@@ -1,0 +1,9 @@
+label	vram_used_mib	ts
+Ternary-Bonsai-1.7B	2789	loaded
+Bonsai-1.7B	2596	loaded
+Ternary-Bonsai-4B	3661	loaded
+Bonsai-4B	3180	loaded
+Ternary-Bonsai-8B	4584	loaded
+Bonsai-8B	3677	loaded
+Ternary-Bonsai-27B	9156	loaded
+Bonsai-27B	5798	loaded

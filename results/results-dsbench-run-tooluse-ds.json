@@ -1,0 +1,42 @@
+[
+ {
+  "model": "deepseek/deepseek-v3.2",
+  "run": 1,
+  "ok": true,
+  "error": null,
+  "success": true,
+  "submitted": 115,
+  "submittedName": "Acme",
+  "nameOk": true,
+  "totalOk": true,
+  "steps": 4,
+  "totalCalls": 6,
+  "validCalls": 6,
+  "malformed": 0,
+  "validRate": 1,
+  "cost": 0.000665,
+  "latency": 22.1,
+  "reasonTok": 111,
+  "finish": "tool_calls"
+ },
+ {
+  "model": "deepseek/deepseek-v3.2",
+  "run": 2,
+  "ok": true,
+  "error": null,
+  "success": true,
+  "submitted": 115,
+  "submittedName": "Acme",
+  "nameOk": true,
+  "totalOk": true,
+  "steps": 4,
+  "totalCalls": 6,
+  "validCalls": 6,
+  "malformed": 0,
+  "validRate": 1,
+  "cost": 0.000583,
+  "latency": 14,
+  "reasonTok": 136,
+  "finish": "tool_calls"
+ }
+]

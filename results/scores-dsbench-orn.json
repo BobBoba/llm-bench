@@ -1,0 +1,12 @@
+{
+ "ornith-1.0-35b": {
+  "facts": 9.5,
+  "ideas": 7.5,
+  "fermi": 7,
+  "forecast": 8.5,
+  "analysis": 9,
+  "notes": "All 14 fact probes handled correctly with proper premise-refutals; Fermi method sound but final number omits the PUE overhead it correctly identifies, landing at the low edge.",
+  "empties": 0,
+  "avg": 8.3
+ }
+}

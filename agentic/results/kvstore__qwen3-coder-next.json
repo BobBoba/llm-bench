@@ -1,0 +1,17 @@
+{
+ "task": "kvstore",
+ "model": "qwen3-coder-next",
+ "client": "local",
+ "outcome_pct": 86,
+ "passed": 6,
+ "total": 7,
+ "steps": 10,
+ "wall_s": 155.4,
+ "cost_usd": 0,
+ "tokens_in": 61187,
+ "tokens_out": 6784,
+ "finished": "done",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-kvstore-qwen3-coder-next-CzRTy9",
+ "hidden_tail": "ne1\\nline2 = ok  спасибо\")\n        del s\n        s2 = KVStore(path)\n        assert s2.get(\"a\") == \"overwritten\"\n        assert s2.get(\"b\") is None\n>       assert s2.get(\"c\") == \"line1\\nline2 = ok  спасибо\"\nE       AssertionError: assert 'line1' == 'line1\\nline2 = ok  спасибо'\nE         \nE         - line1\nE         ?      -\nE         + line1\nE         - line2 = ok  спасибо\n\nhidden_test.py:62: AssertionError\n=========================== short test summary info ============================\nFAILED hidden_test.py::test_persistence_across_reload - AssertionError: asser...\n1 failed, 6 passed in 0.08s\n"
+}

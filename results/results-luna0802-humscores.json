@@ -1,0 +1,12 @@
+{
+ "openai/gpt-5.6-luna": {
+  "facts": 9.3,
+  "ideas": 7.6,
+  "fermi": 7,
+  "forecast": 8,
+  "analysis": 9.2,
+  "notes": "Near-flawless fact battery (only #5 conflates the real 1937 London whaling agreement's venue framing and #12 slightly overstates 'no 2027 World Cup' by ignoring the Women's tournament); Fermi used sound method but omitted host/cooling overhead entirely, landing at the low edge of the acceptable band.",
+  "empties": 0,
+  "avg": 8.22
+ }
+}

@@ -1,0 +1,32 @@
+[
+ {
+  "model": "google/gemini-3.1-flash-lite-preview",
+  "ctx": 1048576,
+  "targetTok": 32000,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 31683,
+  "latency": 2.55,
+  "tokps": 243.9,
+  "reasonTok": 543,
+  "finish": "stop",
+  "cost": 0.00885375
+ },
+ {
+  "model": "google/gemini-3.1-flash-lite-preview",
+  "ctx": 1048576,
+  "targetTok": 262144,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 257614,
+  "latency": 4.55,
+  "tokps": 214.2,
+  "reasonTok": 895,
+  "finish": "stop",
+  "cost": 0.0658645
+ }
+]

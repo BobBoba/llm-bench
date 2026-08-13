@@ -1,0 +1,32 @@
+[
+ {
+  "model": "inception/mercury-2",
+  "ctx": 128000,
+  "targetTok": 32000,
+  "ok": true,
+  "foundCount": 7,
+  "total": 8,
+  "recall": 0.875,
+  "promptTok": 23376,
+  "latency": 2.8,
+  "tokps": 139.5,
+  "reasonTok": 342,
+  "finish": "stop",
+  "cost": 0.0060675
+ },
+ {
+  "model": "inception/mercury-2",
+  "ctx": 128000,
+  "targetTok": 64000,
+  "ok": true,
+  "foundCount": 7,
+  "total": 8,
+  "recall": 0.875,
+  "promptTok": 45485,
+  "latency": 2.68,
+  "tokps": 168.9,
+  "reasonTok": 402,
+  "finish": "stop",
+  "cost": 0.011641625
+ }
+]

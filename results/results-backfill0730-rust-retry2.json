@@ -1,0 +1,103 @@
+[
+ {
+  "model": "minimax/minimax-m2.5",
+  "task": "expr",
+  "mode": "single",
+  "run": 1,
+  "ok": true,
+  "compiles": false,
+  "passed": 0,
+  "total": 25,
+  "pct": 0,
+  "clippy": null,
+  "note": "lib_compile_fail",
+  "finish": "stop",
+  "tokIn": 366,
+  "tokOut": 4063,
+  "reasonTok": 2951,
+  "latency": 100.22,
+  "ttft": 0.787,
+  "tokps": 40.9,
+  "codeLen": 5947,
+  "cost": 0.0037116
+ },
+ {
+  "model": "minimax/minimax-m2.5",
+  "task": "expr",
+  "mode": "single",
+  "run": 2,
+  "ok": true,
+  "compiles": false,
+  "passed": 0,
+  "total": 25,
+  "pct": 0,
+  "clippy": null,
+  "note": "lib_compile_fail",
+  "finish": "stop",
+  "tokIn": 366,
+  "tokOut": 4025,
+  "reasonTok": 3359,
+  "latency": 81.97,
+  "ttft": 0.338,
+  "tokps": 49.3,
+  "codeLen": 5268,
+  "cost": 0.0036422
+ },
+ {
+  "model": "minimax/minimax-m2.5",
+  "task": "lru",
+  "mode": "single",
+  "run": 1,
+  "ok": false,
+  "error": "timeout>1200s",
+  "timeout": true
+ },
+ {
+  "model": "minimax/minimax-m2.5",
+  "task": "lru",
+  "mode": "single",
+  "run": 2,
+  "ok": false,
+  "error": "skipped_after_timeout"
+ },
+ {
+  "model": "minimax/minimax-m2.5",
+  "task": "wordcount",
+  "mode": "single",
+  "run": 1,
+  "ok": false,
+  "error": "skipped_after_timeout"
+ },
+ {
+  "model": "minimax/minimax-m2.5",
+  "task": "wordcount",
+  "mode": "single",
+  "run": 2,
+  "ok": false,
+  "error": "skipped_after_timeout"
+ },
+ {
+  "model": "minimax/minimax-m2.5",
+  "task": "expr",
+  "mode": "agentic",
+  "run": 1,
+  "ok": false,
+  "error": "skipped_after_timeout"
+ },
+ {
+  "model": "minimax/minimax-m2.5",
+  "task": "lru",
+  "mode": "agentic",
+  "run": 1,
+  "ok": false,
+  "error": "skipped_after_timeout"
+ },
+ {
+  "model": "minimax/minimax-m2.5",
+  "task": "wordcount",
+  "mode": "agentic",
+  "run": 1,
+  "ok": false,
+  "error": "skipped_after_timeout"
+ }
+]

@@ -1,0 +1,212 @@
+{
+ "google/gemini-3.1-pro-preview": [
+  "gemini-3.1-pro-preview",
+  "fast100",
+  "2/12",
+  "1.05M"
+ ],
+ "x-ai/grok-build-0.1": [
+  "grok-build-0.1",
+  "fast100",
+  "1/2",
+  "256k"
+ ],
+ "x-ai/grok-4.20-multi-agent": [
+  "grok-4.20-multi-agent",
+  "fast100",
+  "1.25/2.5",
+  "2M"
+ ],
+ "bytedance-seed/seed-2.0-mini": [
+  "seed-2.0-mini",
+  "fast100",
+  "0.1/0.4",
+  "262k"
+ ],
+ "bytedance-seed/seed-1.6-flash": [
+  "seed-1.6-flash",
+  "fast100",
+  "0.075/0.3",
+  "262k"
+ ],
+ "bytedance-seed/seed-2.0-lite": [
+  "seed-2.0-lite",
+  "fast100",
+  "0.25/2",
+  "262k"
+ ],
+ "inception/mercury-2": [
+  "mercury-2",
+  "fast100",
+  "0.25/0.75",
+  "128k"
+ ],
+ "x-ai/grok-4.3": [
+  "grok-4.3",
+  "fast100",
+  "1.25/2.5",
+  "1M"
+ ],
+ "stepfun/step-3.5-flash": [
+  "step-3.5-flash",
+  "fast100",
+  "0.1/0.3",
+  "262k"
+ ],
+ "mistralai/mistral-small-2603": [
+  "mistral-small-2603",
+  "fast100",
+  "0.15/0.6",
+  "262k"
+ ],
+ "mistralai/ministral-3b-2512": [
+  "ministral-3b-2512",
+  "fast100",
+  "0.1/0.1",
+  "131k"
+ ],
+ "moonshotai/kimi-k2-thinking": [
+  "kimi-k2-thinking",
+  "fast100",
+  "0.6/2.5",
+  "262k"
+ ],
+ "google/gemini-3.1-flash-lite-preview": [
+  "gemini-3.1-flash-lite-preview",
+  "fast100",
+  "0.25/1.5",
+  "1.05M"
+ ],
+ "liquid/lfm-2-24b-a2b": [
+  "lfm-2-24b-a2b",
+  "fast100",
+  "0.03/0.12",
+  "128k"
+ ],
+ "amazon/nova-micro-v1": [
+  "nova-micro-v1",
+  "fast100",
+  "0.035/0.14",
+  "128k"
+ ],
+ "google/gemini-2.5-flash-lite": [
+  "gemini-2.5-flash-lite",
+  "fast100",
+  "0.1/0.4",
+  "1.05M"
+ ],
+ "bytedance/ui-tars-1.5-7b": [
+  "ui-tars-1.5-7b",
+  "fast100",
+  "0.1/0.2",
+  "128k"
+ ],
+ "rekaai/reka-edge": [
+  "reka-edge",
+  "fast100",
+  "0.1/0.1",
+  "16k"
+ ],
+ "openai/gpt-5.2-codex": [
+  "gpt-5.2-codex",
+  "fast100",
+  "1.75/14",
+  "400k"
+ ],
+ "google/gemini-3.1-flash-lite": [
+  "gemini-3.1-flash-lite",
+  "fast100",
+  "0.25/1.5",
+  "1.05M"
+ ],
+ "google/gemini-3.5-flash": [
+  "gemini-3.5-flash",
+  "fast100",
+  "1.5/9",
+  "1.05M"
+ ],
+ "arcee-ai/trinity-mini": [
+  "trinity-mini",
+  "fast100",
+  "0.045/0.15",
+  "131k"
+ ],
+ "x-ai/grok-4.20": [
+  "grok-4.20",
+  "fast100",
+  "1.25/2.5",
+  "2M"
+ ],
+ "amazon/nova-lite-v1": [
+  "nova-lite-v1",
+  "fast100",
+  "0.06/0.24",
+  "300k"
+ ],
+ "amazon/nova-pro-v1": [
+  "nova-pro-v1",
+  "fast100",
+  "0.8/3.2",
+  "300k"
+ ],
+ "ibm-granite/granite-4.1-8b": [
+  "granite-4.1-8b",
+  "fast100",
+  "0.05/0.1",
+  "131k"
+ ],
+ "deepseek/deepseek-v4-flash": [
+  "deepseek-v4-flash",
+  "fast100",
+  "0.089/0.18",
+  "1.05M"
+ ],
+ "qwen/qwen3-next-80b-a3b-thinking": [
+  "qwen3-next-80b-a3b-thinking",
+  "fast100",
+  "0.0975/0.78",
+  "262k"
+ ],
+ "amazon/nova-2-lite-v1": [
+  "nova-2-lite-v1",
+  "fast100",
+  "0.3/2.5",
+  "1M"
+ ],
+ "google/gemini-3-flash-preview": [
+  "gemini-3-flash-preview",
+  "fast100",
+  "0.5/3",
+  "1.05M"
+ ],
+ "openai/gpt-5.3-codex": [
+  "gpt-5.3-codex",
+  "fast100",
+  "1.75/14",
+  "400k"
+ ],
+ "moonshotai/kimi-k2-0905": [
+  "kimi-k2-0905",
+  "fast100",
+  "0.6/2.5",
+  "262k"
+ ],
+ "google/gemini-2.5-flash-lite-preview-09-2025": [
+  "gemini-2.5-flash-lite-preview-09-2025",
+  "fast100",
+  "0.1/0.4",
+  "1.05M"
+ ],
+ "kwaipilot/kat-coder-pro-v2": [
+  "kat-coder-pro-v2",
+  "fast100",
+  "0.3/1.2",
+  "256k"
+ ],
+ "tencent/hunyuan-a13b-instruct": [
+  "hunyuan-a13b-instruct",
+  "fast100",
+  "0.14/0.57",
+  "131k"
+ ]
+}

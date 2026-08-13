@@ -1,0 +1,22 @@
+{
+ "openai/gpt-5.4-mini": {
+  "facts": 8.5,
+  "ideas": 6.5,
+  "fermi": 6,
+  "forecast": 8,
+  "analysis": 9,
+  "notes": "Facts strong (all correct incl. false-premise flags) but Q6 gives a false 'Saturday' justification—14 Mar 1981 was a Saturday, so factually right yet not the intended unknowability rationale; Fermi omits overhead/PUE but lands in-band via inflated price; analysis is exhaustive and rigorous.",
+  "empties": 0,
+  "avg": 7.6
+ },
+ "openai/gpt-5-mini": {
+  "facts": 9.8,
+  "ideas": 7.5,
+  "fermi": 6,
+  "forecast": 8,
+  "analysis": 9,
+  "notes": "Flawless fact battery with proper refusals/refutations; Fermi undershoots B200 power (~1kW actual, not 400W) landing at $12k just below the band despite sound method.",
+  "empties": 0,
+  "avg": 8.06
+ }
+}

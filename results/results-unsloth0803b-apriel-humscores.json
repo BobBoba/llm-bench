@@ -1,0 +1,12 @@
+{
+ "unsloth/Apriel-1.5-15b-Thinker-GGUF:UD-Q8_K_XL": {
+  "facts": 6.5,
+  "ideas": 3.5,
+  "fermi": 3,
+  "forecast": 5,
+  "analysis": 2,
+  "notes": "Facts battery was mostly solid (all 4 false premises refuted, 2 of 3 unanswerables declined) but #10 confabulated a fabricated 6.5B/Cape Verde figure after visible flailing; the Fermi answer is catastrophically wrong (300W for a B200 vs ~1kW, no PUE/facility overhead, ~4x under), and the ideas and analysis axes collapsed into pathological repetition loops with the analysis response never producing a final answer at all.",
+  "empties": 0,
+  "avg": 4
+ }
+}

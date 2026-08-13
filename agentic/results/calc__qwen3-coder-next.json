@@ -1,0 +1,17 @@
+{
+ "task": "calc",
+ "model": "qwen3-coder-next",
+ "client": "local",
+ "outcome_pct": 100,
+ "passed": 8,
+ "total": 8,
+ "steps": 17,
+ "wall_s": 120.2,
+ "cost_usd": 0,
+ "tokens_in": 117320,
+ "tokens_out": 5008,
+ "finished": "done",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-calc-qwen3-coder-next-7u1UcK",
+ "hidden_tail": "........                                                                 [100%]\n8 passed in 0.03s\n"
+}

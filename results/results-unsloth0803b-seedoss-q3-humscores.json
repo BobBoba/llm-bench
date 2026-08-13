@@ -1,0 +1,12 @@
+{
+ "unsloth/Seed-OSS-36B-Instruct-GGUF:UD-Q3_K_XL": {
+  "facts": 7.4,
+  "ideas": 5.5,
+  "fermi": 4,
+  "forecast": 6,
+  "analysis": 8.5,
+  "notes": "Strong analysis and clean unanswerable-declines, but Fermi used a fabricated 450W B200 TDP with no PUE overhead and an absurd €0.53/kWh, and probe 5 answered a false-premise treaty as if real.",
+  "empties": 0,
+  "avg": 6.28
+ }
+}

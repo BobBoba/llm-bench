@@ -1,0 +1,17 @@
+{
+ "task": "todo-api",
+ "model": "qwen3-coder-next",
+ "client": "local",
+ "outcome_pct": 83,
+ "passed": 5,
+ "total": 6,
+ "steps": 11,
+ "wall_s": 219.9,
+ "cost_usd": 0,
+ "tokens_in": 79582,
+ "tokens_out": 8187,
+ "finished": "done",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-todo-api-qwen3-coder-next-b07OTn",
+ "hidden_tail": "============= FAILURES ===================================\n________________________ test_incrementing_ids_and_list ________________________\n\nbase = 'http://127.0.0.1:33081'\n\n    def test_incrementing_ids_and_list(base):\n        req(\"POST\", f\"{base}/todos\", {\"title\": \"a\"})\n        st, t2 = req(\"POST\", f\"{base}/todos\", {\"title\": \"b\"})\n>       assert t2[\"id\"] == 2\nE       assert 3 == 2\n\nhidden_test.py:54: AssertionError\n=========================== short test summary info ============================\nFAILED hidden_test.py::test_incrementing_ids_and_list - assert 3 == 2\n1 failed, 5 passed in 3.15s\n"
+}

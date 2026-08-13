@@ -1,0 +1,6 @@
+.venv-gsheets/
+results/hard-dumps/
+*.log
+node_modules/
+NOTES-ru.md
+.orkey

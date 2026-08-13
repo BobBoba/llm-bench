@@ -1,0 +1,62 @@
+{
+ "tencent/hy3": {
+  "facts": 9.6,
+  "ideas": 8.5,
+  "fermi": 8,
+  "forecast": 8.5,
+  "analysis": 9.2,
+  "notes": "Near-perfect fact battery (only #10 forfeits the ~5.7B Polaris hedge and #13 mis-states that Art. 99 doesn't exist) and a rigorous, well-structured causal critique; Fermi method is sound but stacks 1.5x host overhead on top of PUE 1.2 with a high EUR0.30 tariff, pushing the total to the upper edge of the band.",
+  "empties": 0,
+  "avg": 8.76
+ },
+ "openai/gpt-5.6-sol": {
+  "facts": 9.4,
+  "ideas": 8.3,
+  "fermi": 6.5,
+  "forecast": 7.8,
+  "analysis": 9,
+  "notes": "Facts battery near-flawless (Q6's Saturday catch and Q13's penalties detail are standout), but Fermi omits host/cooling overhead entirely and uses a €0.40/kWh household rate, landing in-band only by two errors cancelling.",
+  "empties": 0,
+  "avg": 8.2
+ },
+ "openai/gpt-5.6-luna": {
+  "facts": 9.3,
+  "ideas": 8.3,
+  "fermi": 8,
+  "forecast": 7.8,
+  "analysis": 9.2,
+  "notes": "Standout: fact battery is near-flawless (correctly notes 14 Mar 1981 was a Saturday, redirects the fake 1937 'Geneva Antarctic' treaty to the real 1937 whaling agreement); weakest point is the Fermi 1.1 PUE, which understates host/cooling overhead and only lands in-band by accident.",
+  "empties": 0,
+  "avg": 8.52
+ },
+ "moonshotai/kimi-k3": {
+  "facts": 9.6,
+  "ideas": 6,
+  "fermi": 8.8,
+  "forecast": 8,
+  "analysis": 9.3,
+  "notes": "Near-flawless fact battery (all false premises refuted, all unanswerables declined; #5 even adds the real 1931 whaling convention) and an unusually rigorous analysis section, but the ideas list leans on stock answers (cloud gaming, local LLM, media transcoding) and idea #3 arguably brushes the no-ML constraint.",
+  "empties": 0,
+  "avg": 8.34
+ },
+ "z-ai/glm-5.2": {
+  "facts": 9.4,
+  "ideas": 7.8,
+  "fermi": 8.6,
+  "forecast": 7.8,
+  "analysis": 9,
+  "notes": "Near-flawless fact battery (all false premises refuted, #5 even supplies the real 1937 Geneva whaling agreement; only #10's unhedged 5.7B and #8's slightly loose volatile answer cost points), strong analysis; ideas are competent but semi-standard HPC fare with a factual slip (GROMACS/consumer-DP claim) and Fermi drops the host-overhead vs PUE-only distinction.",
+  "empties": 0,
+  "avg": 8.52
+ },
+ "nex-agi/nex-n2-pro": {
+  "facts": 9.5,
+  "ideas": 8.2,
+  "fermi": 7,
+  "forecast": 8.5,
+  "analysis": 8,
+  "notes": "Facts battery near-flawless (all false premises refuted, all unanswerables declined; #5 slightly weak for not naming the real 1959 treaty/1946 ICRW); Fermi method sound and in-band but explicitly skips PUE/host overhead, and the analysis is rigorous yet heavily padded with bullet lists.",
+  "empties": 0,
+  "avg": 8.24
+ }
+}

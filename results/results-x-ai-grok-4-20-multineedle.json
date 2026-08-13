@@ -1,0 +1,32 @@
+[
+ {
+  "model": "x-ai/grok-4.20",
+  "ctx": 2000000,
+  "targetTok": 32000,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 23893,
+  "latency": 4.57,
+  "tokps": 201.8,
+  "reasonTok": 868,
+  "finish": "stop",
+  "cost": 0.03210405
+ },
+ {
+  "model": "x-ai/grok-4.20",
+  "ctx": 2000000,
+  "targetTok": 262144,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 193120,
+  "latency": 11.03,
+  "tokps": 51.7,
+  "reasonTok": 516,
+  "finish": "stop",
+  "cost": 0.2427578
+ }
+]

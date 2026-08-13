@@ -1,0 +1,12 @@
+{
+ "qwen-agentworld-35b": {
+  "facts": 9.7,
+  "ideas": 7.5,
+  "fermi": 9,
+  "forecast": 8,
+  "analysis": 8.5,
+  "notes": "Flawless fact battery (all V/F/U probes handled correctly, though Q12 wrongly implies no 2027 Women's WC exists); creative ideas solid but lean toward large-institution science rather than home-lab-realistic.",
+  "empties": 0,
+  "avg": 8.54
+ }
+}

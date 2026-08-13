@@ -1,0 +1,42 @@
+{
+ "unsloth/Seed-OSS-36B-Instruct-GGUF:UD-Q4_K_XL": {
+  "facts": 7.4,
+  "ideas": 5,
+  "fermi": 7,
+  "forecast": 7,
+  "analysis": 8.8,
+  "notes": "Strong analysis and clean false-premise refusals, but fact #5 is a confident hallucination and #13 wrongly denies Article 99 exists; idea #5 openly violates the no-ML constraint while #3 hedges on a false 4.5 kW/0.45 EUR pair that luckily lands in band.",
+  "empties": 0,
+  "avg": 7.04
+ },
+ "unsloth/Seed-OSS-36B-Instruct-GGUF:UD-Q3_K_XL": {
+  "facts": 7.4,
+  "ideas": 5.5,
+  "fermi": 4,
+  "forecast": 6,
+  "analysis": 8.5,
+  "notes": "Strong analysis and clean unanswerable-declines, but Fermi used a fabricated 450W B200 TDP with no PUE overhead and an absurd €0.53/kWh, and probe 5 answered a false-premise treaty as if real.",
+  "empties": 0,
+  "avg": 6.28
+ },
+ "unsloth/gemma-4-31B-it-qat-GGUF:UD-Q4_K_XL": {
+  "facts": 9.2,
+  "ideas": 8.5,
+  "fermi": 9.3,
+  "forecast": 8.7,
+  "analysis": 8.8,
+  "notes": "Terse but correctly-calibrated fact battery (all 4 false premises refuted, all 4 unanswerables declined, though the volatile answer is register-caching-only and misses reordering, and probe 10's blanket 'I don't know' forgoes the known ~5.7B Polaris-10 hedge); the Fermi chain is textbook (per-GPU TDP → host overhead → PUE → hours → EUR → USD) and the GPU ideas are genuinely non-clichéd.",
+  "empties": 0,
+  "avg": 8.9
+ },
+ "unsloth/Apriel-1.5-15b-Thinker-GGUF:UD-Q8_K_XL": {
+  "facts": 6.5,
+  "ideas": 3.5,
+  "fermi": 3,
+  "forecast": 5,
+  "analysis": 2,
+  "notes": "Facts battery was mostly solid (all 4 false premises refuted, 2 of 3 unanswerables declined) but #10 confabulated a fabricated 6.5B/Cape Verde figure after visible flailing; the Fermi answer is catastrophically wrong (300W for a B200 vs ~1kW, no PUE/facility overhead, ~4x under), and the ideas and analysis axes collapsed into pathological repetition loops with the analysis response never producing a final answer at all.",
+  "empties": 0,
+  "avg": 4
+ }
+}

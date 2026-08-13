@@ -1,0 +1,32 @@
+[
+ {
+  "model": "amazon/nova-micro-v1",
+  "ctx": 128000,
+  "targetTok": 32000,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 30923,
+  "latency": 2.1,
+  "tokps": 39.1,
+  "reasonTok": 0,
+  "finish": "stop",
+  "cost": 0.001093785
+ },
+ {
+  "model": "amazon/nova-micro-v1",
+  "ctx": 128000,
+  "targetTok": 64000,
+  "ok": true,
+  "foundCount": 6,
+  "total": 8,
+  "recall": 0.75,
+  "promptTok": 62085,
+  "latency": 3.83,
+  "tokps": 49.1,
+  "reasonTok": 0,
+  "finish": "stop",
+  "cost": 0.002199295
+ }
+]

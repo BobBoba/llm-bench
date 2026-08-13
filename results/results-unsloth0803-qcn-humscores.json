@@ -1,0 +1,12 @@
+{
+ "unsloth/Qwen3-Coder-Next-GGUF:UD-Q4_K_M": {
+  "facts": 9,
+  "ideas": 7,
+  "fermi": 4,
+  "forecast": 7.5,
+  "analysis": 8.5,
+  "notes": "Facts near-flawless (only #13's 'there is no Article 99' overreach) but Fermi badly undershoots — 450W B200 TDP is wrong (~1000W), zero PUE/host overhead, so the method is both mis-anchored and incomplete.",
+  "empties": 0,
+  "avg": 7.2
+ }
+}

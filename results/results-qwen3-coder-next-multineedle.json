@@ -1,0 +1,32 @@
+[
+ {
+  "model": "qwen3-coder-next",
+  "ctx": 128000,
+  "targetTok": 32000,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 30852,
+  "latency": 84.85,
+  "tokps": 1,
+  "reasonTok": 0,
+  "finish": "stop",
+  "cost": 0
+ },
+ {
+  "model": "qwen3-coder-next",
+  "ctx": 128000,
+  "targetTok": 64000,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 61432,
+  "latency": 165.12,
+  "tokps": 0.5,
+  "reasonTok": 0,
+  "finish": "stop",
+  "cost": 0
+ }
+]

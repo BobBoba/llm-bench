@@ -1,0 +1,1955 @@
+[
+ {
+  "model": "~anthropic/claude-fable-latest",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "poolside/laguna-xs-2.1",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "sakana/fugu-ultra",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "qwen/qwen3.7-plus",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "anthropic/claude-fable-5",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "anthropic/claude-opus-4.8-fast",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "qwen/qwen3.7-max",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "z-ai/glm-5.2",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "stepfun/step-3.7-flash",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "anthropic/claude-opus-4.7-fast",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "ok": true,
+  "tokps": 12069,
+  "ttft": 3.57,
+  "completion": 350,
+  "total": 3.6
+ },
+ {
+  "model": "nex-agi/nex-n2-pro",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "google/gemini-3.5-flash",
+  "ok": true,
+  "tokps": 147.6,
+  "ttft": 0.78,
+  "completion": 284,
+  "total": 2.71
+ },
+ {
+  "model": "openai/gpt-chat-latest",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "anthropic/claude-sonnet-5",
+  "ok": true,
+  "tokps": 78.8,
+  "ttft": 1.67,
+  "completion": 350,
+  "total": 6.11
+ },
+ {
+  "model": "minimax/minimax-m3",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "mistralai/mistral-medium-3-5",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "poolside/laguna-xs.2",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "poolside/laguna-m.1",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "moonshotai/kimi-k2.7-code",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "inclusionai/ring-2.6-1t",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "google/gemini-3.1-flash-lite",
+  "ok": true,
+  "tokps": 151.4,
+  "ttft": 1.04,
+  "completion": 292,
+  "total": 2.97
+ },
+ {
+  "model": "ibm-granite/granite-4.1-8b",
+  "ok": true,
+  "tokps": 134,
+  "ttft": 0.26,
+  "completion": 350,
+  "total": 2.88
+ },
+ {
+  "model": "anthropic/claude-opus-4.8",
+  "ok": true,
+  "tokps": 44.7,
+  "ttft": 1.33,
+  "completion": 350,
+  "total": 9.16
+ },
+ {
+  "model": "openrouter/fusion",
+  "ok": false,
+  "error": "{\"code\":500,\"message\":\"Internal Server Error\",\"metadata\":{\"error_type\":\"server\"}}"
+ },
+ {
+  "model": "~openai/gpt-mini-latest",
+  "ok": true,
+  "tokps": 100.6,
+  "ttft": 0.77,
+  "completion": 277,
+  "total": 3.52
+ },
+ {
+  "model": "qwen/qwen3.5-plus-20260420",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "qwen/qwen3.6-flash",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "~anthropic/claude-haiku-latest",
+  "ok": true,
+  "tokps": 99.8,
+  "ttft": 1.12,
+  "completion": 333,
+  "total": 4.46
+ },
+ {
+  "model": "qwen/qwen3.6-max-preview",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "~google/gemini-flash-latest",
+  "ok": true,
+  "tokps": 137,
+  "ttft": 0.86,
+  "completion": 286,
+  "total": 2.95
+ },
+ {
+  "model": "openai/gpt-5.5-pro",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "~google/gemini-pro-latest",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "qwen/qwen3.6-35b-a3b",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "~anthropic/claude-sonnet-latest",
+  "ok": true,
+  "tokps": 61.6,
+  "ttft": 1.57,
+  "completion": 350,
+  "total": 7.25
+ },
+ {
+  "model": "deepseek/deepseek-v4-flash",
+  "ok": true,
+  "tokps": 129.5,
+  "ttft": 1.02,
+  "completion": 350,
+  "total": 3.72
+ },
+ {
+  "model": "tencent/hy3-preview",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "qwen/qwen3.6-27b",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "inclusionai/ling-2.6-1t",
+  "ok": true,
+  "tokps": 79.3,
+  "ttft": 1.39,
+  "completion": 280,
+  "total": 4.92
+ },
+ {
+  "model": "x-ai/grok-4.3",
+  "ok": true,
+  "tokps": 259.3,
+  "ttft": 10.78,
+  "completion": 1267,
+  "total": 15.66
+ },
+ {
+  "model": "inclusionai/ling-2.6-flash",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "openai/gpt-5.5",
+  "ok": true,
+  "tokps": 33.1,
+  "ttft": 4.29,
+  "completion": 330,
+  "total": 14.26
+ },
+ {
+  "model": "xiaomi/mimo-v2.5",
+  "ok": true,
+  "tokps": 67.2,
+  "ttft": 0.87,
+  "completion": 333,
+  "total": 5.83
+ },
+ {
+  "model": "~moonshotai/kimi-latest",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "perceptron/perceptron-mk1",
+  "ok": true,
+  "tokps": 47.7,
+  "ttft": 17.66,
+  "completion": 332,
+  "total": 24.63
+ },
+ {
+  "model": "~anthropic/claude-opus-latest",
+  "ok": true,
+  "tokps": 71.8,
+  "ttft": 1.48,
+  "completion": 350,
+  "total": 6.35
+ },
+ {
+  "model": "~openai/gpt-latest",
+  "ok": true,
+  "tokps": 22.2,
+  "ttft": 5.61,
+  "completion": 334,
+  "total": 20.62
+ },
+ {
+  "model": "qwen/qwen3.6-plus",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "anthropic/claude-opus-4.7",
+  "ok": true,
+  "tokps": 84.4,
+  "ttft": 1.55,
+  "completion": 350,
+  "total": 5.69
+ },
+ {
+  "model": "arcee-ai/trinity-large-thinking",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "xiaomi/mimo-v2.5-pro",
+  "ok": true,
+  "tokps": 27.9,
+  "ttft": 2.88,
+  "completion": 350,
+  "total": 15.41
+ },
+ {
+  "model": "z-ai/glm-5v-turbo",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "google/lyria-3-pro-preview",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "google/lyria-3-clip-preview",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "google/gemma-4-26b-a4b-it",
+  "ok": true,
+  "tokps": 30.6,
+  "ttft": 0.86,
+  "completion": 267,
+  "total": 9.6
+ },
+ {
+  "model": "x-ai/grok-4.20",
+  "ok": true,
+  "tokps": 142.5,
+  "ttft": 0.4,
+  "completion": 321,
+  "total": 2.65
+ },
+ {
+  "model": "z-ai/glm-5.1",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "x-ai/grok-4.20-multi-agent",
+  "ok": true,
+  "tokps": 1293.2,
+  "ttft": 4.35,
+  "completion": 3392,
+  "total": 6.97
+ },
+ {
+  "model": "moonshotai/kimi-k2.6",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "rekaai/reka-edge",
+  "ok": true,
+  "tokps": 158.6,
+  "ttft": 0.98,
+  "completion": 199,
+  "total": 2.23
+ },
+ {
+  "model": "kwaipilot/kat-coder-pro-v2",
+  "ok": true,
+  "tokps": 114.5,
+  "ttft": 0.83,
+  "completion": 273,
+  "total": 3.22
+ },
+ {
+  "model": "minimax/minimax-m2.7",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "deepseek/deepseek-v4-pro",
+  "ok": true,
+  "tokps": 12.3,
+  "ttft": 1.01,
+  "completion": 313,
+  "total": 26.52
+ },
+ {
+  "model": "mistralai/mistral-small-2603",
+  "ok": true,
+  "tokps": 229.8,
+  "ttft": 1,
+  "completion": 344,
+  "total": 2.5
+ },
+ {
+  "model": "openrouter/pareto-code",
+  "ok": true,
+  "tokps": 17.2,
+  "ttft": 2.3,
+  "completion": 337,
+  "total": 21.92
+ },
+ {
+  "model": "openai/gpt-5.4-mini",
+  "ok": true,
+  "tokps": 74.9,
+  "ttft": 0.8,
+  "completion": 287,
+  "total": 4.63
+ },
+ {
+  "model": "openai/gpt-5.4-nano",
+  "ok": true,
+  "tokps": 58.4,
+  "ttft": 0.46,
+  "completion": 283,
+  "total": 5.3
+ },
+ {
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "ok": true,
+  "tokps": 23333.3,
+  "ttft": 4.33,
+  "completion": 350,
+  "total": 4.34
+ },
+ {
+  "model": "inception/mercury-2",
+  "ok": true,
+  "tokps": 404.1,
+  "ttft": 0.86,
+  "completion": 333,
+  "total": 1.69
+ },
+ {
+  "model": "google/gemini-3.1-flash-lite-preview",
+  "ok": true,
+  "tokps": 179.8,
+  "ttft": 0.77,
+  "completion": 292,
+  "total": 2.39
+ },
+ {
+  "model": "qwen/qwen3.5-35b-a3b",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "google/gemma-4-31b-it",
+  "ok": true,
+  "tokps": 10.6,
+  "ttft": 1.49,
+  "completion": 245,
+  "total": 24.62
+ },
+ {
+  "model": "openai/gpt-5.3-chat",
+  "ok": true,
+  "tokps": 99.8,
+  "ttft": 5.63,
+  "completion": 350,
+  "total": 9.14
+ },
+ {
+  "model": "qwen/qwen3.5-flash-02-23",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "openai/gpt-5.4",
+  "ok": true,
+  "tokps": 45.7,
+  "ttft": 3.58,
+  "completion": 285,
+  "total": 9.82
+ },
+ {
+  "model": "google/gemini-3.1-pro-preview-customtools",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "liquid/lfm-2-24b-a2b",
+  "ok": true,
+  "tokps": 169,
+  "ttft": 0.7,
+  "completion": 331,
+  "total": 2.66
+ },
+ {
+  "model": "aion-labs/aion-2.0",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "qwen/qwen3.5-9b",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "x-ai/grok-build-0.1",
+  "ok": true,
+  "tokps": 2476.6,
+  "ttft": 55.17,
+  "completion": 4396,
+  "total": 56.94
+ },
+ {
+  "model": "qwen/qwen3.5-plus-02-15",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "z-ai/glm-5-turbo",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "openai/gpt-5.3-codex",
+  "ok": true,
+  "tokps": 118.3,
+  "ttft": 2.22,
+  "completion": 350,
+  "total": 5.17
+ },
+ {
+  "model": "google/gemini-3.1-pro-preview",
+  "ok": true,
+  "tokps": 5164.2,
+  "ttft": 5.39,
+  "completion": 346,
+  "total": 5.46
+ },
+ {
+  "model": "qwen/qwen3-max-thinking",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "qwen/qwen3.5-397b-a17b",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "bytedance-seed/seed-2.0-lite",
+  "ok": true,
+  "tokps": 538.4,
+  "ttft": 20.88,
+  "completion": 1529,
+  "total": 23.72
+ },
+ {
+  "model": "openrouter/free",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "anthropic/claude-sonnet-4.6",
+  "ok": true,
+  "tokps": 42.7,
+  "ttft": 1.07,
+  "completion": 316,
+  "total": 8.47
+ },
+ {
+  "model": "bytedance-seed/seed-2.0-mini",
+  "ok": true,
+  "tokps": 1208,
+  "ttft": 20.12,
+  "completion": 2799,
+  "total": 22.44
+ },
+ {
+  "model": "upstage/solar-pro-3",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "minimax/minimax-m2-her",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "qwen/qwen3-coder-next",
+  "ok": true,
+  "tokps": 54.5,
+  "ttft": 0.36,
+  "completion": 343,
+  "total": 6.66
+ },
+ {
+  "model": "openai/gpt-audio",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "openai/gpt-audio-mini",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "anthropic/claude-opus-4.6",
+  "ok": true,
+  "tokps": 39,
+  "ttft": 1.39,
+  "completion": 296,
+  "total": 8.97
+ },
+ {
+  "model": "minimax/minimax-m2.5",
+  "ok": true,
+  "tokps": 125.3,
+  "ttft": 7.76,
+  "completion": 606,
+  "total": 12.6
+ },
+ {
+  "model": "writer/palmyra-x5",
+  "ok": true,
+  "tokps": 79.1,
+  "ttft": 0.4,
+  "completion": 306,
+  "total": 4.26
+ },
+ {
+  "model": "stepfun/step-3.5-flash",
+  "ok": true,
+  "tokps": 253.4,
+  "ttft": 8.03,
+  "completion": 350,
+  "total": 9.41
+ },
+ {
+  "model": "openai/gpt-5.2-codex",
+  "ok": true,
+  "tokps": 156,
+  "ttft": 3.46,
+  "completion": 309,
+  "total": 5.44
+ },
+ {
+  "model": "qwen/qwen3.5-27b",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "bytedance-seed/seed-1.6-flash",
+  "ok": true,
+  "tokps": 1196.5,
+  "ttft": 8.84,
+  "completion": 1522,
+  "total": 10.11
+ },
+ {
+  "model": "minimax/minimax-m2.1",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "z-ai/glm-4.7-flash",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "openai/gpt-5.2-pro",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "google/gemini-3-flash-preview",
+  "ok": true,
+  "tokps": 120.8,
+  "ttft": 1.69,
+  "completion": 287,
+  "total": 4.07
+ },
+ {
+  "model": "mistralai/devstral-2512",
+  "ok": false,
+  "error": "no_content"
+ },
+ {
+  "model": "nvidia/nemotron-3-nano-30b-a3b",
+  "ok": true,
+  "tokps": 38888.9,
+  "ttft": 4.13,
+  "completion": 350,
+  "total": 4.14
+ },
+ {
+  "model": "relace/relace-search",
+  "ok": true,
+  "tokps": 73.9,
+  "completion": 318,
+  "total": 4.3
+ },
+ {
+  "model": "openai/gpt-5.2-chat",
+  "ok": true,
+  "tokps": 67.5,
+  "completion": 350,
+  "total": 5.18
+ },
+ {
+  "model": "openrouter/bodybuilder",
+  "ok": true,
+  "tokps": 40.7,
+  "completion": 114,
+  "total": 2.8
+ },
+ {
+  "model": "z-ai/glm-5",
+  "ok": true,
+  "tokps": 48.2,
+  "completion": 350,
+  "total": 7.27
+ },
+ {
+  "model": "openai/gpt-5.2",
+  "ok": true,
+  "tokps": 40.5,
+  "completion": 302,
+  "total": 7.45
+ },
+ {
+  "model": "amazon/nova-2-lite-v1",
+  "ok": true,
+  "tokps": 125.4,
+  "completion": 306,
+  "total": 2.44
+ },
+ {
+  "model": "z-ai/glm-4.6v",
+  "ok": true,
+  "tokps": 35.7,
+  "completion": 350,
+  "total": 9.81
+ },
+ {
+  "model": "mistralai/mistral-large-2512",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "mistralai/ministral-3b-2512",
+  "ok": true,
+  "tokps": 205.1,
+  "completion": 341,
+  "total": 1.66
+ },
+ {
+  "model": "mistralai/ministral-14b-2512",
+  "ok": true,
+  "tokps": 76.1,
+  "completion": 350,
+  "total": 4.6
+ },
+ {
+  "model": "openai/gpt-5.1-codex-max",
+  "ok": true,
+  "tokps": 51.9,
+  "completion": 350,
+  "total": 6.75
+ },
+ {
+  "model": "allenai/olmo-3-32b-think",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints found for allenai/olmo-3-32b-think.\",\"code\":404}"
+ },
+ {
+  "model": "arcee-ai/trinity-mini",
+  "ok": true,
+  "tokps": 143.1,
+  "completion": 350,
+  "total": 2.44
+ },
+ {
+  "model": "deepcogito/cogito-v2.1-671b",
+  "ok": true,
+  "tokps": 86.9,
+  "completion": 303,
+  "total": 3.49
+ },
+ {
+  "model": "deepseek/deepseek-v3.2",
+  "ok": true,
+  "tokps": 51.7,
+  "completion": 300,
+  "total": 5.8
+ },
+ {
+  "model": "openai/gpt-5.1",
+  "ok": true,
+  "tokps": 55.1,
+  "completion": 299,
+  "total": 5.42
+ },
+ {
+  "model": "moonshotai/kimi-k2.5",
+  "ok": true,
+  "tokps": 33.6,
+  "completion": 652,
+  "total": 19.4
+ },
+ {
+  "model": "openai/gpt-5.1-chat",
+  "ok": true,
+  "tokps": 74.2,
+  "completion": 330,
+  "total": 4.45
+ },
+ {
+  "model": "openai/gpt-5.1-codex",
+  "ok": true,
+  "tokps": 83.4,
+  "completion": 343,
+  "total": 4.12
+ },
+ {
+  "model": "anthropic/claude-opus-4.5",
+  "ok": true,
+  "tokps": 33.6,
+  "completion": 314,
+  "total": 9.35
+ },
+ {
+  "model": "mistralai/voxtral-small-24b-2507",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "moonshotai/kimi-k2-thinking",
+  "ok": true,
+  "tokps": 179.9,
+  "completion": 350,
+  "total": 1.95
+ },
+ {
+  "model": "openai/gpt-oss-safeguard-20b",
+  "ok": false,
+  "error": "{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"openai/gpt-oss-safeguard-20b is temporarily rate-limited upstream. Please"
+ },
+ {
+  "model": "qwen/qwen3-vl-32b-instruct",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "ibm-granite/granite-4.0-h-micro",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "minimax/minimax-m2",
+  "ok": true,
+  "tokps": 142,
+  "completion": 350,
+  "total": 2.46
+ },
+ {
+  "model": "qwen/qwen3-vl-8b-thinking",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "openai/gpt-5.1-codex-mini",
+  "ok": true,
+  "tokps": 50.7,
+  "completion": 320,
+  "total": 6.31
+ },
+ {
+  "model": "openai/o3-deep-research",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "openai/o4-mini-deep-research",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "anthropic/claude-haiku-4.5",
+  "ok": true,
+  "tokps": 71.3,
+  "completion": 321,
+  "total": 4.5
+ },
+ {
+  "model": "perplexity/sonar-pro-search",
+  "ok": true,
+  "tokps": 47.2,
+  "completion": 315,
+  "total": 6.67
+ },
+ {
+  "model": "z-ai/glm-4.7",
+  "ok": true,
+  "tokps": 52.2,
+  "completion": 1457,
+  "total": 27.93
+ },
+ {
+  "model": "openai/gpt-5-pro",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "qwen/qwen3-vl-8b-instruct",
+  "ok": true,
+  "tokps": 75,
+  "completion": 350,
+  "total": 4.67
+ },
+ {
+  "model": "amazon/nova-premier-v1",
+  "ok": true,
+  "tokps": 30.4,
+  "completion": 263,
+  "total": 8.66
+ },
+ {
+  "model": "nvidia/llama-3.3-nemotron-super-49b-v1.5",
+  "ok": true,
+  "tokps": 48.6,
+  "completion": 350,
+  "total": 7.2
+ },
+ {
+  "model": "mistralai/ministral-8b-2512",
+  "ok": true,
+  "tokps": 13.1,
+  "completion": 350,
+  "total": 26.63
+ },
+ {
+  "model": "relace/relace-apply-3",
+  "ok": false,
+  "error": "{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"expected `<code>...</code>` and `<update>...</update>` tags\",\"provider_na"
+ },
+ {
+  "model": "deepseek/deepseek-v3.2-exp",
+  "ok": true,
+  "tokps": 50.6,
+  "completion": 292,
+  "total": 5.77
+ },
+ {
+  "model": "thedrummer/cydonia-24b-v4.1",
+  "ok": true,
+  "tokps": 65.1,
+  "completion": 282,
+  "total": 4.33
+ },
+ {
+  "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+  "ok": true,
+  "tokps": 115.3,
+  "completion": 259,
+  "total": 2.25
+ },
+ {
+  "model": "qwen/qwen3-max",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "qwen/qwen3-coder-plus",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "openai/gpt-5-codex",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "anthropic/claude-sonnet-4.5",
+  "ok": true,
+  "tokps": 32.1,
+  "completion": 306,
+  "total": 9.54
+ },
+ {
+  "model": "qwen/qwen3-coder-flash",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "qwen/qwen3-vl-235b-a22b-instruct",
+  "ok": true,
+  "tokps": 63.7,
+  "completion": 316,
+  "total": 4.96
+ },
+ {
+  "model": "qwen/qwen3-next-80b-a3b-thinking",
+  "ok": true,
+  "tokps": 126.8,
+  "completion": 350,
+  "total": 2.76
+ },
+ {
+  "model": "qwen/qwen-plus-2025-07-28:thinking",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "qwen/qwen-plus-2025-07-28",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "qwen/qwen3-vl-30b-a3b-instruct",
+  "ok": true,
+  "tokps": 23.2,
+  "completion": 317,
+  "total": 13.67
+ },
+ {
+  "model": "qwen/qwen3-30b-a3b-thinking-2507",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "deepseek/deepseek-v3.1-terminus",
+  "ok": true,
+  "tokps": 43,
+  "completion": 278,
+  "total": 6.46
+ },
+ {
+  "model": "moonshotai/kimi-k2-0905",
+  "ok": true,
+  "tokps": 117.7,
+  "completion": 331,
+  "total": 2.81
+ },
+ {
+  "model": "nousresearch/hermes-4-70b",
+  "ok": true,
+  "tokps": 69.7,
+  "completion": 262,
+  "total": 3.76
+ },
+ {
+  "model": "mistralai/mistral-medium-3.1",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "qwen/qwen3-next-80b-a3b-instruct",
+  "ok": true,
+  "tokps": 56.4,
+  "completion": 330,
+  "total": 5.85
+ },
+ {
+  "model": "ai21/jamba-large-1.7",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "openai/gpt-5-chat",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "deepseek/deepseek-chat-v3.1",
+  "ok": true,
+  "tokps": 52.4,
+  "completion": 292,
+  "total": 5.57
+ },
+ {
+  "model": "nousresearch/hermes-4-405b",
+  "ok": true,
+  "tokps": 37.6,
+  "completion": 292,
+  "total": 7.76
+ },
+ {
+  "model": "bytedance-seed/seed-1.6",
+  "ok": true,
+  "tokps": 52.3,
+  "completion": 2687,
+  "total": 51.36
+ },
+ {
+  "model": "openai/gpt-oss-120b",
+  "ok": true,
+  "tokps": 148,
+  "completion": 350,
+  "total": 2.37
+ },
+ {
+  "model": "z-ai/glm-4.6",
+  "ok": true,
+  "tokps": 45,
+  "completion": 1186,
+  "total": 26.34
+ },
+ {
+  "model": "openai/gpt-oss-20b",
+  "ok": true,
+  "tokps": 276.5,
+  "completion": 350,
+  "total": 1.27
+ },
+ {
+  "model": "mistralai/codestral-2508",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "z-ai/glm-4.5v",
+  "ok": true,
+  "tokps": 34.1,
+  "completion": 350,
+  "total": 10.28
+ },
+ {
+  "model": "openai/gpt-5-mini",
+  "ok": true,
+  "tokps": 55.4,
+  "completion": 350,
+  "total": 6.32
+ },
+ {
+  "model": "openai/gpt-5-nano",
+  "ok": true,
+  "tokps": 49.3,
+  "completion": 320,
+  "total": 6.49
+ },
+ {
+  "model": "openai/gpt-5",
+  "ok": true,
+  "tokps": 29.4,
+  "completion": 320,
+  "total": 10.87
+ },
+ {
+  "model": "qwen/qwen3-vl-235b-a22b-thinking",
+  "ok": true,
+  "tokps": 39,
+  "completion": 931,
+  "total": 23.85
+ },
+ {
+  "model": "qwen/qwen3-coder-30b-a3b-instruct",
+  "ok": true,
+  "tokps": 78.5,
+  "completion": 303,
+  "total": 3.86
+ },
+ {
+  "model": "bytedance/ui-tars-1.5-7b",
+  "ok": true,
+  "tokps": 160.3,
+  "completion": 350,
+  "total": 2.18
+ },
+ {
+  "model": "z-ai/glm-4.5-air",
+  "ok": true,
+  "tokps": 69.3,
+  "completion": 350,
+  "total": 5.05
+ },
+ {
+  "model": "qwen/qwen3-coder",
+  "ok": true,
+  "tokps": 63.3,
+  "completion": 304,
+  "total": 4.8
+ },
+ {
+  "model": "switchpoint/router",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "google/gemini-2.5-flash-lite",
+  "ok": true,
+  "tokps": 162.7,
+  "completion": 340,
+  "total": 2.09
+ },
+ {
+  "model": "z-ai/glm-4.5",
+  "ok": true,
+  "tokps": 42.9,
+  "completion": 350,
+  "total": 8.15
+ },
+ {
+  "model": "qwen/qwen3-235b-a22b-thinking-2507",
+  "ok": true,
+  "tokps": 46.9,
+  "completion": 350,
+  "total": 7.46
+ },
+ {
+  "model": "qwen/qwen3-30b-a3b-instruct-2507",
+  "ok": true,
+  "tokps": 33.3,
+  "completion": 326,
+  "total": 9.79
+ },
+ {
+  "model": "tencent/hunyuan-a13b-instruct",
+  "ok": true,
+  "tokps": 104.5,
+  "completion": 347,
+  "total": 3.32
+ },
+ {
+  "model": "qwen/qwen3-vl-30b-a3b-thinking",
+  "ok": true,
+  "tokps": 20.4,
+  "completion": 829,
+  "total": 40.66
+ },
+ {
+  "model": "mistralai/mistral-small-3.2-24b-instruct",
+  "ok": false,
+  "error": "{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"mistralai/mistral-small-3.2-24b-instruct is temporarily rate-limited upst"
+ },
+ {
+  "model": "openai/gpt-5.4-pro",
+  "ok": true,
+  "tokps": 5.1,
+  "completion": 350,
+  "total": 68.56
+ },
+ {
+  "model": "morph/morph-v3-fast",
+  "ok": true,
+  "tokps": 6795,
+  "completion": 32657,
+  "total": 4.81
+ },
+ {
+  "model": "openai/o3-pro",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "google/gemini-2.5-flash",
+  "ok": true,
+  "tokps": 81.1,
+  "completion": 308,
+  "total": 3.8
+ },
+ {
+  "model": "qwen/qwen3-235b-a22b-2507",
+  "ok": true,
+  "tokps": 30.2,
+  "completion": 289,
+  "total": 9.57
+ },
+ {
+  "model": "moonshotai/kimi-k2",
+  "ok": true,
+  "tokps": 31.9,
+  "completion": 301,
+  "total": 9.42
+ },
+ {
+  "model": "minimax/minimax-m1",
+  "ok": true,
+  "tokps": 57.1,
+  "completion": 350,
+  "total": 6.13
+ },
+ {
+  "model": "baidu/ernie-4.5-vl-424b-a47b",
+  "ok": true,
+  "tokps": 37,
+  "completion": 279,
+  "total": 7.55
+ },
+ {
+  "model": "mistralai/mistral-medium-3",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "google/gemini-2.5-pro",
+  "ok": true,
+  "tokps": 71,
+  "completion": 346,
+  "total": 4.88
+ },
+ {
+  "model": "arcee-ai/virtuoso-large",
+  "ok": false,
+  "error": "{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\n  \\\"id\\\": \\\"oqXU2PR-2kFHot-a14f071531941bb8\\\",\\n  \\\"error\\\": {\\n    \\\""
+ },
+ {
+  "model": "arcee-ai/coder-large",
+  "ok": false,
+  "error": "{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\n  \\\"id\\\": \\\"oqXU2VG-2kFHot-a14f07175014c073\\\",\\n  \\\"error\\\": {\\n    \\\""
+ },
+ {
+  "model": "google/gemini-2.5-pro-preview",
+  "ok": true,
+  "tokps": 66.4,
+  "completion": 347,
+  "total": 5.22
+ },
+ {
+  "model": "meta-llama/llama-guard-4-12b",
+  "ok": true,
+  "tokps": 7.7,
+  "completion": 3,
+  "total": 0.39
+ },
+ {
+  "model": "qwen/qwen3-8b",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "anthropic/claude-sonnet-4",
+  "ok": true,
+  "tokps": 56.4,
+  "completion": 300,
+  "total": 5.32
+ },
+ {
+  "model": "anthropic/claude-opus-4.1",
+  "ok": true,
+  "tokps": 13.3,
+  "completion": 311,
+  "total": 23.43
+ },
+ {
+  "model": "qwen/qwen3-235b-a22b",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "openai/o4-mini-high",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "openai/o3",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "openai/o4-mini",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "google/gemini-2.5-pro-preview-05-06",
+  "ok": true,
+  "tokps": 67.8,
+  "completion": 346,
+  "total": 5.1
+ },
+ {
+  "model": "qwen/qwen3-30b-a3b",
+  "ok": true,
+  "tokps": 70.6,
+  "completion": 350,
+  "total": 4.96
+ },
+ {
+  "model": "openai/gpt-4.1",
+  "ok": true,
+  "tokps": 69.6,
+  "completion": 292,
+  "total": 4.19
+ },
+ {
+  "model": "openai/gpt-4.1-mini",
+  "ok": true,
+  "tokps": 71.6,
+  "completion": 297,
+  "total": 4.15
+ },
+ {
+  "model": "google/gemma-3n-e4b-it",
+  "ok": true,
+  "tokps": 31.2,
+  "completion": 312,
+  "total": 10.01
+ },
+ {
+  "model": "morph/morph-v3-large",
+  "ok": true,
+  "tokps": 14.6,
+  "completion": 278,
+  "total": 19.08
+ },
+ {
+  "model": "openai/o1-pro",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "mistralai/mistral-small-3.1-24b-instruct",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "qwen/qwen3-32b",
+  "ok": true,
+  "tokps": 65.4,
+  "completion": 350,
+  "total": 5.36
+ },
+ {
+  "model": "openai/gpt-4.1-nano",
+  "ok": true,
+  "tokps": 70,
+  "completion": 306,
+  "total": 4.37
+ },
+ {
+  "model": "cohere/command-a",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "openai/gpt-4o-mini-search-preview",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "openai/gpt-4o-search-preview",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "anthropic/claude-opus-4",
+  "ok": true,
+  "tokps": 22,
+  "completion": 289,
+  "total": 13.14
+ },
+ {
+  "model": "meta-llama/llama-4-scout",
+  "ok": true,
+  "tokps": 50.7,
+  "completion": 308,
+  "total": 6.08
+ },
+ {
+  "model": "rekaai/reka-flash-3",
+  "ok": true,
+  "tokps": 77.5,
+  "completion": 350,
+  "total": 4.51
+ },
+ {
+  "model": "qwen/qwen3.5-122b-a10b",
+  "ok": false,
+  "error": "This operation was aborted"
+ },
+ {
+  "model": "qwen/qwen3-14b",
+  "ok": true,
+  "tokps": 22.7,
+  "completion": 350,
+  "total": 15.41
+ },
+ {
+  "model": "thedrummer/skyfall-36b-v2",
+  "ok": true,
+  "tokps": 75.5,
+  "completion": 231,
+  "total": 3.06
+ },
+ {
+  "model": "mistralai/mistral-saba",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "openai/o3-mini-high",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "aion-labs/aion-1.0",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "aion-labs/aion-1.0-mini",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "aion-labs/aion-rp-llama-3.1-8b",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "deepseek/deepseek-chat-v3-0324",
+  "ok": true,
+  "tokps": 27.5,
+  "completion": 283,
+  "total": 10.3
+ },
+ {
+  "model": "qwen/qwen-plus",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "openai/o3-mini",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "meta-llama/llama-4-maverick",
+  "ok": true,
+  "tokps": 23.5,
+  "completion": 266,
+  "total": 11.31
+ },
+ {
+  "model": "google/gemma-3-12b-it",
+  "ok": true,
+  "tokps": 24.6,
+  "completion": 268,
+  "total": 10.91
+ },
+ {
+  "model": "perplexity/sonar-reasoning-pro",
+  "ok": false,
+  "error": "{\"message\":\"Upstream error from Perplexity: The inference server returned an error or timed out.\",\"code\":502}"
+ },
+ {
+  "model": "perplexity/sonar-pro",
+  "ok": true,
+  "tokps": 57.5,
+  "completion": 347,
+  "total": 6.03
+ },
+ {
+  "model": "minimax/minimax-01",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "mistralai/mistral-small-24b-instruct-2501",
+  "ok": true,
+  "tokps": 63.8,
+  "completion": 248,
+  "total": 3.89
+ },
+ {
+  "model": "perplexity/sonar",
+  "ok": true,
+  "tokps": 78.6,
+  "completion": 300,
+  "total": 3.82
+ },
+ {
+  "model": "qwen/qwen2.5-vl-72b-instruct",
+  "ok": true,
+  "tokps": 50.1,
+  "completion": 300,
+  "total": 5.99
+ },
+ {
+  "model": "google/gemma-3-4b-it",
+  "ok": true,
+  "tokps": 16.4,
+  "completion": 254,
+  "total": 15.49
+ },
+ {
+  "model": "openai/o1",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "cohere/command-r7b-12-2024",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "microsoft/phi-4",
+  "ok": true,
+  "tokps": 82.4,
+  "completion": 264,
+  "total": 3.2
+ },
+ {
+  "model": "amazon/nova-lite-v1",
+  "ok": true,
+  "tokps": 137.4,
+  "completion": 264,
+  "total": 1.92
+ },
+ {
+  "model": "amazon/nova-micro-v1",
+  "ok": true,
+  "tokps": 163.2,
+  "completion": 310,
+  "total": 1.9
+ },
+ {
+  "model": "google/gemma-3-27b-it",
+  "ok": true,
+  "tokps": 15.2,
+  "completion": 289,
+  "total": 19.04
+ },
+ {
+  "model": "openai/gpt-4o-2024-11-20",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "mistralai/mistral-large-2407",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "qwen/qwen-2.5-coder-32b-instruct",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "amazon/nova-pro-v1",
+  "ok": true,
+  "tokps": 135.4,
+  "completion": 247,
+  "total": 1.82
+ },
+ {
+  "model": "thedrummer/unslopnemo-12b",
+  "ok": true,
+  "tokps": 86.9,
+  "completion": 257,
+  "total": 2.96
+ },
+ {
+  "model": "deepseek/deepseek-r1-distill-llama-70b",
+  "ok": true,
+  "tokps": 24.8,
+  "completion": 350,
+  "total": 14.1
+ },
+ {
+  "model": "inflection/inflection-3-productivity",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "inflection/inflection-3-pi",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "qwen/qwen-2.5-7b-instruct",
+  "ok": true,
+  "tokps": 97.3,
+  "completion": 251,
+  "total": 2.58
+ },
+ {
+  "model": "meta-llama/llama-3.2-3b-instruct",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "meta-llama/llama-3.2-1b-instruct",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "thedrummer/rocinante-12b",
+  "ok": true,
+  "tokps": 96.8,
+  "completion": 350,
+  "total": 3.62
+ },
+ {
+  "model": "anthracite-org/magnum-v4-72b",
+  "ok": true,
+  "tokps": 29.4,
+  "completion": 230,
+  "total": 7.83
+ },
+ {
+  "model": "cohere/command-r-08-2024",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "cohere/command-r-plus-08-2024",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "meta-llama/llama-3.2-11b-vision-instruct",
+  "ok": true,
+  "tokps": 62.1,
+  "completion": 266,
+  "total": 4.28
+ },
+ {
+  "model": "deepseek/deepseek-chat",
+  "ok": true,
+  "tokps": 16.6,
+  "completion": 285,
+  "total": 17.16
+ },
+ {
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "ok": true,
+  "tokps": 16.2,
+  "completion": 259,
+  "total": 15.96
+ },
+ {
+  "model": "deepseek/deepseek-r1-0528",
+  "ok": true,
+  "tokps": 15.1,
+  "completion": 699,
+  "total": 46.15
+ },
+ {
+  "model": "sao10k/l3.1-euryale-70b",
+  "ok": true,
+  "tokps": 57.9,
+  "completion": 271,
+  "total": 4.68
+ },
+ {
+  "model": "sao10k/l3-lunaris-8b",
+  "ok": true,
+  "tokps": 61,
+  "completion": 233,
+  "total": 3.82
+ },
+ {
+  "model": "perplexity/sonar-deep-research",
+  "ok": false,
+  "error": "{\"message\":\"Upstream error from Perplexity: The inference server returned an error or timed out.\",\"code\":502}"
+ },
+ {
+  "model": "deepseek/deepseek-r1",
+  "ok": true,
+  "tokps": 13.5,
+  "completion": 350,
+  "total": 25.87
+ },
+ {
+  "model": "openai/gpt-4o-2024-08-06",
+  "ok": true,
+  "tokps": 77.5,
+  "completion": 297,
+  "total": 3.83
+ },
+ {
+  "model": "openai/gpt-4o-mini-2024-07-18",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "nousresearch/hermes-3-llama-3.1-70b",
+  "ok": true,
+  "tokps": 35.5,
+  "completion": 285,
+  "total": 8.03
+ },
+ {
+  "model": "google/gemma-2-27b-it",
+  "ok": true,
+  "tokps": 51.8,
+  "completion": 221,
+  "total": 4.27
+ },
+ {
+  "model": "openai/gpt-4o",
+  "ok": true,
+  "tokps": 89,
+  "completion": 293,
+  "total": 3.29
+ },
+ {
+  "model": "openai/gpt-4o-mini",
+  "ok": true,
+  "tokps": 52.5,
+  "completion": 289,
+  "total": 5.5
+ },
+ {
+  "model": "mistralai/mixtral-8x22b-instruct",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "meta-llama/llama-3.1-8b-instruct",
+  "ok": true,
+  "tokps": 26.1,
+  "completion": 260,
+  "total": 9.95
+ },
+ {
+  "model": "openai/gpt-4-turbo",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "meta-llama/llama-3-8b-instruct",
+  "ok": true,
+  "tokps": 90.2,
+  "completion": 242,
+  "total": 2.68
+ },
+ {
+  "model": "mistralai/mistral-large",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "nousresearch/hermes-3-llama-3.1-405b",
+  "ok": true,
+  "tokps": 20.7,
+  "completion": 297,
+  "total": 14.34
+ },
+ {
+  "model": "openai/gpt-4o-2024-05-13",
+  "ok": true,
+  "tokps": 81.7,
+  "completion": 305,
+  "total": 3.73
+ },
+ {
+  "model": "openai/gpt-4-turbo-preview",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "openai/gpt-3.5-turbo-instruct",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "meta-llama/llama-3.1-70b-instruct",
+  "ok": true,
+  "tokps": 25.1,
+  "completion": 272,
+  "total": 10.83
+ },
+ {
+  "model": "mistralai/mistral-nemo",
+  "ok": true,
+  "tokps": 24.2,
+  "completion": 295,
+  "total": 12.21
+ },
+ {
+  "model": "anthropic/claude-3-haiku",
+  "ok": true,
+  "tokps": 79.7,
+  "completion": 300,
+  "total": 3.76
+ },
+ {
+  "model": "openai/gpt-3.5-turbo-16k",
+  "ok": true,
+  "tokps": 72.8,
+  "completion": 295,
+  "total": 4.05
+ },
+ {
+  "model": "openai/gpt-3.5-turbo",
+  "ok": false,
+  "error": "{\"message\":\"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy\","
+ },
+ {
+  "model": "openai/gpt-3.5-turbo-0613",
+  "ok": true,
+  "tokps": 61.4,
+  "completion": 291,
+  "total": 4.74
+ },
+ {
+  "model": "openai/gpt-4",
+  "ok": true,
+  "tokps": 85.5,
+  "completion": 281,
+  "total": 3.29
+ },
+ {
+  "model": "undi95/remm-slerp-l2-13b",
+  "ok": true,
+  "tokps": 38.3,
+  "completion": 245,
+  "total": 6.39
+ },
+ {
+  "model": "mancer/weaver",
+  "ok": true,
+  "tokps": 45.8,
+  "completion": 350,
+  "total": 7.65
+ },
+ {
+  "model": "gryphe/mythomax-l2-13b",
+  "ok": true,
+  "tokps": 25,
+  "completion": 218,
+  "total": 8.71
+ },
+ {
+  "model": "sao10k/l3.1-70b-hanami-x1",
+  "ok": true,
+  "tokps": 6.6,
+  "completion": 288,
+  "total": 43.7
+ },
+ {
+  "model": "qwen/qwen-2.5-72b-instruct",
+  "ok": true,
+  "tokps": 8.5,
+  "completion": 329,
+  "total": 38.52
+ },
+ {
+  "model": "microsoft/wizardlm-2-8x22b",
+  "ok": true,
+  "tokps": 11.3,
+  "completion": 304,
+  "total": 27
+ },
+ {
+  "model": "sao10k/l3.3-euryale-70b",
+  "ok": false,
+  "error": "This operation was aborted"
+ }
+]

@@ -1,0 +1,12 @@
+{
+ "ornith-1.0-35b": {
+  "facts": 9.5,
+  "ideas": 8,
+  "fermi": 7.5,
+  "forecast": 8.5,
+  "analysis": 9.5,
+  "notes": "Facts near-perfect (Q12 slightly weaker for not noting the real 2027 Women's WC, Q13 mislabels Art.99 as transitional vs penalties); Fermi method sound but underestimates German industrial rate (~€0.10 low) landing at $12k, just at the low edge of acceptable band.",
+  "empties": 0,
+  "avg": 8.6
+ }
+}

@@ -1,0 +1,42 @@
+[
+ {
+  "model": "ornith-1.0-35b",
+  "run": 1,
+  "ok": true,
+  "error": null,
+  "success": true,
+  "submitted": 115,
+  "submittedName": "Acme",
+  "nameOk": true,
+  "totalOk": true,
+  "steps": 4,
+  "totalCalls": 6,
+  "validCalls": 6,
+  "malformed": 0,
+  "validRate": 1,
+  "cost": 0,
+  "latency": 4.3,
+  "reasonTok": 0,
+  "finish": "tool_calls"
+ },
+ {
+  "model": "ornith-1.0-35b",
+  "run": 2,
+  "ok": true,
+  "error": null,
+  "success": true,
+  "submitted": 115,
+  "submittedName": "Acme",
+  "nameOk": true,
+  "totalOk": true,
+  "steps": 4,
+  "totalCalls": 6,
+  "validCalls": 6,
+  "malformed": 0,
+  "validRate": 1,
+  "cost": 0,
+  "latency": 4.6,
+  "reasonTok": 0,
+  "finish": "tool_calls"
+ }
+]

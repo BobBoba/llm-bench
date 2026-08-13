@@ -1,0 +1,12 @@
+{
+ "deepseek/deepseek-v4-flash-0731": {
+  "facts": 9.4,
+  "ideas": 7.8,
+  "fermi": 6.5,
+  "forecast": 7,
+  "analysis": 9,
+  "notes": "Facts battery near-flawless (all false premises refuted, unanswerables declined; #10 lacks a hedge and misspells 'transistors'), but the Fermi estimate omits host/cooling/PUE overhead entirely and never converts EUR→USD explicitly.",
+  "empties": 0,
+  "avg": 7.94
+ }
+}
