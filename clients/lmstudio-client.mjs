@@ -111,6 +111,13 @@ async function attempt({ body, stream, signal }) {
 //   opts: { model, messages, max_tokens, tools, tool_choice, stream }
 // Returns { ok, content, reasoning, tool_calls, usage, finish, ttft, total, tokps }
 //      or { ok:false, error, timeout? }.
+// Сэмплинг: умолчание temperature 0.2 — контрольная константа всей таблицы. Для прогонов
+// «на рекомендованных настройках производителя» — env LLM_TEMPERATURE / LLM_TOP_P / LLM_TOP_K
+// (отдельной строкой результатов, основную не подменять).
+const ENV_TEMP = process.env.LLM_TEMPERATURE !== undefined ? Number(process.env.LLM_TEMPERATURE) : undefined;
+const ENV_TOP_P = process.env.LLM_TOP_P !== undefined ? Number(process.env.LLM_TOP_P) : undefined;
+const ENV_TOP_K = process.env.LLM_TOP_K !== undefined ? Number(process.env.LLM_TOP_K) : undefined;
+
 async function chat({ model, messages, max_tokens = 40000, tools, tool_choice, stream = false, temperature = 0.2 }) {
   // ! ЗАПРОСЫ С ИНСТРУМЕНТАМИ ВСЕГДА СТРИМЯТСЯ, даже если вызывающий просил иначе.
   //   Причина — ограничение HTTP-клиента, а не сервера: у `fetch` в Node умолчание
@@ -129,7 +136,9 @@ async function chat({ model, messages, max_tokens = 40000, tools, tool_choice, s
   // отказ модели, и подавать такой ноль как результат нельзя. Значение по умолчанию не меняется,
   // поэтому прежние строки таблицы остаются сопоставимыми.
   if (process.env.LLM_MAX_TOKENS) max_tokens = Number(process.env.LLM_MAX_TOKENS);
-  const body = { model, messages, temperature, max_tokens, stream };
+  const body = { model, messages, temperature: ENV_TEMP ?? temperature, max_tokens, stream };
+  if (ENV_TOP_P !== undefined) body.top_p = ENV_TOP_P;
+  if (ENV_TOP_K !== undefined) body.top_k = ENV_TOP_K;
   // LM Studio omits `usage` from stream chunks unless explicitly asked.
   if (stream) body.stream_options = { include_usage: true };
   if (tools) { body.tools = tools; body.tool_choice = tool_choice || 'auto'; }

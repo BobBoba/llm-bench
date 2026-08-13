@@ -25,12 +25,9 @@ SID = open(os.path.join(HERE, "gsheets-sheet-id.txt")).read().strip()
 
 # ---- configure the batch to add ----
 MODELS = [
-    "unsloth/Seed-OSS-36B-Instruct-GGUF:UD-Q4_K_XL",
-    "unsloth/Seed-OSS-36B-Instruct-GGUF:UD-Q3_K_XL",
-    "unsloth/gemma-4-31B-it-qat-GGUF:UD-Q4_K_XL",
-    "unsloth/Apriel-1.5-15b-Thinker-GGUF:UD-Q8_K_XL",
+    "unsloth/Muse-Glimmer-30B-GGUF",
 ]
-SUFFIX = "unsloth0803b"                      # results-<SUFFIX>-{rust,ts,knowledge}.json + -humscores.json
+SUFFIX = "muse0813"                      # results-<SUFFIX>-{rust,ts,knowledge}.json + -humscores.json
 GROUP = "local"                             # 'группа' label (non-local/ref => treated as cloud)
 PROV = "local (Unsloth Studio)"
 MODEL_META = {
@@ -45,16 +42,16 @@ MODEL_META = {
     # делает её KV вшестеро дешевле), Seed-OSS при таком окне не влезает в 24 ГиБ.
     # Оба кванта Seed-OSS обязаны иметь ОДНО окно: переопределения Studio ключуются по
     # репозиторию, и при сравнении квантов контекст должен быть контрольной константой.
-    "unsloth/Seed-OSS-36B-Instruct-GGUF:UD-Q4_K_XL": {"ctx": 32768, "tools": True},
-    "unsloth/Seed-OSS-36B-Instruct-GGUF:UD-Q3_K_XL": {"ctx": 32768, "tools": True},
-    "unsloth/gemma-4-31B-it-qat-GGUF:UD-Q4_K_XL": {"ctx": 262144, "tools": True},
-    "unsloth/Apriel-1.5-15b-Thinker-GGUF:UD-Q8_K_XL": {"ctx": 98304, "tools": True},
+    # Muse-Glimmer (Meta MSL): окно 131072 родное, GQA 16:1 + скользящее окно => KV крошечный,
+    # полное окно живёт на 24 ГиБ. Tool-use подтверждён агентной фазой (green=true).
+    "unsloth/Muse-Glimmer-30B-GGUF": {"ctx": 131072, "tools": True},
 }
 
 # Необязательное переопределение имени строки. По умолчанию имя = short(mid), но у локальных
 # моделей идентификатор несёт репозиторий и квант (`unsloth/Repo-GGUF:UD-Q4_K_M`) — как заголовок
 # строки это нечитаемо, а квант при этом принципиален и потерять его нельзя.
 DISPLAY = {
+    "unsloth/Muse-Glimmer-30B-GGUF": "Muse-Glimmer-30B UD-Q4_K_XL",
     "unsloth/Seed-OSS-36B-Instruct-GGUF:UD-Q4_K_XL": "Seed-OSS-36B UD-Q4_K_XL",
     "unsloth/Seed-OSS-36B-Instruct-GGUF:UD-Q3_K_XL": "Seed-OSS-36B UD-Q3_K_XL",
     "unsloth/gemma-4-31B-it-qat-GGUF:UD-Q4_K_XL": "Gemma-4-31B-QAT UD-Q4_K_XL",

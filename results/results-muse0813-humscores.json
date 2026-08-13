@@ -1,0 +1,12 @@
+{
+ "unsloth/Muse-Glimmer-30B-GGUF": {
+  "facts": 9.6,
+  "ideas": 8.5,
+  "fermi": 7,
+  "forecast": 8,
+  "analysis": 9.3,
+  "notes": "Near-perfect refutations and a rigorous causal-inference critique; weakest link is Fermi, where PUE overhead was understated (~15% vs realistic 40-60%) and the price/currency reasoning meandered between business and residential tariffs, though the final band still lands in range.",
+  "empties": 0,
+  "avg": 8.48
+ }
+}

@@ -47,6 +47,9 @@ EXCLUDED = {
 DISPLAY = {
     "InternScience/Agents-A1-Q4_K_M-GGUF": "Agents-A1 Q4_K_M (local, бюджет 100k)",
     # gaming-pc CachyOS Studio, кампания hard0812 [[13.08.2026]]:
+    # muse0813: та же модель на РЕКОМЕНДОВАННЫХ настройках Meta (t=1.0 top_p=0.95 top_k=64)
+    # против контрольной t=0.2 основной строки — id с суффиксом кванта разводит строки.
+    "unsloth/Muse-Glimmer-30B-GGUF:UD-Q4_K_XL": "Muse-Glimmer-30B UD-Q4_K_XL (реком. настройки t=1.0)",
     "unsloth/Qwen3.6-35B-A3B-MTP-GGUF": "Qwen3.6-35B-A3B-MTP UD-IQ4_NL (local)",
     "unsloth/Ornith-1.0-35B-GGUF": "Ornith-1.0-35B UD-IQ4_NL (local)",
     "unsloth/Qwen3.6-27B-MTP-GGUF": "Qwen3.6-27B-MTP UD-Q4_K_XL (local, окно 32k)",
