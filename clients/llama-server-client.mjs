@@ -9,11 +9,11 @@
 //   * separates `reasoning_content` (ornith models are reasoners) from final content,
 //   * supports tool-use (non-streaming) for the agentic mode.
 //
-// Endpoint base is configurable via env LMSTUDIO_BASE (default localhost:1234).
+// Endpoint base is configurable via env LLAMA_SERVER_BASE (default localhost:1234).
 //
 // AUTH: LM Studio itself needs none, but the same OpenAI-compatible contract is served by
 // Unsloth Studio on the GPU stand, which DOES require a bearer token (отдаёт 401 без него).
-// Ключ берётся из env LMSTUDIO_API_KEY или из файла LMSTUDIO_KEY_FILE; когда ни то, ни другое
+// Ключ берётся из env LLAMA_SERVER_API_KEY или из файла LLAMA_SERVER_KEY_FILE; когда ни то, ни другое
 // не задано, заголовок не отправляется вовсе — поведение для LM Studio не меняется.
 // Значение никогда не логируется.
 import fs from 'fs';
