@@ -1,7 +1,8 @@
 // Client for llama.cpp-based OpenAI-compatible servers (bare llama-server, Unsloth Studio,
 // LM Studio) — исторически назывался lmstudio-client, переименован [[14.08.2026]]: LM Studio
-// давно не единственный и не основной бэкенд. Env-переменные LMSTUDIO_BASE / LMSTUDIO_API_KEY /
-// LMSTUDIO_KEY_FILE сохранены как есть — их знают все кампанейские скрипты и playbook.
+// давно не единственный и не основной бэкенд. Окружение переименовано вместе с файлом
+// [[14.08.2026]]: LLAMA_SERVER_BASE / LLAMA_SERVER_API_KEY / LLAMA_SERVER_KEY_FILE; старые
+// имена LMSTUDIO_* принимаются как тихий fallback, чтобы забытый скрипт не сломался молча.
 // Mirrors the OpenRouter `chat()` of the original ZDR harness, but:
 //   * points at a local LM Studio server (no auth, no provider routing, no cost),
 //   * measures TTFT + tok/s via streaming (LM Studio's `stats` object is empty),
@@ -17,10 +18,10 @@
 // Значение никогда не логируется.
 import fs from 'fs';
 
-const BASE = (process.env.LMSTUDIO_BASE || 'http://localhost:1234/v1').replace(/\/$/, '');
-const API_KEY = (process.env.LMSTUDIO_API_KEY
-  || (process.env.LMSTUDIO_KEY_FILE && fs.existsSync(process.env.LMSTUDIO_KEY_FILE)
-      ? fs.readFileSync(process.env.LMSTUDIO_KEY_FILE, 'utf8') : '')).trim();
+const BASE = (process.env.LLAMA_SERVER_BASE || process.env.LMSTUDIO_BASE || 'http://localhost:1234/v1').replace(/\/$/, '');
+const KEY_FILE = process.env.LLAMA_SERVER_KEY_FILE || process.env.LMSTUDIO_KEY_FILE;
+const API_KEY = (process.env.LLAMA_SERVER_API_KEY || process.env.LMSTUDIO_API_KEY
+  || (KEY_FILE && fs.existsSync(KEY_FILE) ? fs.readFileSync(KEY_FILE, 'utf8') : '')).trim();
 const AUTH = API_KEY ? { Authorization: `Bearer ${API_KEY}` } : {};
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 

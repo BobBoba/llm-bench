@@ -15,8 +15,8 @@
 # У Muse-Glimmer окно 131072 (родное), у остальных 262144; KV q4_0 задан overrides Studio.
 set -u
 cd /code/work/llm-bench
-export LMSTUDIO_BASE=http://gaming-pc.lan:8888/v1
-export LMSTUDIO_KEY_FILE=/tmp/.unsloth-gp
+export LLAMA_SERVER_BASE=http://gaming-pc.lan:8888/v1
+export LLAMA_SERVER_KEY_FILE=/tmp/.unsloth-gp
 [ -s /tmp/.unsloth-gp ] || secret-tool lookup service unsloth-studio host gaming-pc purpose api-key > /tmp/.unsloth-gp
 [ -s /tmp/.unsloth-gp ] || { echo "нет ключа Studio gaming-pc (KeePassXC заблокирован?)"; exit 1; }
 

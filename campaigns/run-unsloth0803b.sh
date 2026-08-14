@@ -24,8 +24,8 @@
 # девятикратная разница объясняется offload'ом, а не моделью.
 set -u
 cd /code/work/llm-bench
-export LMSTUDIO_BASE=http://192.168.89.53:8888/v1
-export LMSTUDIO_KEY_FILE=/tmp/.unsloth
+export LLAMA_SERVER_BASE=http://192.168.89.53:8888/v1
+export LLAMA_SERVER_KEY_FILE=/tmp/.unsloth
 
 LOG=results/unsloth0803b-orchestrate.log
 echo "[unsloth0803b] start $(date '+%F %H:%M:%S')" >> $LOG

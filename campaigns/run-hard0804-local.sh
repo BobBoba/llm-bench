@@ -9,8 +9,8 @@
 # модель платит за длинный контекст там, где облако укладывается в секунды.
 set -u
 cd /code/work/llm-bench
-export LMSTUDIO_BASE=http://192.168.89.53:8888/v1
-export LMSTUDIO_KEY_FILE=/tmp/.unsloth
+export LLAMA_SERVER_BASE=http://192.168.89.53:8888/v1
+export LLAMA_SERVER_KEY_FILE=/tmp/.unsloth
 [ -s /tmp/.unsloth ] || { echo "нет /tmp/.unsloth — положите ключ Unsloth Studio"; exit 1; }
 
 OUT="results-hard0804-local.json" node runners/run-hard.mjs \

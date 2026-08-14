@@ -4,7 +4,7 @@
 # Each result -> results/<task>__<model>.json (incremental, survives interruption).
 set -uo pipefail
 cd /code/work/llm-bench/agentic
-export LMSTUDIO_BASE="http://192.168.89.53:8080/v1" MAX_STEPS=30 WALL_CAP_MIN=30 RUN_TIMEOUT_S=90
+export LLAMA_SERVER_BASE="http://192.168.89.53:8080/v1" MAX_STEPS=30 WALL_CAP_MIN=30 RUN_TIMEOUT_S=90
 
 # OpenRouter inference key for cloud runs (removed at the end).
 secret-tool lookup Title "OpenRouter API key" > /tmp/.orkey 2>/dev/null; chmod 600 /tmp/.orkey

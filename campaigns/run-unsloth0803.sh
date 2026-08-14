@@ -2,7 +2,7 @@
 # Батареи для локальных моделей на Unsloth Studio (GPU-стенд) — [[03.08.2026]], группа `unsloth0803`.
 #
 # Эндпоинт: http://192.168.89.53:8888/v1, OpenAI-совместимый, ТРЕБУЕТ Bearer-ключ (без него 401).
-# Ключ читается клиентом из файла (LMSTUDIO_KEY_FILE), в конфиги и логи не попадает.
+# Ключ читается клиентом из файла (LLAMA_SERVER_KEY_FILE), в конфиги и логи не попадает.
 #
 # Квант закрепляется СУФФИКСОМ в идентификаторе (`repo:VARIANT`) — отдельной настройки «закрепить
 # квант» в Studio нет ни в UI, ни в overrides, а без суффикса берётся variants[0], порядок которого
@@ -17,8 +17,8 @@
 #      прогон приходится ровно одно переключение.
 set -u
 cd /code/work/llm-bench
-export LMSTUDIO_BASE=http://192.168.89.53:8888/v1
-export LMSTUDIO_KEY_FILE=/tmp/.unsloth
+export LLAMA_SERVER_BASE=http://192.168.89.53:8888/v1
+export LLAMA_SERVER_KEY_FILE=/tmp/.unsloth
 # LLM_CLIENT не выставляем: по умолчанию раннеры берут llama-server-client.mjs (OpenAI-совместимый).
 
 AW='unsloth/Qwen-AgentWorld-35B-A3B-GGUF:UD-Q3_K_XL'

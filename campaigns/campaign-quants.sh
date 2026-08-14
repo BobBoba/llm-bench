@@ -22,7 +22,7 @@ cd "$(dirname "$0")"
 
 STAND=root@192.168.89.53
 HOSTPORT=http://192.168.89.53:8080
-export LMSTUDIO_BASE="$HOSTPORT/v1"
+export LLAMA_SERVER_BASE="$HOSTPORT/v1"
 MDIR=/opt/models/gguf
 CTX=262144
 # run-longctx строит лесенку как «8k, затем 25/50/75% окна». Чтобы верхняя ступень

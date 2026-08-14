@@ -13,7 +13,7 @@
 # TypeScript не гоняется — вкладка уже заполнена целиком.
 set -u
 cd /code/work/llm-bench
-export LMSTUDIO_BASE=http://127.0.0.1:11234/v1     # клиент по умолчанию смотрит на gaming-pc.lan:1234
+export LLAMA_SERVER_BASE=http://127.0.0.1:11234/v1     # клиент по умолчанию смотрит на gaming-pc.lan:1234
 
 MODELS=(
   zai-org/glm-4.7-flash

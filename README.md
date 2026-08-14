@@ -61,7 +61,7 @@ node runners/run-hard.mjs --selftest
 LLM_CLIENT=openrouter OUT=results-my-run.json node runners/run-hard.mjs openai/gpt-5.6-luna deepseek/deepseek-v3.2
 
 # local models via any OpenAI-compatible server (LM Studio, llama-server, etc.)
-LMSTUDIO_BASE=http://localhost:1234/v1 OUT=results-local.json node runners/run-hard.mjs my-local-model
+LLAMA_SERVER_BASE=http://localhost:1234/v1 OUT=results-local.json node runners/run-hard.mjs my-local-model
 ```
 
 Runs are crash-safe (results are flushed after every unit) and resumable (`model|lang|task|run` keys are skipped when present). Useful knobs: `MAX_TOKENS` (default 40000), `LLM_DEADLINE_MS` (default 20 min per call), `BENCH_NO_STREAM=1` for servers whose streaming path is broken, `SINGLE_RUNS=N` to grow the sample.

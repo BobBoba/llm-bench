@@ -6,8 +6,8 @@
 # Идентификатор с суффиксом кванта разводит записи с контрольной строкой.
 set -u
 cd "$(dirname "$0")/.."
-export LMSTUDIO_BASE=http://gaming-pc.lan:8888/v1
-export LMSTUDIO_KEY_FILE=/tmp/.unsloth-gp
+export LLAMA_SERVER_BASE=http://gaming-pc.lan:8888/v1
+export LLAMA_SERVER_KEY_FILE=/tmp/.unsloth-gp
 [ -s /tmp/.unsloth-gp ] || secret-tool lookup service unsloth-studio host gaming-pc purpose api-key > /tmp/.unsloth-gp
 export LLM_TEMPERATURE=1.0 LLM_TOP_P=0.95 LLM_TOP_K=64
 
