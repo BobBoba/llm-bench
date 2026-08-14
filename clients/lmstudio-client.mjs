@@ -47,10 +47,17 @@ async function attempt({ body, stream, signal }) {
     const total = (Date.now() - t0) / 1000;
     const u = d.usage || {};
     const compTok = u.completion_tokens || 0;
+    // Тот же провал счётчика, что в стрим-ветке: llama-server не отдаёт reasoning_tokens —
+    // оцениваем долей символов канала размышлений в измеренном completion.
+    let reasonTok = u.completion_tokens_details?.reasoning_tokens || 0;
+    const rc = msg.reasoning_content || '';
+    if (!reasonTok && rc && compTok > 0) {
+      reasonTok = Math.round(compTok * (rc.length / (rc.length + (msg.content || '').length || 1)));
+    }
     return {
-      ok: true, content: msg.content || '', reasoning: msg.reasoning_content || '',
+      ok: true, content: msg.content || '', reasoning: rc,
       tool_calls: msg.tool_calls || [], finish: d.choices?.[0]?.finish_reason,
-      usage: { prompt: u.prompt_tokens || 0, completion: compTok, reasoning: u.completion_tokens_details?.reasoning_tokens || 0 },
+      usage: { prompt: u.prompt_tokens || 0, completion: compTok, reasoning: reasonTok },
       ttft: null, total: +total.toFixed(2), tokps: total > 0 ? +(compTok / total).toFixed(1) : 0,
     };
   }
@@ -97,6 +104,16 @@ async function attempt({ body, stream, signal }) {
   }
   const total = (Date.now() - t0) / 1000;
   const genTime = ttft != null ? Math.max(0.001, total - ttft) : total; // tok/s of the decode phase
+  // ! llama-server НЕ заполняет completion_tokens_details.reasoning_tokens, поэтому у
+  //   рассуждающих моделей в отчётах стоял reason=0, хотя reasoning_content реально шёл
+  //   (найдено на Muse-Glimmer [[14.08.2026]]: 1742 символа размышлений при «reasoning: 0»).
+  //   Токены размышлений при этом входят в ОБЩИЙ completion — делим измеренный итог
+  //   пропорционально длинам двух каналов. Это производная оценка, но детерминированная и
+  //   честнее нуля; если сервер счётчик даёт (LM Studio) — используется его значение.
+  if (!usage.reasoning && reasoning && usage.completion > 0) {
+    const share = reasoning.length / (reasoning.length + content.length || 1);
+    usage.reasoning = Math.round(usage.completion * share);
+  }
   return {
     ok: true, content, reasoning, tool_calls: [...tcAcc.values()], finish,
     usage, ttft: ttft != null ? +ttft.toFixed(3) : null, total: +total.toFixed(2),
