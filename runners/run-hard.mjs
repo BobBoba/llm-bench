@@ -22,7 +22,7 @@ import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
 
 const CLIENT_MAP = { openrouter: '../clients/openrouter-client.mjs', claudecode: '../clients/claudecode-client.mjs' };
-const { chat } = await import(CLIENT_MAP[process.env.LLM_CLIENT] || '../clients/lmstudio-client.mjs');
+const { chat } = await import(CLIENT_MAP[process.env.LLM_CLIENT] || '../clients/llama-server-client.mjs');
 
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

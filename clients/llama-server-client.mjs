@@ -1,4 +1,7 @@
-// LM Studio (OpenAI-compatible) client for the local-model benchmark.
+// Client for llama.cpp-based OpenAI-compatible servers (bare llama-server, Unsloth Studio,
+// LM Studio) — исторически назывался lmstudio-client, переименован [[14.08.2026]]: LM Studio
+// давно не единственный и не основной бэкенд. Env-переменные LMSTUDIO_BASE / LMSTUDIO_API_KEY /
+// LMSTUDIO_KEY_FILE сохранены как есть — их знают все кампанейские скрипты и playbook.
 // Mirrors the OpenRouter `chat()` of the original ZDR harness, but:
 //   * points at a local LM Studio server (no auth, no provider routing, no cost),
 //   * measures TTFT + tok/s via streaming (LM Studio's `stats` object is empty),

@@ -1,4 +1,4 @@
-// OpenRouter client with the SAME chat() interface as lmstudio-client.mjs, so the existing
+// OpenRouter client with the SAME chat() interface as llama-server-client.mjs, so the existing
 // run-rust.mjs / run-knowledge.mjs runners work unchanged against cloud models (e.g. to add
 // a fresh Anthropic model like Sonnet 5 to the local comparison on identical tasks).
 //

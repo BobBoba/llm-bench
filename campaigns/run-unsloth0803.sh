@@ -19,7 +19,7 @@ set -u
 cd /code/work/llm-bench
 export LMSTUDIO_BASE=http://192.168.89.53:8888/v1
 export LMSTUDIO_KEY_FILE=/tmp/.unsloth
-# LLM_CLIENT не выставляем: по умолчанию раннеры берут lmstudio-client.mjs (OpenAI-совместимый).
+# LLM_CLIENT не выставляем: по умолчанию раннеры берут llama-server-client.mjs (OpenAI-совместимый).
 
 AW='unsloth/Qwen-AgentWorld-35B-A3B-GGUF:UD-Q3_K_XL'
 QCN='unsloth/Qwen3-Coder-Next-GGUF:UD-Q4_K_M'

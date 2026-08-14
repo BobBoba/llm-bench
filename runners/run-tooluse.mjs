@@ -16,7 +16,7 @@ import { fileURLToPath } from 'url';
 
 // Same client switch as the other runners: cloud (openrouter+ZDR) is the default target here.
 const CLIENT_MAP = { openrouter: '../clients/openrouter-client.mjs', claudecode: '../clients/claudecode-client.mjs', morph: '../clients/morph-client.mjs' };
-const { chat } = await import(CLIENT_MAP[process.env.LLM_CLIENT] || '../clients/lmstudio-client.mjs');
+const { chat } = await import(CLIENT_MAP[process.env.LLM_CLIENT] || '../clients/llama-server-client.mjs');
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const log = (...a) => process.stderr.write(a.join(' ') + '\n');

@@ -6,7 +6,7 @@
 // Usage: node run-temp-sweep.mjs [model]   (default minicpm5-1b)
 //   TEMPS="0,0.3,0.7,1.0" to override temperatures, MAXTOK=300, REPEAT=1 samples per cell.
 
-import { chat } from '../clients/lmstudio-client.mjs';
+import { chat } from '../clients/llama-server-client.mjs';
 
 const MODEL = process.argv[2] || 'minicpm5-1b';
 const TEMPS = (process.env.TEMPS || '0,0.3,0.7,1.0').split(',').map(Number);

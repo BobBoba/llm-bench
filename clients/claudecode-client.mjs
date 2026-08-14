@@ -1,4 +1,4 @@
-// Claude Code (subscription) client — exposes the SAME chat() interface as lmstudio-client.mjs
+// Claude Code (subscription) client — exposes the SAME chat() interface as llama-server-client.mjs
 // and openrouter-client.mjs, so run-rust / run-ts / run-knowledge drive Anthropic models through
 // the `claude -p` headless CLI (subscription auth) instead of a raw HTTP endpoint.
 //

@@ -103,7 +103,7 @@ Runs are crash-safe (results are flushed after every unit) and resumable (`model
 | File | Purpose |
 |---|---|
 | `clients/openrouter-client.mjs` | OpenRouter client (streaming TTFT/tok/s measurement, real `usage.cost`, privacy routing `data_collection: deny`) |
-| `clients/lmstudio-client.mjs` | Client for any OpenAI-compatible local server (optional bearer auth, tool-call accumulation from stream deltas) |
+| `clients/llama-server-client.mjs` | Client for any OpenAI-compatible local server (optional bearer auth, tool-call accumulation from stream deltas) |
 | `clients/claudecode-client.mjs` | Runs prompts through a Claude Code subscription (`claude -p`) so subscription-only models can join the same tables |
 | `clients/morph-client.mjs` | Morph fast-apply specialist client |
 

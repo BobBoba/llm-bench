@@ -18,7 +18,7 @@ import { fileURLToPath } from 'url';
 // Client switchable via LLM_CLIENT: openrouter -> cloud, claudecode -> `claude -p` (subscription),
 // default -> local LM Studio.
 const CLIENT_MAP = { openrouter: '../clients/openrouter-client.mjs', claudecode: '../clients/claudecode-client.mjs', morph: '../clients/morph-client.mjs' };
-const { chat } = await import(CLIENT_MAP[process.env.LLM_CLIENT] || '../clients/lmstudio-client.mjs');
+const { chat } = await import(CLIENT_MAP[process.env.LLM_CLIENT] || '../clients/llama-server-client.mjs');
 
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

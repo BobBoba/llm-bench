@@ -15,7 +15,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const CLIENT_MAP = { openrouter: '../clients/openrouter-client.mjs', claudecode: '../clients/claudecode-client.mjs', morph: '../clients/morph-client.mjs' };
-const { chat } = await import(CLIENT_MAP[process.env.LLM_CLIENT] || '../clients/lmstudio-client.mjs');
+const { chat } = await import(CLIENT_MAP[process.env.LLM_CLIENT] || '../clients/llama-server-client.mjs');
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const log = (...a) => process.stderr.write(a.join(' ') + '\n');
