@@ -22,7 +22,7 @@ const MAX_STEPS = Number(process.env.MAX_STEPS || 30);
 const WALL_CAP_MS = Number(process.env.WALL_CAP_MIN || 30) * 60_000;
 const RUN_TIMEOUT_S = Number(process.env.RUN_TIMEOUT_S || 90);
 
-const CLIENT = clientKind === 'local' ? './lmstudio-client.mjs' : './openrouter-client.mjs';
+const CLIENT = clientKind === 'local' ? '../clients/llama-server-client.mjs' : './openrouter-client.mjs';
 const { chat } = await import(path.join('..', CLIENT).replace(/\\/g, '/'));
 
 const TASK_DIR = path.join(__dirname, 'tasks', task);
