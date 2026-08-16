@@ -1,0 +1,32 @@
+[
+ {
+  "model": "unsloth/Muse-Glimmer-30B-GGUF:UD-Q4_K_XL",
+  "ctx": 128000,
+  "targetTok": 32000,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 23798,
+  "latency": 39.34,
+  "tokps": 19.4,
+  "reasonTok": 735,
+  "finish": "stop",
+  "cost": 0
+ },
+ {
+  "model": "unsloth/Muse-Glimmer-30B-GGUF:UD-Q4_K_XL",
+  "ctx": 128000,
+  "targetTok": 64000,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 47336,
+  "latency": 50.84,
+  "tokps": 25,
+  "reasonTok": 1245,
+  "finish": "stop",
+  "cost": 0
+ }
+]
