@@ -54,6 +54,8 @@ DOC_HUM = ("Медианная задержка ответа по пяти ос�
 # Ключ — имя в первом столбце таблицы (сравнивается ПОСЛЕ нормализации, поэтому украшения
 # вида «⭐» в ключе писать не нужно), значение — идентификатор в файлах результатов.
 ALIASES = {
+    "Qwen3.8-27B UD-Q4_K_XL (t=0.2, xhigh)": "unsloth/Qwen3.8-27B-GGUF",
+    "Qwen3.8-27B UD-Q4_K_XL (реком. t=1.0 + medium)": "unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL",
     "Muse-Glimmer-30B UD-Q4_K_XL": "unsloth/Muse-Glimmer-30B-GGUF",
     "Muse-Glimmer-30B UD-Q4_K_XL (реком. t=1.0)": "unsloth/Muse-Glimmer-30B-GGUF:UD-Q4_K_XL",
     "DS-V3.2": "deepseek/deepseek-v3.2",

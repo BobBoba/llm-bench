@@ -25,9 +25,9 @@ SID = open(os.path.join(HERE, "gsheets-sheet-id.txt")).read().strip()
 
 # ---- configure the batch to add ----
 MODELS = [
-    "unsloth/Muse-Glimmer-30B-GGUF:UD-Q4_K_XL",
+    "unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL",
 ]
-SUFFIX = "muse0813rec"                      # results-<SUFFIX>-{rust,ts,knowledge}.json + -humscores.json
+SUFFIX = "qwen38rec"                      # results-<SUFFIX>-{rust,ts,knowledge}.json + -humscores.json
 GROUP = "local"                             # 'группа' label (non-local/ref => treated as cloud)
 PROV = "local (Unsloth Studio)"
 MODEL_META = {
@@ -46,12 +46,16 @@ MODEL_META = {
     # полное окно живёт на 24 ГиБ. Tool-use подтверждён агентной фазой (green=true).
     "unsloth/Muse-Glimmer-30B-GGUF": {"ctx": 131072, "tools": True},
     "unsloth/Muse-Glimmer-30B-GGUF:UD-Q4_K_XL": {"ctx": 131072, "tools": True},
+    "unsloth/Qwen3.8-27B-GGUF": {"ctx": 65536, "tools": True},
+    "unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL": {"ctx": 65536, "tools": True},
 }
 
 # Необязательное переопределение имени строки. По умолчанию имя = short(mid), но у локальных
 # моделей идентификатор несёт репозиторий и квант (`unsloth/Repo-GGUF:UD-Q4_K_M`) — как заголовок
 # строки это нечитаемо, а квант при этом принципиален и потерять его нельзя.
 DISPLAY = {
+    "unsloth/Qwen3.8-27B-GGUF": "Qwen3.8-27B UD-Q4_K_XL (t=0.2, xhigh)",
+    "unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL": "Qwen3.8-27B UD-Q4_K_XL (реком. t=1.0 + medium)",
     # Пара строк одной модели: контрольная t=0.2 (вся таблица) и рекомендованные настройки Meta.
     "unsloth/Muse-Glimmer-30B-GGUF": "Muse-Glimmer-30B UD-Q4_K_XL",
     "unsloth/Muse-Glimmer-30B-GGUF:UD-Q4_K_XL": "Muse-Glimmer-30B UD-Q4_K_XL (реком. t=1.0)",

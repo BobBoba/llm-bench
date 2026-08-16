@@ -1,0 +1,12 @@
+{
+ "unsloth/Qwen3.8-27B-GGUF": {
+  "facts": 9.3,
+  "ideas": 7.4,
+  "fermi": 5.5,
+  "forecast": 8.6,
+  "analysis": 9.3,
+  "notes": "Excellent epistemics on facts and analysis, but the Fermi answer lowballs the German industrial rate and consciously omits host/cooling overhead, landing ~$11k — below the defensible band despite clean method.",
+  "empties": 0,
+  "avg": 8.02
+ }
+}

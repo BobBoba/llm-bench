@@ -1,0 +1,32 @@
+[
+ {
+  "model": "unsloth/Qwen3.8-27B-GGUF:UD-Q3_K_XL",
+  "ctx": 128000,
+  "targetTok": 32000,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 31703,
+  "latency": 34.44,
+  "tokps": 10.5,
+  "reasonTok": 326,
+  "finish": "stop",
+  "cost": 0
+ },
+ {
+  "model": "unsloth/Qwen3.8-27B-GGUF:UD-Q3_K_XL",
+  "ctx": 128000,
+  "targetTok": 64000,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 63124,
+  "latency": 63.45,
+  "tokps": 6,
+  "reasonTok": 348,
+  "finish": "stop",
+  "cost": 0
+ }
+]

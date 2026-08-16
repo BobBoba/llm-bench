@@ -1,0 +1,12 @@
+{
+ "unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL": {
+  "facts": 9.4,
+  "ideas": 7.3,
+  "fermi": 5.5,
+  "forecast": 8.4,
+  "analysis": 9.3,
+  "notes": "Near-flawless factual honesty and a rigorous causal-analysis answer; Fermi undershoots (25% overhead, EUR0.12/kWh) to $11.5k, below the plausible band, and the creative ideas hide physics errors (50 µs MD in 36 h, '56 MeV' Co-60 photons).",
+  "empties": 0,
+  "avg": 7.98
+ }
+}
