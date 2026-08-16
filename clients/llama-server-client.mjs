@@ -138,6 +138,10 @@ async function attempt({ body, stream, signal }) {
 const ENV_TEMP = process.env.LLM_TEMPERATURE !== undefined ? Number(process.env.LLM_TEMPERATURE) : undefined;
 const ENV_TOP_P = process.env.LLM_TOP_P !== undefined ? Number(process.env.LLM_TOP_P) : undefined;
 const ENV_TOP_K = process.env.LLM_TOP_K !== undefined ? Number(process.env.LLM_TOP_K) : undefined;
+// Пер-запросные аргументы chat-шаблона (llama-server поддерживает поле chat_template_kwargs):
+// например LLM_CHAT_TEMPLATE_KWARGS='{"reasoning_effort":"medium"}' — у Qwen3.8 усилие
+// рассуждения по умолчанию xhigh, и на тяжёлых задачах оно съедает весь бюджет [[14.08.2026]].
+const ENV_CTK = process.env.LLM_CHAT_TEMPLATE_KWARGS ? JSON.parse(process.env.LLM_CHAT_TEMPLATE_KWARGS) : undefined;
 
 async function chat({ model, messages, max_tokens = 40000, tools, tool_choice, stream = false, temperature = 0.2 }) {
   // ! ЗАПРОСЫ С ИНСТРУМЕНТАМИ ВСЕГДА СТРИМЯТСЯ, даже если вызывающий просил иначе.
@@ -158,6 +162,7 @@ async function chat({ model, messages, max_tokens = 40000, tools, tool_choice, s
   // поэтому прежние строки таблицы остаются сопоставимыми.
   if (process.env.LLM_MAX_TOKENS) max_tokens = Number(process.env.LLM_MAX_TOKENS);
   const body = { model, messages, temperature: ENV_TEMP ?? temperature, max_tokens, stream };
+  if (ENV_CTK) body.chat_template_kwargs = ENV_CTK;
   if (ENV_TOP_P !== undefined) body.top_p = ENV_TOP_P;
   if (ENV_TOP_K !== undefined) body.top_k = ENV_TOP_K;
   // LM Studio omits `usage` from stream chunks unless explicitly asked.
