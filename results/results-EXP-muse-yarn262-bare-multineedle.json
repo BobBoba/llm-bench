@@ -1,0 +1,32 @@
+[
+ {
+  "model": "muse-glimmer-yarn262",
+  "ctx": 262144,
+  "targetTok": 200000,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 147318,
+  "latency": 160.3,
+  "tokps": 7.4,
+  "reasonTok": 1153,
+  "finish": "stop",
+  "cost": 0
+ },
+ {
+  "model": "muse-glimmer-yarn262",
+  "ctx": 262144,
+  "targetTok": 245000,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 180402,
+  "latency": 211.61,
+  "tokps": 8.3,
+  "reasonTok": 1727,
+  "finish": "stop",
+  "cost": 0
+ }
+]
