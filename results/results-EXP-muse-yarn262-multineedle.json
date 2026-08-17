@@ -1,0 +1,40 @@
+[
+ {
+  "model": "unsloth/Muse-Glimmer-30B-GGUF:UD-Q4_K_XL",
+  "ctx": 262144,
+  "targetTok": 32000,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 23798,
+  "latency": 31.33,
+  "tokps": 31.1,
+  "reasonTok": 949,
+  "finish": "stop",
+  "cost": 0
+ },
+ {
+  "model": "unsloth/Muse-Glimmer-30B-GGUF:UD-Q4_K_XL",
+  "ctx": 262144,
+  "targetTok": 131072,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 96655,
+  "latency": 93.24,
+  "tokps": 6.3,
+  "reasonTok": 558,
+  "finish": "stop",
+  "cost": 0
+ },
+ {
+  "model": "unsloth/Muse-Glimmer-30B-GGUF:UD-Q4_K_XL",
+  "ctx": 262144,
+  "targetTok": 200000,
+  "ok": false,
+  "timeout": false,
+  "error": "{\"message\":\"Message too long: 147318 tokens exceeds the 131072-token context window. Try increasing the Context Length in Model settings, or shorten the convers"
+ }
+]

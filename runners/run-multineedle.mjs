@@ -58,7 +58,11 @@ function loadCtx(model) {
 }
 const CTX = loadCtx(MODEL);
 const CAP = 262144;
-const rawRungs = [32000, Math.min(Math.round(CTX * 0.5), CAP)];
+// RUNGS="32000,131072,200000" — произвольная лестница глубин (нужна для проверок растянутых
+// YaRN-окон, где интересны точки ВЫШЕ половины окна; штатная пара — 32k и 50% окна).
+const rawRungs = process.env.RUNGS
+  ? process.env.RUNGS.split(',').map(Number)
+  : [32000, Math.min(Math.round(CTX * 0.5), CAP)];
 const LADDER = [];
 for (const r of rawRungs) { if (r >= 16000 && (!LADDER.length || r > LADDER[LADDER.length - 1] * 1.15)) LADDER.push(r); }
 log(`ctx=${CTX} -> multineedle ladder ${LADDER.map(r => Math.round(r / 1000) + 'k').join(', ')} (cap ${CAP / 1000}k)`);
