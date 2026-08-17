@@ -17,4 +17,8 @@ exec /mnt/4tb/llm/unsloth-studio/llama.cpp/llama-server \
   --rope-scaling yarn --rope-scale 2 --yarn-orig-ctx 131072 \
   --override-kv muse-glimmer.context_length=int:262144 \
   --cache-type-k q4_0 --cache-type-v q4_0 \
-  --flash-attn on --jinja -ngl -1 --kv-unified
+  --flash-attn on --jinja -ngl -1 --kv-unified \
+  --parallel 1
+# --parallel 1: пул KV (262144 ячеек) един для ВСЕХ слотов; при 4 слотах кэши длинных промптов
+# вытесняют друг друга («failed to find N available cells in kv cache» → полный re-prefill
+# ~3 мин на 200k). Одному пользователю с промптами под самое окно нужен один слот со всем пулом.
