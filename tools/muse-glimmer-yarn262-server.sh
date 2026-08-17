@@ -13,7 +13,12 @@ exec /mnt/4tb/llm/unsloth-studio/llama.cpp/llama-server \
   -m "$M" \
   --model-draft "$D" --spec-type draft-dflash --spec-draft-n-max 2 \
   --host 0.0.0.0 --port 8080 \
-  -c 262144 \
+  -c 458752 \
+# -c больше окна НАРОЧНО: это ёмкость KV-ПУЛА (ячейки дёшевы: q4_0 ≈ 9 КБ/ячейка, 458752 ≈ +1.7 ГБ
+# против 262144) — при --kv-unified кэши промптов живут в этом же пуле, и 1.75× окна вмещает ДВА
+# полноразмерных длинных промпта одновременно (иначе второй ~200k-запрос вытесняет кэш первого и
+# платит ~3 мин re-prefill). ! Потолок запроса поднимается вместе с пулом, а YaRN сертифицирован
+# только до 262144 — промпты длиннее не слать (позиции уйдут за проверенный диапазон).
   --rope-scaling yarn --rope-scale 2 --yarn-orig-ctx 131072 \
   --override-kv muse-glimmer.context_length=int:262144 \
   --cache-type-k q4_0 --cache-type-v q4_0 \
