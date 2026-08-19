@@ -1,0 +1,50 @@
+[
+ {
+  "model": "unsloth/Qwen3.8-27B-GGUF:UD-IQ2_XXS",
+  "ctx": 262144,
+  "targetTok": 65536,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 64617,
+  "latency": 73.56,
+  "tokps": 5.1,
+  "reasonTok": 342,
+  "finish": "stop",
+  "cost": 0,
+  "answerHead": "QX-73519-ZP\nRM-48210-KT\nBW-90163-LF\nZC-25874-QN\nHD-61932-VX\nPK-38047-MJ\nTN-51726-GB\nYS-84095-WR"
+ },
+ {
+  "model": "unsloth/Qwen3.8-27B-GGUF:UD-IQ2_XXS",
+  "ctx": 262144,
+  "targetTok": 131072,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 128966,
+  "latency": 182.4,
+  "tokps": 3.4,
+  "reasonTok": 580,
+  "finish": "stop",
+  "cost": 0,
+  "answerHead": "QX-73519-ZP\nRM-48210-KT\nBW-90163-LF\nZC-25874-QN\nHD-61932-VX\nPK-38047-MJ\nTN-51726-GB\nYS-84095-WR"
+ },
+ {
+  "model": "unsloth/Qwen3.8-27B-GGUF:UD-IQ2_XXS",
+  "ctx": 262144,
+  "targetTok": 196608,
+  "ok": true,
+  "foundCount": 0,
+  "total": 8,
+  "recall": 0,
+  "promptTok": 69375,
+  "latency": 192.04,
+  "tokps": 0,
+  "reasonTok": 0,
+  "finish": "stop",
+  "cost": 0,
+  "answerHead": ""
+ }
+]

@@ -60,11 +60,22 @@ const CTX = loadCtx(MODEL);
 const CAP = 262144;
 // RUNGS="32000,131072,200000" — произвольная лестница глубин (нужна для проверок растянутых
 // YaRN-окон, где интересны точки ВЫШЕ половины окна; штатная пара — 32k и 50% окна).
-const rawRungs = process.env.RUNGS
+// ! Сортировка ОБЯЗАТЕЛЬНА: фильтр ниже принимает ступень, только если она больше предыдущей
+//   в 1.15 раза, поэтому из убывающего списка молча выживала ОДНА ступень — прогон выглядел
+//   выполненным, а мерил треть задуманного (поймано на бисекции обрыва [[19.08.2026]]).
+const rawRungs = (process.env.RUNGS
   ? process.env.RUNGS.split(',').map(Number)
-  : [32000, Math.min(Math.round(CTX * 0.5), CAP)];
+  : [32000, Math.min(Math.round(CTX * 0.5), CAP)]).sort((a, b) => a - b);
+// Прореживание «каждая ступень минимум на 15% выше предыдущей» защищает АВТОМАТИЧЕСКУЮ лестницу
+// от почти одинаковых ступеней. Но при ЯВНО заданных RUNGS оно вредит: бисекция границы обрыва
+// требует именно близких точек, а фильтр выбрасывал их МОЛЧА (поймано [[19.08.2026]]: из
+// 147456,163840,180224,196608 выживали только две). Явный список — воля вызывающего, не трогаем.
+const EXPLICIT = !!process.env.RUNGS;
 const LADDER = [];
-for (const r of rawRungs) { if (r >= 16000 && (!LADDER.length || r > LADDER[LADDER.length - 1] * 1.15)) LADDER.push(r); }
+for (const r of rawRungs) {
+  if (r < 16000) continue;
+  if (EXPLICIT || !LADDER.length || r > LADDER[LADDER.length - 1] * 1.15) LADDER.push(r);
+}
 log(`ctx=${CTX} -> multineedle ladder ${LADDER.map(r => Math.round(r / 1000) + 'k').join(', ')} (cap ${CAP / 1000}k)`);
 
 const outPath = process.env.OUT
@@ -100,6 +111,11 @@ for (const tt of LADDER) {
     model: MODEL, ctx: CTX, targetTok: tt, ok: true, foundCount: found.length, total: CODES.length, recall,
     promptTok: res.usage.prompt, latency: res.total, tokps: res.tokps, reasonTok: res.usage.reasoning,
     finish: res.finish, cost: res.cost || 0,
+    // ! Огрызок ответа сохраняем ВСЕГДА: без него recall=0 неотличим от отказа, галлюцинации
+    //   кодов и обрезки ответа. Найдено [[19.08.2026]] на Q2_K_XL, где 0/8 пришлось разбирать
+    //   по журналу сервера. Плюс promptTok от прослойки Studio на длинных промптах ВРЁТ
+    //   (68152 против фактических 193992 в логе движка) — доверять только n_tokens сервера.
+    answerHead: (res.content || '').slice(0, 400),
   });
   save();
 }

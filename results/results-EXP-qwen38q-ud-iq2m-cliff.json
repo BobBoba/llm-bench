@@ -1,0 +1,50 @@
+[
+ {
+  "model": "unsloth/Qwen3.8-27B-GGUF:UD-IQ2_M",
+  "ctx": 262144,
+  "targetTok": 163840,
+  "ok": true,
+  "foundCount": 6,
+  "total": 8,
+  "recall": 0.75,
+  "promptTok": 161107,
+  "latency": 237.16,
+  "tokps": 2.5,
+  "reasonTok": 566,
+  "finish": "stop",
+  "cost": 0,
+  "answerHead": "QX-73519-ZP\nRM-48210-KT\nBW-90163-LF\nHD-61932-VX\nTN-51726-GB\nYS-84095-WR"
+ },
+ {
+  "model": "unsloth/Qwen3.8-27B-GGUF:UD-IQ2_M",
+  "ctx": 262144,
+  "targetTok": 196608,
+  "ok": true,
+  "foundCount": 0,
+  "total": 8,
+  "recall": 0,
+  "promptTok": 68411,
+  "latency": 183.88,
+  "tokps": 0,
+  "reasonTok": 0,
+  "finish": "stop",
+  "cost": 0,
+  "answerHead": ""
+ },
+ {
+  "model": "unsloth/Qwen3.8-27B-GGUF:UD-IQ2_M",
+  "ctx": 262144,
+  "targetTok": 229376,
+  "ok": true,
+  "foundCount": 0,
+  "total": 8,
+  "recall": 0,
+  "promptTok": 63488,
+  "latency": 176.03,
+  "tokps": 0,
+  "reasonTok": 0,
+  "finish": "stop",
+  "cost": 0,
+  "answerHead": ""
+ }
+]

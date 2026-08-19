@@ -1,0 +1,47 @@
+[
+ {
+  "model": "unsloth/Qwen3.8-27B-GGUF:UD-Q2_K_XL",
+  "ctx": 262144,
+  "targetTok": 65536,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 64617,
+  "latency": 76.3,
+  "tokps": 11.6,
+  "reasonTok": 845,
+  "finish": "stop",
+  "cost": 0
+ },
+ {
+  "model": "unsloth/Qwen3.8-27B-GGUF:UD-Q2_K_XL",
+  "ctx": 262144,
+  "targetTok": 131072,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 128966,
+  "latency": 170.12,
+  "tokps": 3.8,
+  "reasonTok": 604,
+  "finish": "stop",
+  "cost": 0
+ },
+ {
+  "model": "unsloth/Qwen3.8-27B-GGUF:UD-Q2_K_XL",
+  "ctx": 262144,
+  "targetTok": 196608,
+  "ok": true,
+  "foundCount": 0,
+  "total": 8,
+  "recall": 0,
+  "promptTok": 68152,
+  "latency": 182.01,
+  "tokps": 0,
+  "reasonTok": 0,
+  "finish": "stop",
+  "cost": 0
+ }
+]

@@ -47,12 +47,19 @@ EXCLUDED = {
 DISPLAY = {
     "InternScience/Agents-A1-Q4_K_M-GGUF": "Agents-A1 Q4_K_M (local, бюджет 100k)",
     # gaming-pc CachyOS Studio, кампания hard0812 [[13.08.2026]]:
+    # qwen38-quants0818 [[18.08.2026]]: ЛЕСТНИЦА КВАНТОВ — каждый на СВОЁМ максимальном окне
+    # (окно у Studio задаёт и потолок запроса, и ёмкость KV-пула). Все точки: сэмплинг
+    # производителя + reasoning_effort=medium, KV q4_0, GUI погашен.
+    "unsloth/Qwen3.8-27B-GGUF:UD-Q3_K_XL": "Qwen3.8-27B UD-Q3_K_XL (окно 229k, реком. + medium)",
+    "unsloth/Qwen3.8-27B-GGUF:UD-Q2_K_XL": "Qwen3.8-27B UD-Q2_K_XL (окно 262k, реком. + medium)",
+    "unsloth/Qwen3.8-27B-GGUF:UD-IQ2_M": "Qwen3.8-27B UD-IQ2_M (окно 262k, реком. + medium)",
+    "unsloth/Qwen3.8-27B-GGUF:UD-IQ2_XXS": "Qwen3.8-27B UD-IQ2_XXS (окно 262k, реком. + medium)",
     # qwen38-0814 [[14.08.2026]]: три конфигурации одной модели — контроль (repo id),
     # реком.+medium (Q4-суффикс), длинноконтекстная Q3@131k (Q3-суффикс, идея владельца
     # «младший квант ради KV»; Q3 здесь РЕШАЕТ БОЛЬШЕ Q4 и открывает edit-long).
     "unsloth/Qwen3.8-27B-GGUF": "Qwen3.8-27B UD-Q4_K_XL (окно 65k, t=0.2, xhigh)",
-    "unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL": "Qwen3.8-27B UD-Q4_K_XL (окно 65k, реком. t=1.0 + medium)",
-    "unsloth/Qwen3.8-27B-GGUF:UD-Q3_K_XL": "Qwen3.8-27B UD-Q3_K_XL (окно 131k, реком. + medium)",
+    "unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL": "Qwen3.8-27B UD-Q4_K_XL (окно 82k, реком. + medium)",
+    
     # muse0813: та же модель на РЕКОМЕНДОВАННЫХ настройках Meta (t=1.0 top_p=0.95 top_k=64)
     # против контрольной t=0.2 основной строки — id с суффиксом кванта разводит строки.
     "unsloth/Muse-Glimmer-30B-GGUF:UD-Q4_K_XL": "Muse-Glimmer-30B UD-Q4_K_XL (реком. настройки t=1.0)",

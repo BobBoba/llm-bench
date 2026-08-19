@@ -1,0 +1,10 @@
+[
+ {
+  "model": "unsloth/Qwen3.8-27B-GGUF:UD-Q3_K_XL",
+  "ctx": 229376,
+  "targetTok": 194560,
+  "ok": false,
+  "timeout": false,
+  "error": "network: fetch failed"
+ }
+]

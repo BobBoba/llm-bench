@@ -1,0 +1,17 @@
+QUANT=unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL CTX=98304 tok/s=44.8 vram=21743 MiB selected: None
+  fingerprint: GGUF size: 16.7 GB, mmproj: 0.9 GB, est. KV cache: 4.1 GB, MTP reserve: 0.38 GB (draft KV @ 98304 + verify n_max=2), context: 98304, GPUs free: [(0, 24095)], selected: None, --fit: on
+QUANT=unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL CTX=81920 tok/s=51.7 vram=21869 MiB selected: None
+  fingerprint: GGUF size: 16.7 GB, mmproj: 0.9 GB, est. KV cache: 3.4 GB, MTP reserve: 0.31 GB (draft KV @ 81920 + verify n_max=2), context: 81920, GPUs free: [(0, 24095)], selected: None, --fit: on
+UD-Q4_K_XL: максимальное окно = 81920
+QUANT=unsloth/Qwen3.8-27B-GGUF:UD-Q3_K_XL CTX=229376 tok/s=48 vram=21803 MiB selected: None
+  fingerprint: GGUF size: 12.5 GB, mmproj: 0.9 GB, est. KV cache: 9.5 GB, MTP reserve: 0.88 GB (draft KV @ 229376 + verify n_max=2), context: 229376, GPUs free: [(0, 24095)], selected: None, --fit: on
+UD-Q3_K_XL: максимальное окно = 229376
+QUANT=unsloth/Qwen3.8-27B-GGUF:UD-Q2_K_XL CTX=262144 tok/s=58.9 vram=20391 MiB selected: None
+  fingerprint: GGUF size: 9.9 GB, mmproj: 0.9 GB, est. KV cache: 10.9 GB, MTP reserve: 1.00 GB (draft KV @ 262144 + verify n_max=2), context: 262144, GPUs free: [(0, 24095)], selected: None, --fit: on
+UD-Q2_K_XL: максимальное окно = 262144
+QUANT=unsloth/Qwen3.8-27B-GGUF:UD-IQ2_M CTX=262144 tok/s=60.9 vram=20051 MiB selected: None
+  fingerprint: GGUF size: 9.6 GB, mmproj: 0.9 GB, est. KV cache: 10.9 GB, MTP reserve: 1.00 GB (draft KV @ 262144 + verify n_max=2), context: 262144, GPUs free: [(0, 24095)], selected: None, --fit: on
+UD-IQ2_M: максимальное окно = 262144
+QUANT=unsloth/Qwen3.8-27B-GGUF:UD-IQ2_XXS CTX=262144 tok/s=63 vram=18805 MiB selected: None
+  fingerprint: GGUF size: 8.4 GB, mmproj: 0.9 GB, est. KV cache: 10.9 GB, MTP reserve: 1.00 GB (draft KV @ 262144 + verify n_max=2), context: 262144, GPUs free: [(0, 24095)], selected: None, --fit: on
+UD-IQ2_XXS: максимальное окно = 262144
