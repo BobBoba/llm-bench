@@ -11,12 +11,17 @@
 # YaRN/--override-kv здесь НЕ нужны: у Qwen3.8 родное окно и есть 262144.
 #
 # Использование: QUANT=UD-Q2_K_XL KV_POOL=262144 qwen38-longctx-server.sh
-#   QUANT   — UD-Q2_K_XL (умолчание; полное окно + лучший запас VRAM) | UD-Q3_K_XL | UD-IQ2_M
+#   QUANT   — UD-IQ2_XXS (умолчание; максимум кэша) | UD-Q2_K_XL | UD-Q3_K_XL | UD-IQ2_M
 #   KV_POOL — ёмкость KV-пула; она же потолок запроса и объём кэша промптов.
 # Перед запуском: выгрузить модель из Studio (запрос к unsloth/Qwen3-0.6B-GGUF) и `gui-off -y`.
 set -u
-QUANT="${QUANT:-UD-Q2_K_XL}"
-KV_POOL="${KV_POOL:-262144}"
+QUANT="${QUANT:-UD-IQ2_XXS}"
+# Умолчание пула — ИЗМЕРЕННЫЙ потолок для IQ2_XXS на 24 ГиБ: -c 524288 при 22.6 ГиБ, проверено
+# под реальной нагрузкой (prefill 225k -> recall 8/8, пик 22.7 ГиБ). Цена ячейки ~27 КБ, так что
+# для более тяжёлых квантов пул надо резать: Q2_K_XL ~458752, Q3_K_XL ~327680 (пересчитать!).
+# Окно ЗАПРОСА в любом случае 262144 — llama.cpp капит слот по n_ctx_train; пул сверх этого
+# работает только как кэш промптов (одна полноразмерная сессия на каждые 262144 ячейки).
+KV_POOL="${KV_POOL:-524288}"
 M=$(ls /mnt/4tb/.cache/huggingface/hub/models--unsloth--Qwen3.8-27B-GGUF/snapshots/*/Qwen3.8-27B-"$QUANT".gguf 2>/dev/null | head -1)
 [ -n "$M" ] || { echo "квант $QUANT не найден в кэше HF"; exit 1; }
 echo "модель: $M"
@@ -29,4 +34,5 @@ exec /mnt/4tb/llm/unsloth-studio/llama.cpp/llama-server \
   -c "$KV_POOL" \
   --cache-type-k q4_0 --cache-type-v q4_0 \
   --flash-attn on --jinja -ngl -1 --kv-unified --parallel 1 \
+  --spec-type draft-mtp --spec-draft-n-max 2 \
   --chat-template-kwargs '{"reasoning_effort":"medium"}'

@@ -1,0 +1,18 @@
+[
+ {
+  "model": "qwen38-iq2xxs-pool524288",
+  "ctx": 262144,
+  "targetTok": 229376,
+  "ok": true,
+  "foundCount": 8,
+  "total": 8,
+  "recall": 1,
+  "promptTok": 225463,
+  "latency": 221.41,
+  "tokps": 2.7,
+  "reasonTok": 559,
+  "finish": "stop",
+  "cost": 0,
+  "answerHead": "QX-73519-ZP\nRM-48210-KT\nBW-90163-LF\nZC-25874-QN\nHD-61932-VX\nPK-38047-MJ\nTN-51726-GB\nYS-84095-WR"
+ }
+]
