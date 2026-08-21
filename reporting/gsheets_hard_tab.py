@@ -118,7 +118,47 @@ def gather():
                 continue
             key = (r.get("model"), r.get("lang"), r.get("task"), r.get("run", 1))
             recs[key] = r
-    return list(recs.values())
+    return collapse_runs(list(recs.values()))
+
+
+def collapse_runs(records):
+    """Свести повторы (`SINGLE_RUNS=N`) к ОДНОЙ записи на задачу.
+
+    ЗАЧЕМ. Колонка «решено» в таблице — из 22 задач, и сравнимость строк держится на том, что
+    у каждой модели ровно 22 записи. Прогон с тремя повторами даёт 66, и наивный подсчёт
+    печатает «47» в колонке, максимум которой 22: строка выглядит рекордной, а на деле просто
+    посчитана по другой шкале. Ошибка тихая — доли по языкам считаются как отношения и
+    остаются верными, поэтому глазами в таблице она не видна.
+
+    КАК СВОДИМ. Задача решена, если решена в БОЛЬШИНСТВЕ повторов; это устойчивее одиночного
+    прогона (изменчивость видели своими глазами: `rust/conc` падал в первом повторе и проходил
+    во втором) и совпадает с одиночным замером при N=1, поэтому старые строки не меняются.
+    Время — медиана по повторам, стоимость — среднее (строка описывает ОДИН проход набора).
+    """
+    groups = {}
+    for r in records:
+        groups.setdefault((r.get("model"), r.get("lang"), r.get("task")), []).append(r)
+    out = []
+    for rs in groups.values():
+        if len(rs) == 1:
+            out.append(rs[0])
+            continue
+        base = dict(rs[0])
+        oks = [r for r in rs if r.get("ok")] or rs
+        base["ok"] = any(r.get("ok") for r in rs)
+        base["solved"] = sum(1 for r in oks if r.get("solved")) * 2 > len(oks)
+        base["gate"] = sum(1 for r in oks if r.get("gate")) * 2 > len(oks)
+        lat = [r["latency"] for r in oks if r.get("latency")]
+        base["latency"] = statistics.median(lat) if lat else None
+        costs = [r.get("cost") or 0 for r in oks]
+        base["cost"] = sum(costs) / len(costs) if costs else 0
+        pcts = [r["pct"] for r in oks if isinstance(r.get("pct"), (int, float))]
+        if pcts:
+            base["pct"] = sum(pcts) / len(pcts)
+        base["run"] = 1
+        base["runs_collapsed"] = len(rs)
+        out.append(base)
+    return out
 
 
 def agg(records):
@@ -347,6 +387,7 @@ def main():
     legend = [[""], ["ЧТО ТЕСТИРОВАЛОСЬ"],
         ["22 тяжёлые задачи = 6 языков: Rust, TypeScript, Julia, C# — по 4 задачи; Bash, PowerShell — по 3 (без edit-long). Одношот (без агентного цикла), temperature 0.2, max_tokens 40000. Облако — OpenRouter с data_collection: deny; локальные кванты — Unsloth Studio на GPU-стенде (окно 262144, KV q4_0)."],
         ["Типы задач: edit — в РАБОЧЕМ модуле найти неназванный дефект и добавить возможность, не сломав публичный API; edit-long — ТА ЖЕ правка, но модуль закопан в сгенерированный репозиторий ~63k токенов (контролируемая пара к edit: разница только в длине контекста); algo — алгоритмическая глубина (медиана скользящего окна, адаптивное интегрирование, semver, диапазоны); conc — корректность под параллелизмом (каналы с обратным давлением, ограниченные исполнители)."],
+        ["Пометка «×N» в названии строки: набор прогнан N раз, задача засчитана решённой по большинству повторов. Колонка «решено» во ВСЕХ строках означает одно и то же — задачи из 22, а не измерения; повторы лишь снижают влияние случайности отдельного прогона (наблюдали, как одна и та же задача падает в первом повторе и проходит во втором)."],
         ["Оракулы: Rust — cargo build + скрытые тесты; TypeScript — ДВА независимых гейта: tsc --strict И bun test; Julia — julia -t N; C# — dotnet run (net10.0, без NuGet); Bash/PowerShell — скрытые проверки (bash / pwsh 7.4). «Решено» = пройден гейт И 100% скрытых тестов. C#-набор зеркалит Rust-набор (те же задачи, та же семантика) — пара Rust↔C# изолирует эффект языка."],
         [""], ["КОЛОНКИ"],
         ["решено /22 — полностью решённые задачи из 22."],
