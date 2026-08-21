@@ -18,6 +18,7 @@
 import glob
 import json
 import os
+import re
 import statistics
 import sys
 
@@ -90,6 +91,24 @@ def display(model):
 
 def is_local(model):
     return model.startswith("unsloth/") or model.startswith("InternScience/")
+
+
+def is_rented(model):
+    """Арендованная карта: идентификатор начинается с модели GPU (например `5090/…`, `5090r/…`)."""
+    return re.match(r"^\d{4}[a-z]*/", model) is not None
+
+
+# Арендованная карта не «бесплатна как локальная» и не «платная как облако»: платим за ЧАС
+# аренды независимо от того, считает она или простаивает. Ошибка, которую это чинит: такие
+# строки не проходили `is_local`, попадали в облачную ветку с `cost=0` (клиент для локального
+# сервера цену не возвращает) и получали метку «дёшев» — не потому что дёшевы, а потому что
+# стоимость никто не посчитал. Ставка: заказ Clore стоит $8 при `mrl` 2592000 с (30 суток),
+# то есть ≈$0.33/час — сходится с наблюдаемой владельцем вилкой $0.2…0.5/час для 5090.
+RENT_USD_PER_HOUR = 0.33
+
+
+def rental_usd(latency_seconds):
+    return latency_seconds / 3600.0 * RENT_USD_PER_HOUR
 
 
 # Локальные модели НЕ бесплатны — они жгут электричество (поправка владельца [[04.08.2026]]).
@@ -179,8 +198,11 @@ def agg(records):
             lrs = [r for r in rs if r.get("lang") == lang]
             solved = [r for r in lrs if r.get("solved")]
             times = [r["latency"] for r in solved if r.get("latency")]
+            wall = sum(r.get("latency") or 0 for r in lrs)
             if is_local(model):
-                cost = electricity_eur(sum(r.get("latency") or 0 for r in lrs))
+                cost = electricity_eur(wall)
+            elif is_rented(model):
+                cost = rental_usd(wall)
             else:
                 cost = sum(r.get("cost") or 0 for r in lrs)
             row["langs"][lang] = {
@@ -227,7 +249,8 @@ def _quartiles(vals):
 
 def _add_profiles(rows):
     """Автопрофиль «сильное/слабое» из самих данных: языки-лидеры и провалы, квартили цены/скорости."""
-    q1_c, q3_c = _quartiles([r["cost"] for r in rows if not is_local(r["model"])])
+    q1_c, q3_c = _quartiles([r["cost"] for r in rows
+                             if not is_local(r["model"]) and not is_rented(r["model"])])
     q1_t, q3_t = _quartiles([r["med_t"] for r in rows])
     for r in rows:
         langs_pct = {}
@@ -240,13 +263,13 @@ def _add_profiles(rows):
         bits_plus, bits_minus = [], []
         if strong:
             bits_plus.append("силён: " + ", ".join(strong))
-        if not is_local(r["model"]) and q1_c is not None and r["cost"] <= q1_c:
+        if not is_local(r["model"]) and not is_rented(r["model"]) and q1_c is not None and r["cost"] <= q1_c:
             bits_plus.append("дёшев")
         if q1_t is not None and r["med_t"] is not None and r["med_t"] <= q1_t:
             bits_plus.append("быстр")
         if weak:
             bits_minus.append("слаб: " + ", ".join(weak))
-        if not is_local(r["model"]) and q3_c is not None and r["cost"] >= q3_c:
+        if not is_local(r["model"]) and not is_rented(r["model"]) and q3_c is not None and r["cost"] >= q3_c:
             bits_minus.append("дорог")
         if q3_t is not None and r["med_t"] is not None and r["med_t"] >= q3_t:
             bits_minus.append("медлен")
@@ -387,6 +410,7 @@ def main():
     legend = [[""], ["ЧТО ТЕСТИРОВАЛОСЬ"],
         ["22 тяжёлые задачи = 6 языков: Rust, TypeScript, Julia, C# — по 4 задачи; Bash, PowerShell — по 3 (без edit-long). Одношот (без агентного цикла), temperature 0.2, max_tokens 40000. Облако — OpenRouter с data_collection: deny; локальные кванты — Unsloth Studio на GPU-стенде (окно 262144, KV q4_0)."],
         ["Типы задач: edit — в РАБОЧЕМ модуле найти неназванный дефект и добавить возможность, не сломав публичный API; edit-long — ТА ЖЕ правка, но модуль закопан в сгенерированный репозиторий ~63k токенов (контролируемая пара к edit: разница только в длине контекста); algo — алгоритмическая глубина (медиана скользящего окна, адаптивное интегрирование, semver, диапазоны); conc — корректность под параллелизмом (каналы с обратным давлением, ограниченные исполнители)."],
+        ["Стоимость: облачные модели — по счёту провайдера; локальный стенд — электричество (500 Вт, €0.03/кВт·ч); арендованная карта — почасовая ставка ($0.33/ч для 5090 у Clore). Для арендованной это стоимость СТЕННОГО ВРЕМЕНИ ВЫЗОВОВ, а не владения: аренда тикает непрерывно, включая простой и загрузку модели, поэтому реальные расходы за сутки выше суммы по строке."],
         ["Пометка «×N» в названии строки: набор прогнан N раз, задача засчитана решённой по большинству повторов. Колонка «решено» во ВСЕХ строках означает одно и то же — задачи из 22, а не измерения; повторы лишь снижают влияние случайности отдельного прогона (наблюдали, как одна и та же задача падает в первом повторе и проходит во втором)."],
         ["Оракулы: Rust — cargo build + скрытые тесты; TypeScript — ДВА независимых гейта: tsc --strict И bun test; Julia — julia -t N; C# — dotnet run (net10.0, без NuGet); Bash/PowerShell — скрытые проверки (bash / pwsh 7.4). «Решено» = пройден гейт И 100% скрытых тестов. C#-набор зеркалит Rust-набор (те же задачи, та же семантика) — пара Rust↔C# изолирует эффект языка."],
         [""], ["КОЛОНКИ"],

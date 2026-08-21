@@ -22,6 +22,11 @@
 # ! Порт слушается на 127.0.0.1, а НЕ на 0.0.0.0: у Clore порт контейнера публичный, и
 #   сервер с --host 0.0.0.0 отдаёт модель любому, кто просканирует адрес. Доступ снаружи —
 #   через SSH-туннель. Ключ API обязателен и лежит в /root/.apikey (0600).
+# ! СЭМПЛИНГ ЗАДАЁМ НА СЕРВЕРЕ, а не только в клиенте. Рекомендация Unsloth для Qwen3.8-27B
+#   в режиме размышления: temperature=1.0, top_p=0.95, top_k=20, min_p=0.0, presence_penalty=0.0,
+#   repeat_penalty=1.0. Совпадают с умолчаниями llama.cpp только два последних, а `min_p` по
+#   умолчанию 0.05 — то есть без явного указания модель работает НЕ на рекомендованных настройках,
+#   и заметить это по журналу нельзя. Клиент может прислать свои значения и переопределить эти.
 set -u
 QUANT="${QUANT:-Q3_K_XL}"
 KV="${KV:-q4_0}"
@@ -41,4 +46,5 @@ exec /opt/bin/llama-server \
   --cache-type-k "$KV" --cache-type-v "$KV" \
   --flash-attn on --jinja -ngl -1 --kv-unified --parallel "$PARALLEL" \
   --spec-type draft-mtp --spec-draft-n-max 2 \
+  --min-p 0 --top-k 20 --top-p 0.95 --temp 1.0 \
   --chat-template-kwargs "{\"reasoning_effort\":\"$EFFORT\"}"
