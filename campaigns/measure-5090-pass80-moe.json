@@ -1,0 +1,22 @@
+{
+ "points": [
+  {"name": "80B-Q2-c32k",  "model": "/models/Qwen3-Coder-Next-UD-Q2_K_XL.gguf",
+   "args": "-c 32768 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q8_0 --cache-type-v q8_0 --parallel 2"},
+  {"name": "80B-Q2-c131k", "model": "/models/Qwen3-Coder-Next-UD-Q2_K_XL.gguf",
+   "args": "-c 131072 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q8_0 --cache-type-v q8_0 --parallel 2"},
+  {"name": "80B-Q2-c262k", "model": "/models/Qwen3-Coder-Next-UD-Q2_K_XL.gguf",
+   "args": "-c 262144 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q8_0 --cache-type-v q8_0 --parallel 2"},
+  {"name": "80B-Q3-moe8",  "model": "/models/Qwen3-Coder-Next-UD-Q3_K_XL.gguf",
+   "args": "-c 131072 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q8_0 --cache-type-v q8_0 --parallel 2 --n-cpu-moe 8"},
+  {"name": "80B-Q3-moe16", "model": "/models/Qwen3-Coder-Next-UD-Q3_K_XL.gguf",
+   "args": "-c 131072 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q8_0 --cache-type-v q8_0 --parallel 2 --n-cpu-moe 16"},
+  {"name": "80B-Q3-moe24", "model": "/models/Qwen3-Coder-Next-UD-Q3_K_XL.gguf",
+   "args": "-c 131072 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q8_0 --cache-type-v q8_0 --parallel 2 --n-cpu-moe 24"},
+  {"name": "80B-Q4-moe24", "model": "/models/Qwen3-Coder-Next-UD-Q4_K_M.gguf",
+   "args": "-c 131072 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q8_0 --cache-type-v q8_0 --parallel 2 --n-cpu-moe 24"},
+  {"name": "80B-Q4-moe32", "model": "/models/Qwen3-Coder-Next-UD-Q4_K_M.gguf",
+   "args": "-c 131072 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q8_0 --cache-type-v q8_0 --parallel 2 --n-cpu-moe 32"},
+  {"name": "80B-Q4-moe40", "model": "/models/Qwen3-Coder-Next-UD-Q4_K_M.gguf",
+   "args": "-c 131072 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q8_0 --cache-type-v q8_0 --parallel 2 --n-cpu-moe 40"}
+ ]
+}

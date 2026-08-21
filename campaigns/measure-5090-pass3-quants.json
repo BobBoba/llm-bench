@@ -1,0 +1,15 @@
+{
+ "long_prompt_sentences": 1800,
+ "points": [
+  {"name": "Q3-kv-q8", "long": true, "model": "/models/Qwen3.8-27B-UD-Q3_K_XL.gguf",
+   "args": "-c 262144 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q8_0 --cache-type-v q8_0 --parallel 2 --spec-type draft-mtp --spec-draft-n-max 2"},
+  {"name": "Q4-kv-q4", "long": true, "model": "/models/Qwen3.8-27B-UD-Q4_K_XL.gguf",
+   "args": "-c 262144 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q4_0 --cache-type-v q4_0 --parallel 2 --spec-type draft-mtp --spec-draft-n-max 2"},
+  {"name": "Q4-kv-q8", "long": true, "model": "/models/Qwen3.8-27B-UD-Q4_K_XL.gguf",
+   "args": "-c 262144 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q8_0 --cache-type-v q8_0 --parallel 2 --spec-type draft-mtp --spec-draft-n-max 2"},
+  {"name": "Q5-kv-q4", "long": true, "model": "/models/Qwen3.8-27B-UD-Q5_K_XL.gguf",
+   "args": "-c 262144 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q4_0 --cache-type-v q4_0 --parallel 2 --spec-type draft-mtp --spec-draft-n-max 2"},
+  {"name": "Q5-kv-q8", "long": true, "model": "/models/Qwen3.8-27B-UD-Q5_K_XL.gguf",
+   "args": "-c 262144 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q8_0 --cache-type-v q8_0 --parallel 2 --spec-type draft-mtp --spec-draft-n-max 2"}
+ ]
+}

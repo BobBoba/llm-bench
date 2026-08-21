@@ -1,0 +1,10 @@
+{
+ "long_prompt_sentences": 1800,
+ "points": [
+  {"name": "b-default-q4", "long": true, "args": "-c 262144 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q4_0 --cache-type-v q4_0 --parallel 2 --spec-type draft-mtp --spec-draft-n-max 2"},
+  {"name": "b4096-ub2048-q4", "long": true, "args": "-c 262144 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q4_0 --cache-type-v q4_0 --parallel 2 --spec-type draft-mtp --spec-draft-n-max 2 -b 4096 -ub 2048"},
+  {"name": "b8192-ub4096-q4", "long": true, "args": "-c 262144 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q4_0 --cache-type-v q4_0 --parallel 2 --spec-type draft-mtp --spec-draft-n-max 2 -b 8192 -ub 4096"},
+  {"name": "b8192-ub4096-q8", "long": true, "args": "-c 262144 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q8_0 --cache-type-v q8_0 --parallel 2 --spec-type draft-mtp --spec-draft-n-max 2 -b 8192 -ub 4096"},
+  {"name": "b-default-q8", "long": true, "args": "-c 262144 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q8_0 --cache-type-v q8_0 --parallel 2 --spec-type draft-mtp --spec-draft-n-max 2"}
+ ]
+}

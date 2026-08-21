@@ -1,0 +1,10 @@
+{
+ "points": [
+  {"name": "kv-q4-par2-mtp",   "args": "-c 262144 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q4_0 --cache-type-v q4_0 --parallel 2 --spec-type draft-mtp --spec-draft-n-max 2"},
+  {"name": "kv-q8-par2-mtp",   "args": "-c 262144 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q8_0 --cache-type-v q8_0 --parallel 2 --spec-type draft-mtp --spec-draft-n-max 2"},
+  {"name": "kv-k8v4-par2-mtp", "args": "-c 262144 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q8_0 --cache-type-v q4_0 --parallel 2 --spec-type draft-mtp --spec-draft-n-max 2"},
+  {"name": "kv-f16-par2-mtp",  "args": "-c 262144 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k f16 --cache-type-v f16 --parallel 2 --spec-type draft-mtp --spec-draft-n-max 2"},
+  {"name": "kv-q4-par2-nomtp", "args": "-c 262144 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q4_0 --cache-type-v q4_0 --parallel 2"},
+  {"name": "kv-q4-par4-mtp",   "args": "-c 262144 --flash-attn on --jinja -ngl -1 --kv-unified --cache-type-k q4_0 --cache-type-v q4_0 --parallel 4 --spec-type draft-mtp --spec-draft-n-max 2", "concurrency": 4}
+ ]
+}
