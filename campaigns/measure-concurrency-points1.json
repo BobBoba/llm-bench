@@ -1,0 +1,8 @@
+[
+ {"pool": 262144, "slots": 2, "conc": 2, "sentences": 3600},
+ {"pool": 262144, "slots": 4, "conc": 4, "sentences": 3600},
+ {"pool": 393216, "slots": 4, "conc": 4, "sentences": 3600},
+ {"pool": 524288, "slots": 4, "conc": 4, "sentences": 3600},
+ {"pool": 524288, "slots": 8, "conc": 8, "sentences": 1800},
+ {"pool": 262144, "slots": 8, "conc": 8, "sentences": 1800}
+]

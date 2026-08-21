@@ -1,0 +1,6 @@
+[
+ {"pool": 262144, "slots": 4, "conc": 4, "sentences": 3600, "extra": "-b 8192 -ub 2048"},
+ {"pool": 262144, "slots": 4, "conc": 4, "sentences": 3600, "extra": "-b 16384 -ub 4096"},
+ {"pool": 262144, "slots": 2, "conc": 4, "sentences": 3600},
+ {"pool": 262144, "slots": 1, "conc": 4, "sentences": 3600}
+]
