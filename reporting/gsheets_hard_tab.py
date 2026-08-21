@@ -57,6 +57,11 @@ DISPLAY = {
     # MoE 80B-A3B: Q2 помещается на карту целиком (217 т/с), Q3 частично уезжает в ОЗУ (139 т/с).
     "5090/Qwen3-Coder-Next-80B:UD-Q2_K_XL": "Coder-Next-80B Q2_K_XL (5090, окно 262k, вся на GPU)",
     "5090/Qwen3-Coder-Next-80B:UD-Q3_K_XL": "Coder-Next-80B Q3_K_XL (5090, окно 131k, часть в ОЗУ)",
+    # Три модели на 5090 на равных условиях [[21.08.2026]], по 66 измерений: качество идёт за
+    # числом АКТИВНЫХ параметров на токен, скорость — за ним же в обратную сторону.
+    "5090n/Muse-Glimmer-30B:UD-Q4_K_XL": "Muse-Glimmer-30B Q4 (5090, окно 131k, ×3)",
+    "5090n/Ornith-1.5-35B-A3B:Q4_K_M": "Ornith-1.5-35B-A3B Q4 (5090, окно 262k, ×3)",
+    "5090n/Ornith-1.5-35B-A3B:Q6_K": "Ornith-1.5-35B-A3B Q6 (5090, окно 262k, ×3)",
     "InternScience/Agents-A1-Q4_K_M-GGUF": "Agents-A1 Q4_K_M (local, бюджет 100k)",
     # gaming-pc CachyOS Studio, кампания hard0812 [[13.08.2026]]:
     # qwen38-quants0818 [[18.08.2026]]: ЛЕСТНИЦА КВАНТОВ — каждый на СВОЁМ максимальном окне
@@ -87,6 +92,12 @@ DISPLAY = {
 
 def display(model):
     return DISPLAY.get(model, model.split("/")[-1])
+
+
+# Модели, отложенные из-за неполного прогона: заполняется в agg(), читается контролем полноты.
+# Отдельное множество, а не EXCLUDED: EXCLUDED — это осознанное решение владельца исключить
+# модель насовсем, а здесь строка появится сама, как только прогон доедет до конца.
+INCOMPLETE = set()
 
 
 def is_local(model):
@@ -191,6 +202,19 @@ def agg(records):
         if not r.get("ok") or r.get("model") in EXCLUDED:
             continue
         by_model.setdefault(r["model"], []).append(r)
+
+    # ! НЕЗАВЕРШЁННЫЕ прогоны в таблицу не пускаем. Строка модели, у которой пройдена треть
+    #   задач, выглядит как «решено 5 из 22» и читается как провал, хотя остальные 17 задач
+    #   просто ещё не запускались. Отказ тихий: все числа в строке по отдельности верны.
+    #   Порог — 80% покрытия набора; отброшенное ПЕЧАТАЕТСЯ, молча ничего не теряем.
+    full = max((len({(r.get("lang"), r.get("task")) for r in rs}) for rs in by_model.values()),
+               default=0)
+    for model in list(by_model):
+        cov = len({(r.get("lang"), r.get("task")) for r in by_model[model]})
+        if full and cov < full * 0.8:
+            print(f"пропущена незавершённая модель: {model} — {cov} задач из {full}")
+            INCOMPLETE.add(model)
+            del by_model[model]
     rows = []
     for model, rs in by_model.items():
         row = {"model": model, "langs": {}, "solved": 0, "cost": 0.0, "times": []}
@@ -362,7 +386,7 @@ def main():
     # прецедент был (4 юнита затёрла гонка процессов, и это заметили только по вопросу владельца).
     measured = {r["model"] for r in records if r.get("ok")}
     shown = {row["model"] for row in rows}
-    lost = measured - shown - EXCLUDED
+    lost = measured - shown - EXCLUDED - INCOMPLETE
     if lost:
         raise SystemExit(f"ПОТЕРЯНЫ СТРОКИ (есть замеры, нет в таблице и не в EXCLUDED): {sorted(lost)}")
     print(f"полнота: {len(shown)} строк, {len(EXCLUDED & measured)} исключено осознанно, потерь нет")
