@@ -1,0 +1,17 @@
+{
+ "task": "calc",
+ "model": "Muse-Glimmer-30B-Q4-5090",
+ "client": "local",
+ "outcome_pct": 100,
+ "passed": 8,
+ "total": 8,
+ "steps": 19,
+ "wall_s": 188.6,
+ "cost_usd": 0,
+ "tokens_in": 78245,
+ "tokens_out": 12798,
+ "finished": "done",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-calc-Muse-Glimmer-30B-Q4-5090-42FBNP",
+ "hidden_tail": "........                                                                 [100%]\n8 passed in 0.05s\n"
+}

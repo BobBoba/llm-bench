@@ -1,0 +1,17 @@
+{
+ "task": "todo-api",
+ "model": "Qwen3.8-27B-Q3-5090",
+ "client": "local",
+ "outcome_pct": 100,
+ "passed": 6,
+ "total": 6,
+ "steps": 2,
+ "wall_s": 102.8,
+ "cost_usd": 0,
+ "tokens_in": 1051,
+ "tokens_out": 16000,
+ "finished": "cap",
+ "aborted": "chat_fail:load/stream_error: {\"code\":500,\"message\":\"Failed to parse tool call arguments as",
+ "scratch": "/home/vlad/.abscratch/agentbench-todo-api-Qwen3.8-27B-Q3-5090-c8Cotv",
+ "hidden_tail": "......                                                                   [100%]\n6 passed in 3.13s\n"
+}

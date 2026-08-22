@@ -1,0 +1,17 @@
+{
+ "task": "todo-api",
+ "model": "Ornith-1.5-35B-A3B-Q4-5090",
+ "client": "local",
+ "outcome_pct": 100,
+ "passed": 6,
+ "total": 6,
+ "steps": 5,
+ "wall_s": 28.3,
+ "cost_usd": 0,
+ "tokens_in": 12998,
+ "tokens_out": 3241,
+ "finished": "done",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-todo-api-Ornith-1.5-35B-A3B-Q4-5090-vLPsdi",
+ "hidden_tail": "......                                                                   [100%]\n6 passed in 3.13s\n"
+}

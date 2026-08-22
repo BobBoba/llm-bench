@@ -1,0 +1,17 @@
+{
+ "task": "calc",
+ "model": "Qwen3.8-27B-Q3-5090",
+ "client": "local",
+ "outcome_pct": 100,
+ "passed": 8,
+ "total": 8,
+ "steps": 4,
+ "wall_s": 64.3,
+ "cost_usd": 0,
+ "tokens_in": 11857,
+ "tokens_out": 9679,
+ "finished": "done",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-calc-Qwen3.8-27B-Q3-5090-z8Cbfm",
+ "hidden_tail": "........                                                                 [100%]\n8 passed in 0.01s\n"
+}

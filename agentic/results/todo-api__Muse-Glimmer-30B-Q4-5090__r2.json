@@ -1,0 +1,17 @@
+{
+ "task": "todo-api",
+ "model": "Muse-Glimmer-30B-Q4-5090",
+ "client": "local",
+ "outcome_pct": 100,
+ "passed": 6,
+ "total": 6,
+ "steps": 5,
+ "wall_s": 130.5,
+ "cost_usd": 0,
+ "tokens_in": 11259,
+ "tokens_out": 9768,
+ "finished": "done",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-todo-api-Muse-Glimmer-30B-Q4-5090-dv5i0r",
+ "hidden_tail": "......                                                                   [100%]\n6 passed in 3.12s\n"
+}
