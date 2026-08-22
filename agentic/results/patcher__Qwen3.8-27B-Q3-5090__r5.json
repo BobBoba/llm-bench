@@ -1,0 +1,18 @@
+{
+ "task": "patcher",
+ "model": "Qwen3.8-27B-Q3-5090",
+ "client": "local",
+ "max_tokens_out": 40000,
+ "outcome_pct": 95,
+ "passed": 18,
+ "total": 19,
+ "steps": 28,
+ "wall_s": 1593,
+ "cost_usd": 0,
+ "tokens_in": 722403,
+ "tokens_out": 211081,
+ "finished": "cap",
+ "aborted": "wall",
+ "scratch": "/home/vlad/.abscratch/agentbench-patcher-Qwen3.8-27B-Q3-5090-SFRtf1",
+ "hidden_tail": "ends, src_lines, dst_lines,\n                                        src_stated, src_marker, src_nl,\n                                        dst_marker, dst_nl)\n                if applied is not None:\n                    break\n            if applied is None:\n>               raise PatchError(\"hunk %d does not apply\" % idx)\nE               patcher.PatchError: hunk 1 does not apply\n\npatcher.py:447: PatchError\n=========================== short test summary info ============================\nFAILED hidden_test.py::test_stale_offsets_shifted_up - patcher.PatchError: hu...\n1 failed, 18 passed in 0.11s\n"
+}

@@ -1,0 +1,18 @@
+{
+ "task": "patcher",
+ "model": "Ornith-1.5-35B-A3B-Q4-5090",
+ "client": "local",
+ "outcome_pct": 100,
+ "passed": 19,
+ "total": 19,
+ "steps": 12,
+ "wall_s": 758.8,
+ "cost_usd": 0,
+ "tokens_in": 94835,
+ "tokens_out": 186504,
+ "finished": "budget_exhausted",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-patcher-Ornith-1.5-35B-A3B-Q4-5090-lE6dCV",
+ "hidden_tail": "...................                                                      [100%]\n19 passed in 0.07s\n",
+ "max_tokens_out": 100000
+}

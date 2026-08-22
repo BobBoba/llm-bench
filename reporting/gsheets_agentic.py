@@ -25,8 +25,10 @@ ROOT = os.path.dirname(HERE)
 RESULTS = os.path.join(ROOT, "agentic", "results")
 # Серии с разным бюджетом лежат в подкаталогах: бюджет — параметр эксперимента,
 # а не служебная деталь, поэтому обе серии показываем рядом, а не подменяем одну другой.
+# Основная точка измерения лежит в results/; серии с другим бюджетом — в подкаталогах рядом.
+# Бюджет вывода записан в каждом файле, поэтому группировка разведёт их сама, а не по каталогу.
 RESULT_GLOBS = [os.path.join(RESULTS, "*__*.json"),
-                os.path.join(RESULTS, "superseded-budget40k", "*__*.json")]
+                os.path.join(RESULTS, "budget100k", "*__*.json")]
 SID = open(os.path.join(HERE, "gsheets-sheet-id.txt")).read().strip()
 TAB = "Agentic app-bench 23.07"
 

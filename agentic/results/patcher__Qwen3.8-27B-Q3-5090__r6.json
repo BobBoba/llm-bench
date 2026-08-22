@@ -1,0 +1,18 @@
+{
+ "task": "patcher",
+ "model": "Qwen3.8-27B-Q3-5090",
+ "client": "local",
+ "max_tokens_out": 40000,
+ "outcome_pct": 100,
+ "passed": 19,
+ "total": 19,
+ "steps": 31,
+ "wall_s": 957.2,
+ "cost_usd": 0,
+ "tokens_in": 817458,
+ "tokens_out": 129893,
+ "finished": "cap",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-patcher-Qwen3.8-27B-Q3-5090-ameMhP",
+ "hidden_tail": "...................                                                      [100%]\n19 passed in 0.03s\n"
+}

@@ -1,0 +1,18 @@
+{
+ "task": "patcher",
+ "model": "Ornith-1.5-35B-A3B-Q4-5090",
+ "client": "local",
+ "outcome_pct": 0,
+ "passed": 0,
+ "total": 19,
+ "steps": 8,
+ "wall_s": 552,
+ "cost_usd": 0,
+ "tokens_in": 32832,
+ "tokens_out": 139045,
+ "finished": "budget_exhausted",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-patcher-Ornith-1.5-35B-A3B-Q4-5090-rACLDn",
+ "hidden_tail": "d literal ...\nFAILED hidden_test.py::test_reverse_multi_hunk_round_trip - ValueError: inval...\nFAILED hidden_test.py::test_no_newline_at_eof_preserved - ValueError: invalid...\nFAILED hidden_test.py::test_newline_added_at_eof - ValueError: invalid litera...\nFAILED hidden_test.py::test_create_from_dev_null - ValueError: invalid litera...\nFAILED hidden_test.py::test_delete_to_dev_null - ValueError: invalid literal ...\nFAILED hidden_test.py::test_apply_to_file_writes_result - ValueError: invalid...\nFAILED hidden_test.py::test_input_string_not_mutated - ValueError: invalid li...\n19 failed in 0.55s\n",
+ "max_tokens_out": 100000
+}

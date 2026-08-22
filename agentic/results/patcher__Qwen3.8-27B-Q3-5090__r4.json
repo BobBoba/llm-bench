@@ -1,0 +1,18 @@
+{
+ "task": "patcher",
+ "model": "Qwen3.8-27B-Q3-5090",
+ "client": "local",
+ "max_tokens_out": 40000,
+ "outcome_pct": 95,
+ "passed": 18,
+ "total": 19,
+ "steps": 21,
+ "wall_s": 892.3,
+ "cost_usd": 0,
+ "tokens_in": 414259,
+ "tokens_out": 123393,
+ "finished": "stop_no_tool",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-patcher-Qwen3.8-27B-Q3-5090-Vse9ks",
+ "hidden_tail": " out = lines\n        for hunk in hunks:\n            start = _find_hunk(out, hunk, reverse)\n            if start is None:\n>               raise PatchError(\n                    \"hunk at line %d does not match the file\"\n                    % (hunk.new_start if reverse else hunk.old_start)\n                )\nE               patcher.PatchError: hunk at line 42 does not match the file\n\npatcher.py:287: PatchError\n=========================== short test summary info ============================\nFAILED hidden_test.py::test_stale_offsets_shifted_up - patcher.PatchError: hu...\n1 failed, 18 passed in 0.10s\n"
+}
