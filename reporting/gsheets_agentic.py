@@ -36,8 +36,9 @@ HEAD = [
     ["Модель строит приложение на стандартной библиотеке за много шагов (write_file / read_file / run / done, изоляция podman без сети), затем его оценивает набор pytest, которого модель не видела. Оценка объективна — в отличие от repo-task, где дифф судит эксперт"],
     ["Задачи полностью синтетические, поэтому арендованная карта здесь допустима. Локальные прогоны: окно 131072, KV q4_0, один слот, усилие рассуждения — умолчание модели, по три повтора на точку"],
     ["Столбец «разброс» — минимум и максимум исхода по повторам. Одинаковое среднее при разном разбросе означает разную надёжность, и это важнее среднего"],
+    ["Столбец «отброшено» — прогоны, упёршиеся в потолок вывода. Они измеряют лимит, а не модель (рассуждение съедает бюджет до первого вызова инструмента), поэтому в среднее не входят. Ненулевое значение здесь — повод поднять бюджет и перемерить, а не вывод о модели"],
     [],
-    ["Задача", "модель", "тип", "исход %", "разброс", "повторов", "шагов", "время с", "стоимость $", "финал"],
+    ["Задача", "модель", "тип", "исход %", "разброс", "повторов", "отброшено", "шагов", "время с", "стоимость $", "финал"],
 ]
 
 
@@ -52,16 +53,25 @@ def load():
 
 
 def agg(rs):
-    out = [r["outcome_pct"] for r in rs]
-    cost = [r["cost_usd"] or WATTS / 1000 * r["wall_s"] / 3600 * PRICE_KWH for r in rs]
+    # Прогон, упёршийся в потолок вывода, измеряет ЛИМИТ, а не модель: рассуждение съедает
+    # бюджет до первого вызова инструмента, исход выходит нулевым. Включать такой ноль в среднее
+    # нельзя — он занижает модель тем сильнее, чем подробнее та рассуждает. Считаем отдельно.
+    valid = [r for r in rs if r.get("finished") != "budget_exhausted"]
+    dropped = len(rs) - len(valid)
+    if not valid:
+        return {"n": 0, "dropped": dropped, "outcome": "—", "spread": "—",
+                "steps": "—", "wall": "—", "cost": 0.0, "finished": "budget_exhausted"}
+    out = [r["outcome_pct"] for r in valid]
+    cost = [r["cost_usd"] or WATTS / 1000 * r["wall_s"] / 3600 * PRICE_KWH for r in valid]
     return {
-        "n": len(rs),
+        "n": len(valid),
+        "dropped": dropped,
         "outcome": round(statistics.mean(out)),
         "spread": f"{min(out)}–{max(out)}" if len(out) > 1 and min(out) != max(out) else "—",
-        "steps": round(statistics.median(r["steps"] for r in rs)),
-        "wall": round(statistics.median(r["wall_s"] for r in rs), 1),
+        "steps": round(statistics.median(r["steps"] for r in valid)),
+        "wall": round(statistics.median(r["wall_s"] for r in valid), 1),
         "cost": statistics.mean(cost),
-        "finished": ", ".join(sorted({r["finished"] for r in rs})),
+        "finished": ", ".join(sorted({r["finished"] for r in valid})),
     }
 
 
@@ -77,11 +87,11 @@ def build_rows():
     groups = load()
     rows = list(HEAD)
     for (task, model, client), rs in sorted(groups.items(),
-                                            key=lambda kv: (kv[0][0], -agg(kv[1])["outcome"])):
+                                            key=lambda kv: (kv[0][0], -(agg(kv[1])["outcome"] if isinstance(agg(kv[1])["outcome"], int) else -1))):
         a = agg(rs)
         rows.append([task, model, "локаль" if client == "local" else "облако",
-                     str(a["outcome"]), a["spread"], str(a["n"]), str(a["steps"]),
-                     str(a["wall"]), "$%.4f" % a["cost"], a["finished"]])
+                     str(a["outcome"]), a["spread"], str(a["n"]), str(a["dropped"]),
+                     str(a["steps"]), str(a["wall"]), "$%.4f" % a["cost"], a["finished"]])
     rows += [[], ["ВЫВОДЫ"]] + [[c] for c in read_conclusions()]
     return rows, groups
 

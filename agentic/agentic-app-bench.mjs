@@ -21,6 +21,10 @@ const COST_CAP = Number(costCapStr || 6);
 const MAX_STEPS = Number(process.env.MAX_STEPS || 30);
 const WALL_CAP_MS = Number(process.env.WALL_CAP_MIN || 30) * 60_000;
 const RUN_TIMEOUT_S = Number(process.env.RUN_TIMEOUT_S || 90);
+// Бюджет вывода на шаг. 16000 хватало на простые спецификации, но на плотной рассуждающая
+// модель выедает его целиком ДО первого вызова инструмента — прогон записывается как отказ,
+// хотя измеряет бюджет. Умолчание поднято; переопределяется MAX_TOKENS.
+const MAX_TOKENS = Number(process.env.MAX_TOKENS_OUT || 40000);
 
 // Explicit root instead of string surgery on a relative path. The previous form,
 // path.join('..', '../clients/llama-server-client.mjs'), resolved ABOVE the repository and
@@ -108,13 +112,20 @@ async function main() {
     if (Date.now() - t0 > WALL_CAP_MS) { aborted = 'wall'; break; }
     if (cost > COST_CAP) { aborted = 'cost'; break; }
     let res;
-    try { res = await chat({ model, messages, tools: TOOLS, tool_choice: 'auto', max_tokens: 16000, temperature: 0.3 }); }
+    try { res = await chat({ model, messages, tools: TOOLS, tool_choice: 'auto', max_tokens: MAX_TOKENS, temperature: 0.3 }); }
     catch (e) { aborted = 'chat_err:' + String(e.message).slice(0, 80); break; }
     if (!res.ok) { aborted = 'chat_fail:' + String(res.error || res.timeout).slice(0, 80); break; }
     cost += res.cost || 0; tokIn += res.usage?.prompt || 0; tokOut += res.usage?.completion || 0;
     const calls = res.tool_calls || [];
     messages.push({ role: 'assistant', content: res.content || '', tool_calls: calls.length ? calls : undefined });
-    if (!calls.length) { finished = 'stop_no_tool'; break; }
+    // ОТСЕЧЕНИЕ ПО БЮДЖЕТУ — НЕ ОТКАЗ МОДЕЛИ, и путать их нельзя. У рассуждающей модели
+    // размышление съедает max_tokens раньше, чем дело дойдёт до вызова инструмента: на плотной
+    // спецификации Qwen3.8 трижды подряд выдала ровно 16000 токенов, ноль вызовов и 0% исхода.
+    // Без этой ветки такой прогон записывался как `stop_no_tool` и читался как «модель сдалась».
+    if (!calls.length) {
+      finished = res.finish === 'length' ? 'budget_exhausted' : 'stop_no_tool';
+      break;
+    }
     let sawDone = false;
     for (const c of calls) {
       let args = {}; try { args = JSON.parse(c.function.arguments || '{}'); } catch (_) {}
