@@ -13,5 +13,6 @@
  "finished": "done",
  "aborted": null,
  "scratch": "/home/vlad/.abscratch/agentbench-kvstore-deepseek_deepseek-v4-pro-OETuhz",
- "hidden_tail": ".......                                                                  [100%]\n7 passed in 0.05s\n"
+ "hidden_tail": ".......                                                                  [100%]\n7 passed in 0.05s\n",
+ "max_tokens_out": 16000
 }

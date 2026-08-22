@@ -138,7 +138,10 @@ async function main() {
   }
   const grade = gradeHidden();
   const wall_s = +((Date.now() - t0) / 1000).toFixed(1);
-  const rec = { task, model, client: clientKind, outcome_pct: grade.total ? +(grade.passed / grade.total * 100).toFixed(0) : 0,
+  // Бюджет вывода записываем В РЕЗУЛЬТАТ: 18 прогонов показали, что он переставляет модели
+  // местами (при 40000 порядок один, при 100000 обратный). Прогон без указанного бюджета
+  // невоспроизводим и несопоставим с соседним.
+  const rec = { task, model, client: clientKind, max_tokens_out: MAX_TOKENS, outcome_pct: grade.total ? +(grade.passed / grade.total * 100).toFixed(0) : 0,
     passed: grade.passed, total: grade.total, steps, wall_s, cost_usd: +cost.toFixed(4),
     tokens_in: tokIn, tokens_out: tokOut, finished, aborted, scratch: SCRATCH, hidden_tail: grade.tail };
   // BENCH_RUN разводит повторы по файлам. Без него повторный прогон той же пары

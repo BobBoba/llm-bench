@@ -1,0 +1,18 @@
+{
+ "task": "patcher",
+ "model": "Qwen3.8-27B-Q3-5090",
+ "client": "local",
+ "outcome_pct": 32,
+ "passed": 6,
+ "total": 19,
+ "steps": 3,
+ "wall_s": 872.6,
+ "cost_usd": 0,
+ "tokens_in": 7425,
+ "tokens_out": 126910,
+ "finished": "stop_no_tool",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-patcher-Qwen3.8-27B-Q3-5090-IBFnHc",
+ "hidden_tail": "...\nFAILED hidden_test.py::test_stale_offsets_shifted_down - AssertionError: asse...\nFAILED hidden_test.py::test_stale_offsets_shifted_up - patcher.PatchError: hu...\nFAILED hidden_test.py::test_reverse_round_trip - patcher.PatchError: hunk doe...\nFAILED hidden_test.py::test_reverse_multi_hunk_round_trip - patcher.PatchErro...\nFAILED hidden_test.py::test_no_newline_at_eof_preserved - AssertionError: ass...\nFAILED hidden_test.py::test_newline_added_at_eof - AssertionError: assert 'al...\nFAILED hidden_test.py::test_apply_to_file_writes_result - AssertionError: ass...\n13 failed, 6 passed in 0.24s\n",
+ "max_tokens_out": 100000
+}

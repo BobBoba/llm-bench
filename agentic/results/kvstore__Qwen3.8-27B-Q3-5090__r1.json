@@ -13,5 +13,6 @@
  "finished": "done",
  "aborted": null,
  "scratch": "/home/vlad/.abscratch/agentbench-kvstore-Qwen3.8-27B-Q3-5090-bqO4B7",
- "hidden_tail": ".......                                                                  [100%]\n7 passed in 0.02s\n"
+ "hidden_tail": ".......                                                                  [100%]\n7 passed in 0.02s\n",
+ "max_tokens_out": 16000
 }

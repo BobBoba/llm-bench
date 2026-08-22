@@ -13,5 +13,6 @@
  "finished": "done",
  "aborted": null,
  "scratch": "/home/vlad/.abscratch/agentbench-todo-api-Muse-Glimmer-30B-Q4-5090-dv5i0r",
- "hidden_tail": "......                                                                   [100%]\n6 passed in 3.12s\n"
+ "hidden_tail": "......                                                                   [100%]\n6 passed in 3.12s\n",
+ "max_tokens_out": 16000
 }

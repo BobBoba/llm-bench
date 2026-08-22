@@ -13,5 +13,6 @@
  "finished": "done",
  "aborted": null,
  "scratch": "/home/vlad/.abscratch/agentbench-kvstore-Ornith-1.5-35B-A3B-Q4-5090-8DfYUJ",
- "hidden_tail": ".......                                                                  [100%]\n7 passed in 0.04s\n"
+ "hidden_tail": ".......                                                                  [100%]\n7 passed in 0.04s\n",
+ "max_tokens_out": 16000
 }

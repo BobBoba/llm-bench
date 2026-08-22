@@ -1,0 +1,18 @@
+{
+ "task": "patcher",
+ "model": "Muse-Glimmer-30B-Q4-5090",
+ "client": "local",
+ "outcome_pct": 89,
+ "passed": 17,
+ "total": 19,
+ "steps": 7,
+ "wall_s": 290.4,
+ "cost_usd": 0,
+ "tokens_in": 30048,
+ "tokens_out": 22343,
+ "finished": "done",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-patcher-Muse-Glimmer-30B-Q4-5090-ovEdCV",
+ "hidden_tail": "d(\"--- /dev/null\", \"+++ b/new.txt\", \"@@ -0,0 +1,2 @@\", \"+first\", \"+second\")\n>       assert apply_patch(\"\", diff) == d(\"first\", \"second\")\nE       AssertionError: assert 'first\\nsecond' == 'first\\nsecond\\n'\nE         \nE           first\nE         - second\nE         ?       -\nE         + second\n\nhidden_test.py:157: AssertionError\n=========================== short test summary info ============================\nFAILED hidden_test.py::test_newline_added_at_eof - AssertionError: assert 'al...\nFAILED hidden_test.py::test_create_from_dev_null - AssertionError: assert 'fi...\n2 failed, 17 passed in 0.10s\n",
+ "max_tokens_out": 40000
+}

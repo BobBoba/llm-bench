@@ -13,5 +13,6 @@
  "finished": "done",
  "aborted": null,
  "scratch": "/home/vlad/.abscratch/agentbench-todo-api-deepseek_deepseek-v4-pro-BEVmln",
- "hidden_tail": "......                                                                   [100%]\n6 passed in 3.14s\n"
+ "hidden_tail": "......                                                                   [100%]\n6 passed in 3.14s\n",
+ "max_tokens_out": 16000
 }

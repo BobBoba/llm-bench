@@ -13,5 +13,6 @@
  "finished": "cap",
  "aborted": null,
  "scratch": "/home/vlad/.abscratch/agentbench-calc-deepseek_deepseek-v3.2-fS3vrN",
- "hidden_tail": "........                                                                 [100%]\n8 passed in 0.04s\n"
+ "hidden_tail": "........                                                                 [100%]\n8 passed in 0.04s\n",
+ "max_tokens_out": 16000
 }

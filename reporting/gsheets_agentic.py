@@ -23,6 +23,10 @@ from gsheets_common import credentials               # noqa: E402
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 RESULTS = os.path.join(ROOT, "agentic", "results")
+# Серии с разным бюджетом лежат в подкаталогах: бюджет — параметр эксперимента,
+# а не служебная деталь, поэтому обе серии показываем рядом, а не подменяем одну другой.
+RESULT_GLOBS = [os.path.join(RESULTS, "*__*.json"),
+                os.path.join(RESULTS, "superseded-budget40k", "*__*.json")]
 SID = open(os.path.join(HERE, "gsheets-sheet-id.txt")).read().strip()
 TAB = "Agentic app-bench 23.07"
 
@@ -38,17 +42,17 @@ HEAD = [
     ["Столбец «разброс» — минимум и максимум исхода по повторам. Одинаковое среднее при разном разбросе означает разную надёжность, и это важнее среднего"],
     ["Столбец «отброшено» — прогоны, упёршиеся в потолок вывода. Они измеряют лимит, а не модель (рассуждение съедает бюджет до первого вызова инструмента), поэтому в среднее не входят. Ненулевое значение здесь — повод поднять бюджет и перемерить, а не вывод о модели"],
     [],
-    ["Задача", "модель", "тип", "исход %", "разброс", "повторов", "отброшено", "шагов", "время с", "стоимость $", "финал"],
+    ["Задача", "модель", "тип", "бюджет вывода", "исход %", "разброс", "повторов", "отброшено", "шагов", "время с", "стоимость $", "финал"],
 ]
 
 
 def load():
-    recs = [json.load(open(f)) for f in sorted(glob.glob(os.path.join(RESULTS, "*__*.json")))]
+    recs = [json.load(open(f)) for g in RESULT_GLOBS for f in sorted(glob.glob(g))]
     if not recs:
         raise SystemExit(f"нет результатов в {RESULTS} — проверьте путь или кампанию")
     groups = {}
     for r in recs:
-        groups.setdefault((r["task"], r["model"], r["client"]), []).append(r)
+        groups.setdefault((r["task"], r["model"], r["client"], r.get("max_tokens_out", 16000)), []).append(r)
     return groups
 
 
@@ -56,7 +60,13 @@ def agg(rs):
     # Прогон, упёршийся в потолок вывода, измеряет ЛИМИТ, а не модель: рассуждение съедает
     # бюджет до первого вызова инструмента, исход выходит нулевым. Включать такой ноль в среднее
     # нельзя — он занижает модель тем сильнее, чем подробнее та рассуждает. Считаем отдельно.
-    valid = [r for r in rs if r.get("finished") != "budget_exhausted"]
+    # Отбрасываем не всякое отсечение, а только то, при котором модель НЕ УСПЕЛА НИЧЕГО СДЕЛАТЬ:
+    # `budget_exhausted` описывает, как завершился цикл, а не была ли выполнена работа. Прогон,
+    # где модель построила приложение за двенадцать шагов и лишь на последнем ушла в бесконечное
+    # рассуждение, дал настоящие 19/19 — выбрасывать его значит терять измерение. Недействителен
+    # случай `steps == 1`: рассуждение съело бюджет до первого вызова инструмента.
+    valid = [r for r in rs
+             if not (r.get("finished") == "budget_exhausted" and r.get("steps", 0) <= 1)]
     dropped = len(rs) - len(valid)
     if not valid:
         return {"n": 0, "dropped": dropped, "outcome": "—", "spread": "—",
@@ -86,10 +96,12 @@ def read_conclusions():
 def build_rows():
     groups = load()
     rows = list(HEAD)
-    for (task, model, client), rs in sorted(groups.items(),
-                                            key=lambda kv: (kv[0][0], -(agg(kv[1])["outcome"] if isinstance(agg(kv[1])["outcome"], int) else -1))):
+    for (task, model, client, budget), rs in sorted(
+            groups.items(),
+            key=lambda kv: (kv[0][0], kv[0][3],
+                            -(agg(kv[1])["outcome"] if isinstance(agg(kv[1])["outcome"], int) else -1))):
         a = agg(rs)
-        rows.append([task, model, "локаль" if client == "local" else "облако",
+        rows.append([task, model, "локаль" if client == "local" else "облако", str(budget),
                      str(a["outcome"]), a["spread"], str(a["n"]), str(a["dropped"]),
                      str(a["steps"]), str(a["wall"]), "$%.4f" % a["cost"], a["finished"]])
     rows += [[], ["ВЫВОДЫ"]] + [[c] for c in read_conclusions()]

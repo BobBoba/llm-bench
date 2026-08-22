@@ -1,0 +1,18 @@
+{
+ "task": "patcher",
+ "model": "Muse-Glimmer-30B-Q4-5090",
+ "client": "local",
+ "outcome_pct": 0,
+ "passed": 0,
+ "total": 1,
+ "steps": 2,
+ "wall_s": 266.8,
+ "cost_usd": 0,
+ "tokens_in": 2703,
+ "tokens_out": 21223,
+ "finished": "stop_no_tool",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-patcher-Muse-Glimmer-30B-Q4-5090-GgcsJV",
+ "hidden_tail": "orting test module '/work/hidden_test.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/usr/local/lib/python3.12/importlib/__init__.py:90: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\nhidden_test.py:15: in <module>\n    from patcher import PatchError, apply_patch, apply_to_file\nE   ModuleNotFoundError: No module named 'patcher'\n=========================== short test summary info ============================\nERROR hidden_test.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.08s\n",
+ "max_tokens_out": 40000
+}

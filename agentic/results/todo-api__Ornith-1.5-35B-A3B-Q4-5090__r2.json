@@ -13,5 +13,6 @@
  "finished": "done",
  "aborted": null,
  "scratch": "/home/vlad/.abscratch/agentbench-todo-api-Ornith-1.5-35B-A3B-Q4-5090-vLPsdi",
- "hidden_tail": "......                                                                   [100%]\n6 passed in 3.13s\n"
+ "hidden_tail": "......                                                                   [100%]\n6 passed in 3.13s\n",
+ "max_tokens_out": 16000
 }

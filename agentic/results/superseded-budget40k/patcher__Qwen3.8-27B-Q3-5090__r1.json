@@ -1,0 +1,18 @@
+{
+ "task": "patcher",
+ "model": "Qwen3.8-27B-Q3-5090",
+ "client": "local",
+ "outcome_pct": 95,
+ "passed": 18,
+ "total": 19,
+ "steps": 6,
+ "wall_s": 532.8,
+ "cost_usd": 0,
+ "tokens_in": 38411,
+ "tokens_out": 79470,
+ "finished": "stop_no_tool",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-patcher-Qwen3.8-27B-Q3-5090-Fe3Hm7",
+ "hidden_tail": "f test_newline_added_at_eof():\n        text = \"alpha\\nbeta\"\n        diff = (\"--- a\\n+++ b\\n@@ -2 +2 @@\\n-beta\\n\"\n                \"\\\\ No newline at end of file\\n+beta\\n\")\n>       assert apply_patch(text, diff) == \"alpha\\nbeta\\n\"\nE       AssertionError: assert 'alpha\\nbeta' == 'alpha\\nbeta\\n'\nE         \nE           alpha\nE         - beta\nE         ?     -\nE         + beta\n\nhidden_test.py:150: AssertionError\n=========================== short test summary info ============================\nFAILED hidden_test.py::test_newline_added_at_eof - AssertionError: assert 'al...\n1 failed, 18 passed in 0.04s\n",
+ "max_tokens_out": 40000
+}

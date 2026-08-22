@@ -13,5 +13,6 @@
  "finished": "done",
  "aborted": null,
  "scratch": "/home/vlad/.abscratch/agentbench-kvstore-qwen3-coder-next-CzRTy9",
- "hidden_tail": "ne1\\nline2 = ok  спасибо\")\n        del s\n        s2 = KVStore(path)\n        assert s2.get(\"a\") == \"overwritten\"\n        assert s2.get(\"b\") is None\n>       assert s2.get(\"c\") == \"line1\\nline2 = ok  спасибо\"\nE       AssertionError: assert 'line1' == 'line1\\nline2 = ok  спасибо'\nE         \nE         - line1\nE         ?      -\nE         + line1\nE         - line2 = ok  спасибо\n\nhidden_test.py:62: AssertionError\n=========================== short test summary info ============================\nFAILED hidden_test.py::test_persistence_across_reload - AssertionError: asser...\n1 failed, 6 passed in 0.08s\n"
+ "hidden_tail": "ne1\\nline2 = ok  спасибо\")\n        del s\n        s2 = KVStore(path)\n        assert s2.get(\"a\") == \"overwritten\"\n        assert s2.get(\"b\") is None\n>       assert s2.get(\"c\") == \"line1\\nline2 = ok  спасибо\"\nE       AssertionError: assert 'line1' == 'line1\\nline2 = ok  спасибо'\nE         \nE         - line1\nE         ?      -\nE         + line1\nE         - line2 = ok  спасибо\n\nhidden_test.py:62: AssertionError\n=========================== short test summary info ============================\nFAILED hidden_test.py::test_persistence_across_reload - AssertionError: asser...\n1 failed, 6 passed in 0.08s\n",
+ "max_tokens_out": 16000
 }

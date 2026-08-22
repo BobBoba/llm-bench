@@ -1,0 +1,18 @@
+{
+ "task": "patcher",
+ "model": "Ornith-1.5-35B-A3B-Q4-5090",
+ "client": "local",
+ "outcome_pct": 89,
+ "passed": 17,
+ "total": 19,
+ "steps": 31,
+ "wall_s": 506.2,
+ "cost_usd": 0,
+ "tokens_in": 711025,
+ "tokens_out": 122467,
+ "finished": "cap",
+ "aborted": null,
+ "scratch": "/home/vlad/.abscratch/agentbench-patcher-Ornith-1.5-35B-A3B-Q4-5090-QERAaJ",
+ "hidden_tail": "a\\n+++ b\\n@@ -2 +2 @@\\n-beta\\n\"\n                \"\\\\ No newline at end of file\\n+beta\\n\")\n>       assert apply_patch(text, diff) == \"alpha\\nbeta\\n\"\nE       AssertionError: assert 'alpha\\nbeta' == 'alpha\\nbeta\\n'\nE         \nE           alpha\nE         - beta\nE         ?     -\nE         + beta\n\nhidden_test.py:150: AssertionError\n=========================== short test summary info ============================\nFAILED hidden_test.py::test_stale_offsets_shifted_up - patcher.PatchError: hu...\nFAILED hidden_test.py::test_newline_added_at_eof - AssertionError: assert 'al...\n2 failed, 17 passed in 0.11s\n",
+ "max_tokens_out": 40000
+}
