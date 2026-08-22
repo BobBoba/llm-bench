@@ -96,6 +96,22 @@ If `autossh_entrypoint=true` is already enabled but port 22 resets, the problem 
 
 The official upstream `ghcr.io/ggml-org/llama.cpp:server-cuda13` image is also SSH-free, so switching to it does not remove the need for Clore's SSH entrypoint.
 
+## Remote observability
+
+A rented card can only be observed from the inside: there is no Zabbix agent, no host access, and the Clore web panel shows the bill rather than what the GPU is doing. Since `cuda13-multiarch-tools` the runtime layer therefore ships a diagnostic set: `nvtop`, `btop`, `htop`, `iotop`, `mc`, `curl`, `jq`, `ncdu`, `tmux`, `iproute2` (`ss`), `lsof`, `rsync`, `less`, `vim-tiny`. It is the last layer in the Dockerfile, so editing the list never invalidates the llama.cpp build.
+
+Full-screen tools need a pty, hence `ssh -t`:
+
+```bash
+ssh -t root@<host> -p <port> nvtop                        # SM, VRAM and power over time
+ssh -t root@<host> -p <port> btop                         # CPU, RAM, disk, network
+ssh -t root@<host> -p <port> 'tmux new -A -s watch nvtop'  # survives a dropped connection
+curl -s http://127.0.0.1:8080/health                       # no API key required
+curl -s -H "Authorization: Bearer $LLAMA_API_KEY" http://127.0.0.1:8080/slots | jq '[.[] | {id, is_processing}]'
+```
+
+Two notes on `HARDEN=1`: these packages are read-only diagnostics and add no listening service, so the hardening posture is unchanged — but they do make an attacker's life inside the container easier, which matters only if the container is already lost. Weigh that against the alternative, which was reimplementing `curl` as a five-line `urllib` one-liner on every health check.
+
 ## Model and quantization selection
 
 Default repository: [`unsloth/Qwen3.8-27B-GGUF`](https://huggingface.co/unsloth/Qwen3.8-27B-GGUF).
