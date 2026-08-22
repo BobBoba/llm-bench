@@ -50,18 +50,27 @@ DISPLAY = {
     # на задачу = 66 измерений на строку [[20.08.2026]]. Точки различаются ОДНИМ параметром за
     # раз и различий по качеству между собой НЕ показали (максимум 0.93 стандартной ошибки),
     # поэтому конфигурация выбирается по скорости и памяти, а не по баллу.
-    "5090r/Qwen3.8-27B:UD-Q3_K_XL-kvq4": "Qwen3.8-27B Q3_K_XL, KV q4 (5090, окно 262k, ×3)",
-    "5090r/Qwen3.8-27B:UD-Q3_K_XL-kvq8": "Qwen3.8-27B Q3_K_XL, KV q8 (5090, окно 262k, ×3)",
-    "5090r/Qwen3.8-27B:UD-Q4_K_XL-kvq8": "Qwen3.8-27B Q4_K_XL, KV q8 (5090, окно 262k, ×3)",
-    "5090r/Qwen3.8-27B:UD-Q5_K_XL-kvq4": "Qwen3.8-27B Q5_K_XL, KV q4 (5090, окно 262k, ×3)",
+    "5090r/Qwen3.8-27B:UD-Q3_K_XL-kvq4": "Qwen3.8-27B Q3, KV q4, medium (5090#114647, 262k, ×3)",
+    "5090r/Qwen3.8-27B:UD-Q3_K_XL-kvq8": "Qwen3.8-27B Q3, KV q8, medium (5090#114647, 262k, ×3)",
+    "5090r/Qwen3.8-27B:UD-Q4_K_XL-kvq8": "Qwen3.8-27B Q4, KV q8, medium (5090#114647, 262k, ×3)",
+    "5090r/Qwen3.8-27B:UD-Q5_K_XL-kvq4": "Qwen3.8-27B Q5, KV q4, medium (5090#114647, 262k, ×3)",
     # MoE 80B-A3B: Q2 помещается на карту целиком (217 т/с), Q3 частично уезжает в ОЗУ (139 т/с).
     "5090/Qwen3-Coder-Next-80B:UD-Q2_K_XL": "Coder-Next-80B Q2_K_XL (5090, окно 262k, вся на GPU)",
     "5090/Qwen3-Coder-Next-80B:UD-Q3_K_XL": "Coder-Next-80B Q3_K_XL (5090, окно 131k, часть в ОЗУ)",
     # Три модели на 5090 на равных условиях [[21.08.2026]], по 66 измерений: качество идёт за
     # числом АКТИВНЫХ параметров на токен, скорость — за ним же в обратную сторону.
-    "5090n/Muse-Glimmer-30B:UD-Q4_K_XL": "Muse-Glimmer-30B Q4 (5090, окно 131k, ×3)",
-    "5090n/Ornith-1.5-35B-A3B:Q4_K_M": "Ornith-1.5-35B-A3B Q4 (5090, окно 262k, ×3)",
-    "5090n/Ornith-1.5-35B-A3B:Q6_K": "Ornith-1.5-35B-A3B Q6 (5090, окно 262k, ×3)",
+    "5090n/Muse-Glimmer-30B:UD-Q4_K_XL": "Muse-Glimmer-30B Q4, high (5090#114647, 131k, ×3)",
+    "5090n/Ornith-1.5-35B-A3B:Q4_K_M": "Ornith-1.5-35B-A3B Q4 (5090, 262k, ×3, градаций усилия нет)",
+    "5090n/Ornith-1.5-35B-A3B:Q6_K": "Ornith-1.5-35B-A3B Q6 (5090, 262k, ×3, градаций усилия нет)",
+    # Усилие рассуждения как ЕДИНСТВЕННАЯ переменная [[22.08.2026]], по 66 измерений на точку.
+    # Умолчание модели — xhigh; medium выбирался на вдвое более медленной карте. Итог: high и
+    # xhigh совпали (52/66), medium 47/66 — парный тест по задачам различия НЕ показал (p=1.00
+    # и p=0.375), а цена старшего усилия в 6.6 раза по времени (281 с против 42 на задачу).
+    # ! `high` и `xhigh` — ОДНА конфигурация: шаблон Qwen3.8 молча подменяет high на xhigh
+    # (`if resolved_reasoning_effort == 'high' -> 'xhigh'`), принимает он ровно три значения:
+    # xhigh (умолчание), medium, low. Два прогона слиты в одну строку, отсюда ×6.
+    "5090e/Qwen3.8-27B:UD-Q3_K_XL-xhigh": "Qwen3.8-27B Q3, KV q4, xhigh=high (5090#114647, 262k, ×6)",
+    "5090e/Qwen3.8-27B:UD-Q3_K_XL-low": "Qwen3.8-27B Q3, KV q4, low (5090#114647, 262k, ×3)",
     "InternScience/Agents-A1-Q4_K_M-GGUF": "Agents-A1 Q4_K_M (local, бюджет 100k)",
     # gaming-pc CachyOS Studio, кампания hard0812 [[13.08.2026]]:
     # qwen38-quants0818 [[18.08.2026]]: ЛЕСТНИЦА КВАНТОВ — каждый на СВОЁМ максимальном окне
@@ -98,6 +107,22 @@ def display(model):
 # Отдельное множество, а не EXCLUDED: EXCLUDED — это осознанное решение владельца исключить
 # модель насовсем, а здесь строка появится сама, как только прогон доедет до конца.
 INCOMPLETE = set()
+
+
+# Платформа замера, выведенная из идентификатора. Раньше она пряталась в подписи строки, причём
+# неоднородно («(local)», «(5090, 262k)», а у облачных — никак), и отфильтровать таблицу по
+# железу было нельзя. Две отдельные колонки это чинят.
+_RENTED_5090 = ("5090", "5090e", "5090n", "5090r")
+
+
+def platform(model):
+    """(GPU, провайдер) для строки таблицы."""
+    head = model.split("/")[0]
+    if head in _RENTED_5090:
+        return "RTX 5090", "Clore #114647"
+    if head in ("unsloth", "InternScience"):
+        return "RTX 3090", "gaming-pc"
+    return "—", "OpenRouter"
 
 
 def is_local(model):
@@ -171,7 +196,10 @@ def collapse_runs(records):
     out = []
     for rs in groups.values():
         if len(rs) == 1:
-            out.append(rs[0])
+            one = dict(rs[0])
+            one["solved_raw"] = 1 if one.get("solved") else 0
+            one["measured_raw"] = 1
+            out.append(one)
             continue
         base = dict(rs[0])
         oks = [r for r in rs if r.get("ok")] or rs
@@ -187,6 +215,11 @@ def collapse_runs(records):
             base["pct"] = sum(pcts) / len(pcts)
         base["run"] = 1
         base["runs_collapsed"] = len(rs)
+        # сырая выборка: сколько ОТДЕЛЬНЫХ прогонов задачи прошло. Нужна, чтобы в таблице было
+        # видно, на скольких измерениях получена строка — прогон из одной попытки и из трёх
+        # дают одинаковую колонку «решено /22», но доверия к ним разное
+        base["solved_raw"] = sum(1 for r in oks if r.get("solved"))
+        base["measured_raw"] = len(oks)
         out.append(base)
     return out
 
@@ -217,7 +250,8 @@ def agg(records):
             del by_model[model]
     rows = []
     for model, rs in by_model.items():
-        row = {"model": model, "langs": {}, "solved": 0, "cost": 0.0, "times": []}
+        row = {"model": model, "langs": {}, "solved": 0, "cost": 0.0, "times": [],
+               "solved_raw": 0, "measured_raw": 0}
         for lang in LANGS:
             lrs = [r for r in rs if r.get("lang") == lang]
             solved = [r for r in lrs if r.get("solved")]
@@ -236,6 +270,8 @@ def agg(records):
                 "cost": cost,
             }
             row["solved"] += len(solved)
+            row["solved_raw"] += sum(r.get("solved_raw", 0) for r in lrs)
+            row["measured_raw"] += sum(r.get("measured_raw", 0) for r in lrs)
             row["cost"] += cost
             row["times"] += times
         # Контролируемая пара edit → edit-long: замедление считаем по языкам, где решены ОБА
@@ -313,7 +349,7 @@ def fmt_c(v, local):
 
 
 # 22 задачи: rust/ts/julia/csharp по 4 (с edit-long), bash/pwsh по 3 (без него).
-HEADER = ["Модель", "решено /22"]
+HEADER = ["Модель", "GPU", "провайдер", "solved %", "решено измерений"]
 for _lang in LANGS:
     _t = LANG_TITLE[_lang]
     HEADER += [f"{_t} %", f"{_t} t, с", f"{_t} $"]
@@ -334,9 +370,18 @@ _LANG_NOTE = {
 
 
 def header_notes():
-    """Подсказка для каждой колонки заголовка, по позициям HEADER."""
+    """Подсказка для КАЖДОЙ колонки по ИМЕНИ, а не по позиции.
+
+    Почему по имени: список, привязанный к позициям, ломается от любой вставки колонки —
+    добавил «решено измерений» третьей и сдвинул все подсказки правее на одну, так что
+    «медиана t, с» получила чужой текст. Отказ тихий: подсказки видны только при наведении.
+    Заодно словарь переживает ПЕРЕСТАНОВКУ колонок владельцем в самой таблице.
+    """
     notes = ["Идентификатор модели. (local) = квант на Unsloth Studio (GPU-стенд), (pilot) = пилотная модель харнесса, в отбор S%>80 не входила.",
-             "Полностью решённые задачи из 22. «Решено» = пройден гейт (компиляция/типы/загрузка) И 100% скрытых тестов."]
+             "Видеокарта, на которой сделан замер. «—» = облачная модель, железо неизвестно. Строки с РАЗНЫМ железом сравнимы по качеству (задачи и оракулы одни и те же), но НЕ по времени и стоимости.",
+             "Где исполнялось: `Clore #114647` — арендованная карта (исследовательская), `gaming-pc` — свой стенд, `OpenRouter` — облако.",
+             "Доля полностью решённых задач набора, проценты. «Решено» = пройден гейт (компиляция/типы/загрузка) И 100% скрытых тестов.",
+             "Сырая выборка, из которой получен процент: `16/22` — по одному прогону каждой задачи, `48/66` — три повтора с зачётом задачи по большинству. Проценты сравнимы между строками, дробь говорит, насколько числу можно доверять."]
     for lang in LANGS:
         of = 3 if lang in ("bash", "pwsh") else 4
         notes += [
@@ -354,14 +399,21 @@ def header_notes():
         "Цена длинного контекста: медиана отношения времени edit-long/edit по языкам, где решены ОБА варианта. Облако ≈0.3–3.5 (prefill стоит денег, не времени); локальные кванты ≈13 (prefill 63k токенов ≈ 200+ с до первого токена).",
         "Автопрофиль из данных: «силён» = языки, решённые на 100%; «слаб» = решено треть и меньше; «дёшев»/«дорог» и «быстр»/«медлен» — нижний/верхний квартиль по цене и медиане времени.",
     ]
-    return notes
+    if len(notes) != len(HEADER):
+        raise SystemExit(f"подсказок {len(notes)}, колонок {len(HEADER)} — список разошёлся с заголовком")
+    return dict(zip(HEADER, notes))
 
 
 def to_values(rows):
     values = [HEADER]
     for row in rows:
         loc = is_local(row["model"])
-        line = [display(row["model"]), row["solved"]]
+        # доля решённых в процентах: колонка сравнима между строками независимо от того,
+        # сколько задач в наборе, а сырая выборка вынесена в соседнюю колонку
+        total = sum(row["langs"][l]["of"] for l in LANGS) or 1
+        gpu, prov = platform(row["model"])
+        line = [display(row["model"]), gpu, prov, round(100 * row["solved"] / total),
+                f'{row["solved_raw"]}/{row["measured_raw"]}']
         for lang in LANGS:
             L = row["langs"][lang]
             # Числовой процент вместо строки «4/4»: строке градиент недоступен (просьба владельца).
@@ -422,6 +474,37 @@ def main():
             "requests": [{"addSheet": {"properties": {"title": TAB, "gridProperties": {"frozenRowCount": 1, "frozenColumnCount": 1}}}}]
         }).execute()
         sheet_id = r["replies"][0]["addSheet"]["properties"]["sheetId"]
+    # ПОРЯДОК КОЛОНОК БЕРЁМ ИЗ ТАБЛИЦЫ, а не из HEADER. Скрипт стирает вкладку целиком и пишет
+    # заново, поэтому раньше он молча возвращал свой порядок и затирал перестановку, сделанную
+    # владельцем вручную. Теперь: если в таблице тот же НАБОР колонок (пусть в другом порядке) —
+    # пишем в её порядке; если набор разошёлся (добавили колонку в коде) — берём HEADER и
+    # ГОВОРИМ об этом, а не молчим.
+    try:
+        cur = svc.spreadsheets().values().get(
+            spreadsheetId=SID, range=f"'{TAB}'!1:1").execute().get("values", [[]])[0]
+    except Exception:
+        cur = []
+    order = list(HEADER)
+    if cur:
+        known = [n for n in cur if n in HEADER]          # порядок владельца, без исчезнувших колонок
+        added = [n for n in HEADER if n not in known]    # колонки, появившиеся в коде
+        # НОВЫЕ колонки не должны сбрасывать расстановку владельца: вставляем каждую рядом с её
+        # соседом слева по HEADER, а если соседа в таблице нет — в конец. Прежнее поведение
+        # («набор разошёлся -> пишу в порядке HEADER») молча возвращало таблицу к моему виду.
+        order = known
+        for name in added:
+            i = HEADER.index(name)
+            anchor = next((HEADER[j] for j in range(i - 1, -1, -1) if HEADER[j] in order), None)
+            order.insert(order.index(anchor) + 1 if anchor else len(order), name)
+        gone = [n for n in cur if n not in HEADER]
+        if added or gone:
+            print(f"колонки изменились: добавлены {added or '—'}, исчезли {gone or '—'}; "
+                  "порядок остальных сохранён как в таблице")
+        elif order != HEADER:
+            print("порядок колонок взят из таблицы (перестановка владельца сохранена)")
+    pos = {name: i for i, name in enumerate(HEADER)}
+    values = [[row[pos[name]] for name in order] for row in values]
+
     # Старая версия была уже; строк/колонок могло быть больше нового объёма — чистим хвост.
     svc.spreadsheets().values().clear(spreadsheetId=SID, range=f"'{TAB}'!A1:ZZ1000").execute()
 
@@ -435,10 +518,11 @@ def main():
         ["22 тяжёлые задачи = 6 языков: Rust, TypeScript, Julia, C# — по 4 задачи; Bash, PowerShell — по 3 (без edit-long). Одношот (без агентного цикла), temperature 0.2, max_tokens 40000. Облако — OpenRouter с data_collection: deny; локальные кванты — Unsloth Studio на GPU-стенде (окно 262144, KV q4_0)."],
         ["Типы задач: edit — в РАБОЧЕМ модуле найти неназванный дефект и добавить возможность, не сломав публичный API; edit-long — ТА ЖЕ правка, но модуль закопан в сгенерированный репозиторий ~63k токенов (контролируемая пара к edit: разница только в длине контекста); algo — алгоритмическая глубина (медиана скользящего окна, адаптивное интегрирование, semver, диапазоны); conc — корректность под параллелизмом (каналы с обратным давлением, ограниченные исполнители)."],
         ["Стоимость: облачные модели — по счёту провайдера; локальный стенд — электричество (500 Вт, €0.03/кВт·ч); арендованная карта — почасовая ставка ($0.33/ч для 5090 у Clore). Для арендованной это стоимость СТЕННОГО ВРЕМЕНИ ВЫЗОВОВ, а не владения: аренда тикает непрерывно, включая простой и загрузку модели, поэтому реальные расходы за сутки выше суммы по строке."],
+        ["УСИЛИЕ РАССУЖДЕНИЯ указано в названии строки там, где модель им управляет. Это не косметика: у Qwen3.8-27B умолчание модели — xhigh, а строки сравнения квантов гнались на medium, выбранном для вдвое более медленной карты. Сравнивать между собой можно только строки с ОДИНАКОВЫМ усилием; Muse-Glimmer шла на своём умолчании high, у Ornith-1.5 градаций усилия нет вовсе. Qwen3.8-27B принимает ровно три уровня: xhigh (умолчание), medium и low; `high` шаблон молча подменяет на xhigh, отдельного уровня между ними НЕТ. Замер 22.08.2026: xhigh 52/66, medium 47/66, парный тест по задачам различия не показал при цене старшего усилия в 6.6 раза по времени."],
         ["Пометка «×N» в названии строки: набор прогнан N раз, задача засчитана решённой по большинству повторов. Колонка «решено» во ВСЕХ строках означает одно и то же — задачи из 22, а не измерения; повторы лишь снижают влияние случайности отдельного прогона (наблюдали, как одна и та же задача падает в первом повторе и проходит во втором)."],
         ["Оракулы: Rust — cargo build + скрытые тесты; TypeScript — ДВА независимых гейта: tsc --strict И bun test; Julia — julia -t N; C# — dotnet run (net10.0, без NuGet); Bash/PowerShell — скрытые проверки (bash / pwsh 7.4). «Решено» = пройден гейт И 100% скрытых тестов. C#-набор зеркалит Rust-набор (те же задачи, та же семантика) — пара Rust↔C# изолирует эффект языка."],
         [""], ["КОЛОНКИ"],
-        ["решено /22 — полностью решённые задачи из 22."],
+        ["«solved %» — доля полностью решённых задач набора (гейт пройден И 100% скрытых тестов). Соседняя колонка «решено измерений» показывает сырую выборку, из которой эта доля получена: `16/22` — один прогон каждой задачи, `48/66` — три повтора с зачётом по большинству. Проценты сравнимы между строками, дробь говорит, насколько числу можно доверять."],
         ["<Язык> % — процент полностью решённых задач языка (Rust/TS/Julia/C# — из 4, Bash/PwSh — из 3); <Язык> t, с — МЕДИАННОЕ время до решения по решённым задачам языка (нерешённые не входят; n/a = не решено ни одной); <Язык> $ — суммарная стоимость всех задач языка: облако — $ по usage.cost, локальные — электроэнергия стенда в € (500 Вт × €0.03/кВт·ч × полное время, включая нерешённые)."],
         ["медиана t, с — медиана времени по всем решённым задачам модели; $ всего — стоимость всех задач."],
         ["edit t, с / edit-long t, с — медианное время решённых коротких правок против длинных (~63k токенов входа)."],
@@ -465,7 +549,8 @@ def main():
     }]}).execute()
 
     # Подсказки на заголовках: одна batchUpdate-строка updateCells по row 0 с полем note.
-    notes = header_notes()
+    notes_by_name = header_notes()
+    notes = [notes_by_name[name] for name in order]
     svc.spreadsheets().batchUpdate(spreadsheetId=SID, body={"requests": [{
         "updateCells": {
             "range": {"sheetId": sheet_id, "startRowIndex": 0, "endRowIndex": 1,
@@ -496,19 +581,39 @@ def main():
                                  "maxpoint": {"color": hi, "type": "PERCENTILE", "value": "90"}}}
 
     # {индекс колонки: меньше=лучше}: решено — нет, времена и деньги — да.
-    # Колонки языков идут тройками (X /n, X t, X $) начиная с индекса 2 — градиенты на t и $.
-    wanted = {1: False}
-    for li in range(len(LANGS)):
-        base = 2 + li * 3
-        wanted[base] = False      # % решённых (больше = лучше)
-        wanted[base + 1] = True   # t, с
-        wanted[base + 2] = True   # $
-    tail = 2 + len(LANGS) * 3
-    # медиана t, $ всего, качество % (больше=лучше!), $/решённая, edit t, edit-long t, long ×;
-    # последняя колонка «профиль» — текст, без градиента.
-    for c, better_low in [(tail, True), (tail + 1, True), (tail + 2, False), (tail + 3, True),
-                          (tail + 4, True), (tail + 5, True), (tail + 6, True)]:
-        wanted[c] = better_low
+    # Градиенты и форматы — ТОЖЕ по именам колонок: позиции зависят от порядка в таблице,
+    # который теперь задаёт владелец. Раньше индексы считались от HEADER, и любая перестановка
+    # навесила бы градиент «меньше=лучше» на колонку, где больше — лучше.
+    better_low_by_name = {"solved %": False}
+    for lang in LANGS:
+        t = LANG_TITLE[lang]
+        better_low_by_name[f"{t} %"] = False       # процент решённых: больше = лучше
+        better_low_by_name[f"{t} t, с"] = True
+        better_low_by_name[f"{t} $"] = True
+    better_low_by_name.update({"медиана t, с": True, "$ всего": True, "качество %": False,
+                               "$/решённая": True, "edit t, с": True, "edit-long t, с": True,
+                               "long ×": True})
+    wanted = {order.index(n): v for n, v in better_low_by_name.items() if n in order}
+
+    # ЕДИНЫЙ ЧИСЛОВОЙ ФОРМАТ (просьба владельца [[21.08.2026]]): деньги — четыре знака,
+    # секунды — один. Round в Python этого не даёт: round(0.0, 4) остаётся 0.0, и таблица
+    # рисует «0» вместо «0.0000». Формат задаётся полем `userEnteredFormat.numberFormat` и
+    # НЕ трогает условное форматирование: градиенты живут в другой части схемы.
+    fmt_by_name = {"solved %": "0"}
+    for lang in LANGS:
+        t = LANG_TITLE[lang]
+        fmt_by_name[f"{t} %"], fmt_by_name[f"{t} t, с"], fmt_by_name[f"{t} $"] = "0", "0.0", "0.0000"
+    fmt_by_name.update({"медиана t, с": "0.0", "$ всего": "0.0000", "качество %": "0.0",
+                        "$/решённая": "0.0000", "edit t, с": "0.0", "edit-long t, с": "0.0",
+                        "long ×": "0.00"})
+    fmt_reqs = [{"repeatCell": {
+        "range": {"sheetId": sheet_id, "startRowIndex": 1, "endRowIndex": len(values),
+                  "startColumnIndex": order.index(n), "endColumnIndex": order.index(n) + 1},
+        "cell": {"userEnteredFormat": {"numberFormat": {"type": "NUMBER", "pattern": pat}}},
+        "fields": "userEnteredFormat.numberFormat"}}
+        for n, pat in fmt_by_name.items() if n in order]
+    svc.spreadsheets().batchUpdate(spreadsheetId=SID, body={"requests": fmt_reqs}).execute()
+
     reqs = sync_gradient_rules(ex_rules, sheet_id, wanted,
                                lambda col, better_low: rule(col, better_low),
                                OWN_MINPOINTS)

@@ -47,6 +47,14 @@ KV="${KV:-q4_0}"
 PARALLEL="${PARALLEL:-1}"
 EFFORT="${EFFORT:-medium}"
 CTX="${CTX:-262144}"
+
+# КЭШ ПРОМПТОВ В ОПЕРАТИВНОЙ ПАМЯТИ. Единственный резерв, который на этой карте ещё не занят:
+# видеопамятью выжато всё (полное окно 262144, пул сверх него слоту недоступен), а `--cache-ram`
+# по умолчанию всего 8192 МиБ. Сюда `--cache-idle-slots` складывает простаивающие слоты, и
+# именно отсюда сессия возвращается без повторной предобработки. Одна полноразмерная сессия на
+# 262k занимает ~7.4 ГиБ, значит 32 ГиБ держат в горячем виде четыре сессии вместо одной.
+# Стоит только оперативной памяти (на машине 62 ГиБ, свободно ~43), видеопамять не трогает.
+CRAM="${CRAM:-32768}"
 HOSTBIND="${HOSTBIND:-127.0.0.1}"
 M="/models/Qwen3.8-27B-UD-$QUANT.gguf"
 [ -f "$M" ] || { echo "нет файла $M"; exit 1; }
@@ -56,7 +64,7 @@ exec /opt/bin/llama-server \
   -m "$M" \
   --host "$HOSTBIND" --port 8099 \
   --api-key "$(cat /root/.apikey)" \
-  -c "$CTX" \
+  -c "$CTX" --cache-ram "$CRAM" \
   --cache-type-k "$KV" --cache-type-v "$KV" \
   --flash-attn on --jinja -ngl -1 --kv-unified --parallel "$PARALLEL" \
   --spec-type draft-mtp --spec-draft-n-max 2 \
