@@ -25,8 +25,9 @@ export LLAMA_SERVER_BASE="http://127.0.0.1:${TUNNEL_PORT}/v1"
 export LLAMA_SERVER_KEY_FILE="$KEY_FILE"
 export MAX_STEPS=30 WALL_CAP_MIN=25 LLM_DEADLINE_MS=1800000
 
-TASKS=(calc kvstore todo-api)
-RUNS=(1 2 3)
+# Набор задач переопределяется окружением: TASKS="patcher" campaigns/appbench-locals-5090.sh
+read -r -a TASKS <<< "${TASKS:-calc kvstore todo-api}"
+read -r -a RUNS <<< "${RUNS:-1 2 3}"
 # ключ лаунчера | ярлык в результатах
 MODELS=(
   "qwen38|Qwen3.8-27B-Q3-5090"
