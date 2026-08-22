@@ -1,48 +1,109 @@
-"""Push the agentic app-building benchmark (local vs cloud) into its own tab.
-Reads results/<task>__<model>.json from agentic/. Idempotent (recreates the tab)."""
-import os, json, glob
-from googleapiclient.discovery import build
-from gsheets_common import credentials
+#!/usr/bin/env python3
+"""Вкладка агентного app-bench: модель строит приложение, скрытый pytest его судит.
+
+Читает agentic/results/<task>__<model>[__rN].json и СВОДИТ повторы в одну строку на пару
+(задача, модель): средний исход, разброс по повторам, медианы шагов и времени. Без сведения
+повторы выглядели бы как отдельные модели, а разница в пару процентов между соседними
+строками — как результат.
+
+Путь к результатам берётся от корня репозитория. Прежняя версия склеивала его от каталога
+reporting/ и после реструктуризации b73f61d не находила НИЧЕГО — молча выводила пустую
+таблицу вместо ошибки. Отсюда явная проверка «нет результатов» ниже.
+"""
+import glob
+import json
+import os
+import statistics
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from googleapiclient.discovery import build          # noqa: E402
+from gsheets_common import credentials               # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
+RESULTS = os.path.join(ROOT, "agentic", "results")
 SID = open(os.path.join(HERE, "gsheets-sheet-id.txt")).read().strip()
 TAB = "Agentic app-bench 23.07"
 
-ROWS = [
-    ["Агентная сборка приложений — локаль vs облако (23.07.2026)"],
-    ["Модель строит stdlib-Python приложение в много шагов (write/read/run/done, podman-изоляция), скрытый pytest оценивает. Метрики: исход% / шаги / wall-clock / $"],
+# Электричество по методике claudedocs/llm-cost-per-solution: 500 Вт под нагрузкой, €0.03/кВт·ч.
+# У облачных строк в этом столбце реальная плата провайдеру; у локальных ставим сопоставимую
+# величину, а не ноль — ноль не с чем сравнивать.
+WATTS, PRICE_KWH = 500, 0.03
+
+HEAD = [
+    ["Агентная сборка приложений — результат судят СКРЫТЫЕ тесты. [[23.07.2026]]; локальные модели на арендованной RTX 5090 добавлены [[22.08.2026]]"],
+    ["Модель строит приложение на стандартной библиотеке за много шагов (write_file / read_file / run / done, изоляция podman без сети), затем его оценивает набор pytest, которого модель не видела. Оценка объективна — в отличие от repo-task, где дифф судит эксперт"],
+    ["Задачи полностью синтетические, поэтому арендованная карта здесь допустима. Локальные прогоны: окно 131072, KV q4_0, один слот, усилие рассуждения — умолчание модели, по три повтора на точку"],
+    ["Столбец «разброс» — минимум и максимум исхода по повторам. Одинаковое среднее при разном разбросе означает разную надёжность, и это важнее среднего"],
     [],
-    ["Задача", "модель", "тип", "исход%", "шаги", "wall_s", "cost$", "finished"],
+    ["Задача", "модель", "тип", "исход %", "разброс", "повторов", "шагов", "время с", "стоимость $", "финал"],
 ]
-rows = [json.load(open(f)) for f in sorted(glob.glob(os.path.join(HERE, "agentic", "results", "*__*.json")))]
-for r in sorted(rows, key=lambda x: (x["task"], x["model"])):
-    typ = "локаль" if r["client"] == "local" else "облако"
-    ROWS.append([r["task"], r["model"], typ, str(r["outcome_pct"]) + "%",
-                 str(r["steps"]), str(r["wall_s"]), str(r["cost_usd"]), r["finished"]])
-tot = sum(r.get("cost_usd", 0) for r in rows if r["client"] == "openrouter")
-ROWS += [
-    [],
-    ["ИТОГ стоимость облака (6 сборок)", "$%.2f" % tot],
-    [],
-    ["ВЫВОДЫ", "", ""],
-    ["• Все 3 модели строят рабочие приложения. Облако DS-обе=100%; локальный qwen=90% (спотыкается на edge-cases)", "", ""],
-    ["• DS-v4-pro — быстрее и экономнее всех на РЕАЛЬНОЙ сборке (5-11 шагов, 65-205с) — контраст с runaway на абстрактных rust-пазлах", "", ""],
-    ["• DS-v3.2 надёжен (100%) но многословнее (18-31 шаг, до 485с)", "", ""],
-    ["• qwen-провалы: kvstore WAL не newline-safe (многострочное значение усеклось); todo-api неверный инкремент id", "", ""],
-    ["• Стоимость облака ничтожна ($0.29 за 6 приложений). Локаль: бесплатно, приватно, 90% — достаточно для рутины", "", ""],
-]
+
+
+def load():
+    recs = [json.load(open(f)) for f in sorted(glob.glob(os.path.join(RESULTS, "*__*.json")))]
+    if not recs:
+        raise SystemExit(f"нет результатов в {RESULTS} — проверьте путь или кампанию")
+    groups = {}
+    for r in recs:
+        groups.setdefault((r["task"], r["model"], r["client"]), []).append(r)
+    return groups
+
+
+def agg(rs):
+    out = [r["outcome_pct"] for r in rs]
+    cost = [r["cost_usd"] or WATTS / 1000 * r["wall_s"] / 3600 * PRICE_KWH for r in rs]
+    return {
+        "n": len(rs),
+        "outcome": round(statistics.mean(out)),
+        "spread": f"{min(out)}–{max(out)}" if len(out) > 1 and min(out) != max(out) else "—",
+        "steps": round(statistics.median(r["steps"] for r in rs)),
+        "wall": round(statistics.median(r["wall_s"] for r in rs), 1),
+        "cost": statistics.mean(cost),
+        "finished": ", ".join(sorted({r["finished"] for r in rs})),
+    }
+
+
+def read_conclusions():
+    """Выводы лежат текстовым файлом рядом: правка формулировки не должна требовать правки кода."""
+    p = os.path.join(HERE, "agentic-conclusions.txt")
+    if not os.path.exists(p):
+        return ["• (выводы не заполнены)"]
+    return [ln.rstrip() for ln in open(p, encoding="utf-8") if ln.strip()]
+
+
+def build_rows():
+    groups = load()
+    rows = list(HEAD)
+    for (task, model, client), rs in sorted(groups.items(),
+                                            key=lambda kv: (kv[0][0], -agg(kv[1])["outcome"])):
+        a = agg(rs)
+        rows.append([task, model, "локаль" if client == "local" else "облако",
+                     str(a["outcome"]), a["spread"], str(a["n"]), str(a["steps"]),
+                     str(a["wall"]), "$%.4f" % a["cost"], a["finished"]])
+    rows += [[], ["ВЫВОДЫ"]] + [[c] for c in read_conclusions()]
+    return rows, groups
 
 
 def main():
+    rows, groups = build_rows()
+    if "--dry-run" in sys.argv:
+        for r in rows:
+            print(" | ".join(str(x)[:36] for x in r))
+        print(f"\nточек: {len(groups)}, строк: {len(rows)}")
+        return
     ss = build("sheets", "v4", credentials=credentials()).spreadsheets()
     meta = ss.get(spreadsheetId=SID).execute()
-    for sh in meta["sheets"]:
-        if sh["properties"]["title"] == TAB:
-            ss.batchUpdate(spreadsheetId=SID, body={"requests": [{"deleteSheet": {"sheetId": sh["properties"]["sheetId"]}}]}).execute()
-            break
-    ss.batchUpdate(spreadsheetId=SID, body={"requests": [{"addSheet": {"properties": {"title": TAB}}}]}).execute()
-    ss.values().update(spreadsheetId=SID, range=f"'{TAB}'!A1", valueInputOption="RAW", body={"values": ROWS}).execute()
-    print(f"OK: вкладка '{TAB}' записана ({len(ROWS)} строк)")
+    if TAB not in {s["properties"]["title"] for s in meta["sheets"]}:
+        ss.batchUpdate(spreadsheetId=SID, body={"requests": [
+            {"addSheet": {"properties": {"title": TAB}}}]}).execute()
+    # Очистка, а НЕ удаление вкладки: удаление теряет ручное форматирование владельца,
+    # а строк после сведения повторов стало меньше — без очистки остался бы хвост прежней версии.
+    ss.values().clear(spreadsheetId=SID, range=f"'{TAB}'").execute()
+    ss.values().update(spreadsheetId=SID, range=f"'{TAB}'!A1",
+                       valueInputOption="RAW", body={"values": rows}).execute()
+    print(f"OK: вкладка «{TAB}» записана ({len(rows)} строк, точек {len(groups)})")
 
 
 if __name__ == "__main__":

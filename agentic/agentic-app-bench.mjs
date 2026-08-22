@@ -22,8 +22,15 @@ const MAX_STEPS = Number(process.env.MAX_STEPS || 30);
 const WALL_CAP_MS = Number(process.env.WALL_CAP_MIN || 30) * 60_000;
 const RUN_TIMEOUT_S = Number(process.env.RUN_TIMEOUT_S || 90);
 
-const CLIENT = clientKind === 'local' ? '../clients/llama-server-client.mjs' : './openrouter-client.mjs';
-const { chat } = await import(path.join('..', CLIENT).replace(/\\/g, '/'));
+// Explicit root instead of string surgery on a relative path. The previous form,
+// path.join('..', '../clients/llama-server-client.mjs'), resolved ABOVE the repository and
+// survived the b73f61d restructure unnoticed: the error lives in a dynamic import() and only
+// surfaces at launch, long after the commit that broke it.
+const BENCH_ROOT = process.env.BENCH_ROOT || path.resolve(__dirname, '..');
+const CLIENT = path.join(BENCH_ROOT, 'clients',
+  clientKind === 'local' ? 'llama-server-client.mjs' : 'openrouter-client.mjs');
+if (!fs.existsSync(CLIENT)) { console.error(`client not found: ${CLIENT} (set BENCH_ROOT)`); process.exit(1); }
+const { chat } = await import(CLIENT);
 
 const TASK_DIR = path.join(__dirname, 'tasks', task);
 const SPEC = fs.readFileSync(path.join(TASK_DIR, 'spec.md'), 'utf8');
@@ -123,7 +130,12 @@ async function main() {
   const rec = { task, model, client: clientKind, outcome_pct: grade.total ? +(grade.passed / grade.total * 100).toFixed(0) : 0,
     passed: grade.passed, total: grade.total, steps, wall_s, cost_usd: +cost.toFixed(4),
     tokens_in: tokIn, tokens_out: tokOut, finished, aborted, scratch: SCRATCH, hidden_tail: grade.tail };
-  const outFile = path.join(RESULTS, `${task}__${safe}.json`);
+  // BENCH_RUN разводит повторы по файлам. Без него повторный прогон той же пары
+  // (задача, модель) молча затирал предыдущий, и набрать статистику было нельзя —
+  // а разница в один-два процента между близкими моделями это шум, который лечится
+  // только повторами.
+  const runSuffix = process.env.BENCH_RUN ? `__r${process.env.BENCH_RUN}` : '';
+  const outFile = path.join(RESULTS, `${task}__${safe}${runSuffix}.json`);
   fs.writeFileSync(outFile, JSON.stringify(rec, null, 1));
   log(`\nDONE ${task}/${model}: outcome ${rec.outcome_pct}% (${grade.passed}/${grade.total}) steps=${steps} wall=${wall_s}s cost=$${rec.cost_usd} finished=${finished}${aborted ? ' aborted=' + aborted : ''}`);
   console.log(JSON.stringify(rec));

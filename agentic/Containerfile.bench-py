@@ -1,0 +1,24 @@
+# Sandbox for the agentic app-bench: the model's `run` tool executes here, never on the host.
+#
+# Build:  podman build -t bench-py -f agentic/Containerfile.bench-py agentic
+#
+# The runner starts it with --network=none, --memory=8g and the scratch dir bind-mounted at
+# /work, so a model can create files and run pytest but cannot reach the network or anything
+# outside its own project directory.
+#
+# Pin the base image tag: a benchmark whose sandbox silently moves to a new Python minor
+# version stops being comparable with the runs already in the sheet.
+FROM docker.io/library/python:3.12-slim
+
+# pytest only — the spec restricts every task to the standard library, so anything else
+# installed here would quietly widen what the tasks can rely on.
+RUN pip install --no-cache-dir pytest==8.3.4 \
+    && rm -rf /root/.cache
+
+# bash is what the runner invokes (`bash -lc`); slim images ship dash as /bin/sh.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends bash \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /work
+CMD ["bash"]
