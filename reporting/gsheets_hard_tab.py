@@ -46,6 +46,15 @@ EXCLUDED = {
 
 # Читаемые имена строк: облачные — хвост идентификатора, локальные — с квантом.
 DISPLAY = {
+    # Семейство Claude через LLM_CLIENT=claudecode (`claude -p`, авторизация подпиской, не
+    # ANTHROPIC_API_KEY) [[30.08.2026]]. НЕ сравнивать напрямую со строками через OpenRouter:
+    # даже после фикса клиента (--system-prompt вместо --append-system-prompt) рантайм Claude
+    # Code добавляет ~22k токенов служебной обвязки к каждому вызову (было ~41-46k до фикса,
+    # пока system-prompt ещё нёс полную идентичность Claude Code — см. clients/claudecode-client.mjs).
+    "claude-haiku-4-5-20251001": "Haiku 4.5 (via Claude Code CLI, подписка, ~22k harness overhead)",
+    "claude-sonnet-5": "Sonnet 5 (via Claude Code CLI, подписка, ~22k harness overhead)",
+    "claude-opus-5": "Opus 5 (via Claude Code CLI, подписка, ~22k harness overhead)",
+    "claude-fable-5": "Fable 5 (via Claude Code CLI, подписка — недоступна на OpenRouter под ZDR)",
     # RTX 5090 32 ГиБ (арендованная, Clore), голый llama-server, полное окно 262144, три повтора
     # на задачу = 66 измерений на строку [[20.08.2026]]. Точки различаются ОДНИМ параметром за
     # раз и различий по качеству между собой НЕ показали (максимум 0.93 стандартной ошибки),
@@ -96,6 +105,17 @@ DISPLAY = {
     "unsloth/Qwen3-Coder-Next-GGUF:UD-Q4_K_M": "Qwen3-Coder-Next UD-Q4_K_M (local)",
     "unsloth/Qwen3-Coder-Next-GGUF:Q4_K_M": "Qwen3-Coder-Next Q4_K_M (local)",
     "openai/gpt-oss-120b": "gpt-oss-120b (pilot)",
+    # qwen38maxvw [[23.08.2026]]: open-weight-версия Qwen3.8 Max (2.4T MoE, 95B активных) через
+    # OpenRouter, ZDR-маршрут DeepInfra ($2/$6, окно 262k) — единственная доступная точка
+    # семейства (Alibaba-эндпоинт API-версии лежит). Усилие — единственная переменная.
+    # xhigh hard+rust домерены с поднятым потолком 131k: на общем протоколе 40k reasoning
+    # xhigh сжирал весь лимит (finish=length) и задачи обнулялись.
+    "qwen/qwen3.8-2.4t-a95b~low": "Qwen3.8-Max 2.4T, low (DeepInfra ZDR, 262k)",
+    "qwen/qwen3.8-2.4t-a95b~medium": "Qwen3.8-Max 2.4T, medium (DeepInfra ZDR, 262k)",
+    "qwen/qwen3.8-2.4t-a95b~xhigh": "Qwen3.8-Max 2.4T, xhigh (DeepInfra ZDR, потолок 131k)",
+    # Hetzner Inference, hard-bench 26.08.2026: бесплатный тестовый OpenAI-compatible endpoint.
+    "Qwen/Qwen3.6-35B-A3B-FP8": "Qwen3.6-35B-A3B FP8 (Hetzner Inference, 26.08.2026)",
+    "Qwen3.8-27B": "Qwen3.8-27B (Hetzner Inference, 26.08.2026)",
 }
 
 
@@ -122,6 +142,8 @@ def platform(model):
         return "RTX 5090", "Clore #114647"
     if head in ("unsloth", "InternScience"):
         return "RTX 3090", "gaming-pc"
+    if model in DISPLAY and "Hetzner Inference" in DISPLAY[model]:
+        return "—", "Hetzner Inference"
     return "—", "OpenRouter"
 
 
