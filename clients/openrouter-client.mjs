@@ -82,7 +82,7 @@ async function attempt({ body, stream, signal }) {
 async function chat({ model, messages, max_tokens = 40000, tools, tool_choice, stream = false, temperature = 0.2 }) {
   const body = {
     model, messages, temperature, max_tokens, usage: { include: true },
-    provider: { data_collection: 'deny' }, reasoning: { effort: 'medium' },
+    provider: { data_collection: process.env.OR_DC || 'deny', zdr: true }, reasoning: { effort: process.env.OR_EFFORT || 'medium' },
   };
   if (stream) body.stream = true;
   if (tools) { body.tools = tools; body.tool_choice = tool_choice || 'auto'; }
