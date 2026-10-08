@@ -25,3 +25,20 @@ export const TASKS = [
 
 export const HARNESSES = ["omp", "pi"];
 export const STEER_CAP = 3; // * раундов дошагивания до внешнего green, затем fail
+
+// * ---- hx: сравнение харнессов omp / codex на одних и тех же моделях (подписка openai-codex) ----
+// * id модели у каждого харнесса свой: omp — «провайдер/модель», codex — голый slug из его каталога.
+// * Цены — прейскурант OpenRouter за 1M токенов (у подписки реальная цена нулевая, считаем эквивалент по списку);
+// * cached = чтение из кэша промпта. Надбавка за контекст >272k не учитывается (прогоны далеко ниже).
+export const HX_MODELS = {
+  sol:  { omp: "openai-codex/gpt-6.1-sol", codex: "gpt-6.1-sol", price: { in: 2.0,  cached: 0.10, out: 10.0 } },
+  luna: { omp: "openai-codex/gpt-6-luna",  codex: "gpt-6-luna",  price: { in: 0.10, cached: 0.01, out: 0.50 } },
+};
+export const HX_HARNESSES = ["omp", "codex"];
+
+// * Цена прогона по общей таблице: одинаковая формула для обоих харнессов, чтобы цена зависела только от токенов.
+export function estCost(metrics, modelKey) {
+  const p = HX_MODELS[modelKey]?.price;
+  if (!p || !metrics) return null;
+  return ((metrics.tokensIn || 0) * p.in + (metrics.tokensCached || 0) * p.cached + (metrics.tokensOut || 0) * p.out) / 1e6;
+}

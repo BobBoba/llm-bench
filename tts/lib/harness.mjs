@@ -4,8 +4,10 @@ import { cleanEnv } from "./scratch.mjs";
 
 const OMP_BIN = `${process.env.HOME}/.bun/bin/omp`;
 const PI_BIN = `${process.env.HOME}/.nvm/versions/node/v24.10.0/bin/pi`;
+const CODEX_BIN = `${process.env.HOME}/.local/bin/codex`;
 
 export function binFor(harness) {
+  if (harness === "codex") return CODEX_BIN;
   return harness === "omp" ? OMP_BIN : PI_BIN;
 }
 
@@ -13,7 +15,29 @@ export function binFor(harness) {
 // ! pi НЕ поддерживает --cwd (CONTRACT.md, п.3: "pi does NOT support --cwd" — падает с
 // !   "Error: Unknown option: --cwd"). Рабочий каталог для pi задаётся только через spawn({cwd}),
 // !   которое уже проставлено в runAgent ниже. omp, наоборот, флаг принимает и мы его передаём явно.
-export function buildArgv(harness, { model, cwd, thinking = "high", sessionDir, continueSession, prompt }) {
+export function buildArgv(harness, { model, cwd, thinking = "high", sessionDir, continueSession, resumeId, prompt }) {
+  // * Codex CLI: сессия хранится самим codex (thread_id из thread.started), продолжение — `exec resume <id>`.
+  // * Паритет с omp: --ignore-user-config/--ignore-rules отсекают личный конфиг и хуки оператора (аналог
+  // * omp --no-extensions/--no-skills/--no-rules). Песочница НЕ отключается: `workspace-write` пускает запись
+  // * только в скретч-каталог, сеть открыта (localhost-проверки вроде curl к Bun.serve). omp при этом идёт в
+  // * yolo — разница в режиме защиты есть и честно относится к свойствам харнесса, не скрывается.
+  // * У `exec resume` нет -C: рабочий каталог задаёт spawn({cwd}).
+  if (harness === "codex") {
+    const c = ["exec"];
+    if (continueSession) c.push("resume", resumeId);
+    c.push("--json", "--ignore-user-config", "--ignore-rules", "--skip-git-repo-check", "-m", model);
+    // ! Владелец явно разрешил полный байпас песочницы для codex [[07.10.2026]] — паритет с omp (yolo), скретч одноразовый.
+    // ! HX_CODEX_SANDBOX=workspace-write возвращает confinement (запись только в скретч, сеть открыта).
+    if (process.env.HX_CODEX_SANDBOX === "workspace-write") {
+      c.push("-c", 'sandbox_mode="workspace-write"', "-c", "sandbox_workspace_write.network_access=true");
+    } else {
+      c.push("--dangerously-bypass-approvals-and-sandbox");
+    }
+    if (thinking) c.push("-c", `model_reasoning_effort=${thinking}`);
+    if (!continueSession) c.push("-C", cwd);
+    c.push(prompt);
+    return c;
+  }
   const a = [];
   // ! pi's bare `--model openrouter/anthropic/claude-*` hangs indefinitely: pi ships its OWN
   // !   native "anthropic" provider, and a full "openrouter/anthropic/..." model string routes
@@ -108,7 +132,37 @@ const num = (v) => {
 // *    pi -> usage.reasoning. Совмещаем через coalesce (??), никогда не оба сразу.
 // *  - totalTokens провайдер уже включает reasoning внутри output -- поэтому tokensReason
 // *    НИКОГДА не прибавляется поверх tokensOut/totalTokens, только возвращается отдельным полем.
-export function normalizeResult(stdout) {
+// * Codex CLI (`exec --json`): usage приходит на turn.completed ОДИН раз за ход (сумма по всем API-вызовам хода);
+// * input_tokens включает cached_input_tokens (семантика OpenAI), output_tokens включает reasoning.
+// * Приводим к общей схеме omp: tokensIn = НЕкэшированный вход, tokensCached = чтение из кэша.
+// * Собственной цены у codex нет (подписка) — её считает estCost() по общей таблице цен.
+function normalizeCodex(events, text) {
+  let tokensIn = 0, tokensCached = 0, tokensOut = 0, tokensReason = 0, turns = 0, toolCalls = 0;
+  let threadId = null, lastMessage = null, failed = null;
+  for (const e of events) {
+    if (!e) continue;
+    if (e.type === "thread.started") threadId = e.thread_id ?? threadId;
+    else if (e.type === "turn.completed" && e.usage) {
+      const cached = num(e.usage.cached_input_tokens) ?? 0;
+      tokensCached += cached;
+      tokensIn += (num(e.usage.input_tokens) ?? 0) - cached;
+      tokensOut += num(e.usage.output_tokens) ?? 0;
+      tokensReason += num(e.usage.reasoning_output_tokens) ?? 0;
+      turns++;
+    } else if (e.type === "turn.failed" || e.type === "error") failed = e.error?.message ?? e.message ?? "error";
+    else if (e.type === "item.completed" && e.item) {
+      if (e.item.type === "agent_message") lastMessage = e.item.text;
+      else if (e.item.type !== "reasoning") toolCalls++;
+    }
+  }
+  return {
+    parsed: events.length > 0, cost: 0, tokensIn, tokensCached, tokensOut, tokensReason,
+    finishReason: failed ? `error: ${failed}`.slice(0, 120) : (turns ? "stop" : null),
+    toolCalls, turns, threadId, lastMessage, raw: events.length ? undefined : text.slice(-400),
+  };
+}
+
+export function normalizeResult(stdout, harness) {
   const text = (stdout || "").trim();
   const events = [];
   if (text) {
@@ -123,6 +177,8 @@ export function normalizeResult(stdout) {
       }
     }
   }
+
+  if (harness === "codex") return normalizeCodex(events, text);
 
   if (events.length === 0) {
     return {
@@ -144,10 +200,15 @@ export function normalizeResult(stdout) {
   let tokensIn = 0;
   let tokensOut = 0;
   let tokensReason = 0;
+  let tokensCached = 0;
+  let lastMessage = null;
   for (const te of turnEnds) {
     const usage = te.message && te.message.usage;
+    const txt = (te.message?.content || []).filter((c) => c.type === "text").map((c) => c.text).join("");
+    if (txt) lastMessage = txt;
     if (!usage) continue;
     cost += num(usage.cost && usage.cost.total) ?? 0;
+    tokensCached += num(usage.cacheRead) ?? 0;
     tokensIn += num(usage.input) ?? 0;
     tokensOut += num(usage.output) ?? 0;
     tokensReason += num(usage.reasoningTokens ?? usage.reasoning) ?? 0;
@@ -181,6 +242,8 @@ export function normalizeResult(stdout) {
     parsed: true,
     cost,
     tokensIn,
+    tokensCached,
+    lastMessage,
     tokensOut,
     tokensReason,
     finishReason,
@@ -251,7 +314,7 @@ export function runAgent(harness, opts, { timeoutMs, stallMs = 120000 } = {}) {
         wallMs: performance.now() - t0,
         killed,
         stalled,
-        metrics: normalizeResult(stdout),
+        metrics: normalizeResult(stdout, harness),
       });
     });
   });
