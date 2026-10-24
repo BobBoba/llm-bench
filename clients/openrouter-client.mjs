@@ -84,6 +84,12 @@ async function chat({ model, messages, max_tokens = 40000, tools, tool_choice, s
     model, messages, temperature, max_tokens, usage: { include: true },
     provider: { data_collection: process.env.OR_DC || 'deny', zdr: true }, reasoning: { effort: process.env.OR_EFFORT || 'medium' },
   };
+  // OR_PROVIDER_ORDER=tag1,tag2 — закрепить провайдеров без обхода: иначе OpenRouter сам
+  // распределяет запросы, и результат не привязан к конкретному эндпоинту.
+  if (process.env.OR_PROVIDER_ORDER) {
+    const tags = process.env.OR_PROVIDER_ORDER.split(',').map((s) => s.trim()).filter(Boolean);
+    Object.assign(body.provider, { order: tags, only: tags, allow_fallbacks: false });
+  }
   if (stream) body.stream = true;
   if (tools) { body.tools = tools; body.tool_choice = tool_choice || 'auto'; }
   for (let a = 0; a < 3; a++) {
