@@ -112,6 +112,16 @@ DISPLAY = {
     # xhigh сжирал весь лимит (finish=length) и задачи обнулялись.
     "qwen/qwen3.8-2.4t-a95b~low": "Qwen3.8-Max 2.4T, low (DeepInfra ZDR, 262k)",
     "qwen/qwen3.8-2.4t-a95b~medium": "Qwen3.8-Max 2.4T, medium (DeepInfra ZDR, 262k)",
+    # deepseek-v4.1-flash-1017: усилие рассуждения указано в названии [[25.10.2026]]. Первая строка —
+    # первый прогон (medium по умолчанию клиента, провайдеры по автоподбору OpenRouter, 1 прогон
+    # на задачу); строки ~effort — три прогона на задачу через закреплённую пару
+    # DigitalOcean → InferenceNet (fp8), лимит выхода 40k, ZDR.
+    "deepseek/deepseek-v4.1-flash-1017": "DeepSeek-V4.1-Flash-1017, medium (автоподбор провайдеров, ×1)",
+    "deepseek/deepseek-v4.1-flash-1017~none": "DeepSeek-V4.1-Flash-1017, без рассуждений (DigitalOcean→InferenceNet, ×3)",
+    "deepseek/deepseek-v4.1-flash-1017~low": "DeepSeek-V4.1-Flash-1017, low (DigitalOcean→InferenceNet, ×3)",
+    "deepseek/deepseek-v4.1-flash-1017~medium": "DeepSeek-V4.1-Flash-1017, medium (DigitalOcean→InferenceNet, ×3)",
+    "deepseek/deepseek-v4.1-flash-1017~high": "DeepSeek-V4.1-Flash-1017, high (DigitalOcean→InferenceNet, ×3)",
+    "deepseek/deepseek-v4.1-flash-1017~xhigh": "DeepSeek-V4.1-Flash-1017, xhigh (DigitalOcean→InferenceNet, ×3)",
     "qwen/qwen3.8-2.4t-a95b~xhigh": "Qwen3.8-Max 2.4T, xhigh (DeepInfra ZDR, потолок 131k)",
     # Hetzner Inference, hard-bench 26.08.2026: бесплатный тестовый OpenAI-compatible endpoint.
     "Qwen/Qwen3.6-35B-A3B-FP8": "Qwen3.6-35B-A3B FP8 (Hetzner Inference, 26.08.2026)",
