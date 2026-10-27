@@ -120,6 +120,9 @@ DISPLAY = {
     "deepseek/deepseek-v4.1-flash-1017~none": "DeepSeek-V4.1-Flash-1017, без рассуждений (DigitalOcean→InferenceNet, ×3)",
     "deepseek/deepseek-v4.1-flash-1017~low": "DeepSeek-V4.1-Flash-1017, low (= запросы low и medium; DigitalOcean→InferenceNet, ×6)",
     "deepseek/deepseek-v4.1-flash-1017~high": "DeepSeek-V4.1-Flash-1017, high (= запросы high и xhigh; DigitalOcean→InferenceNet, ×6)",
+    # inception/mercury-3 [[27.10.2026]]: диффузионная модель с очень длинным рассуждением (в среднем
+    # 69k токенов); при лимите 40k оборвано 11 из 22, при потолке провайдера 131k — всё ещё 8 из 22.
+    "inception/mercury-3": "mercury-3 (потолок выхода провайдера 131k; 8 из 22 оборваны по лимиту)",
     "deepseek/deepseek-v4.1-flash-1017~default": "DeepSeek-V4.1-Flash-1017, без параметра = high по умолчанию DeepSeek (DigitalOcean→InferenceNet, ×3)",
     "deepseek/deepseek-v4.1-flash-1017~max": "DeepSeek-V4.1-Flash-1017, max, без лимита выхода (393k; DigitalOcean→InferenceNet, ×3)",
     "qwen/qwen3.8-2.4t-a95b~xhigh": "Qwen3.8-Max 2.4T, xhigh (DeepInfra ZDR, потолок 131k)",
