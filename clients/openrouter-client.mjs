@@ -90,6 +90,9 @@ async function chat({ model, messages, max_tokens = 40000, tools, tool_choice, s
     const tags = process.env.OR_PROVIDER_ORDER.split(',').map((s) => s.trim()).filter(Boolean);
     Object.assign(body.provider, { order: tags, only: tags, allow_fallbacks: false });
   }
+  // OR_EFFORT=omit — не передавать reasoning вовсе: так работает умолчание модели/провайдера
+  // (у DeepSeek включено рассуждение с усилием high).
+  if (process.env.OR_EFFORT === 'omit') delete body.reasoning;
   if (stream) body.stream = true;
   if (tools) { body.tools = tools; body.tool_choice = tool_choice || 'auto'; }
   for (let a = 0; a < 3; a++) {

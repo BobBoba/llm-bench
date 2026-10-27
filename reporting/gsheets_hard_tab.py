@@ -122,6 +122,8 @@ DISPLAY = {
     "deepseek/deepseek-v4.1-flash-1017~medium": "DeepSeek-V4.1-Flash-1017, medium (DigitalOcean→InferenceNet, ×3)",
     "deepseek/deepseek-v4.1-flash-1017~high": "DeepSeek-V4.1-Flash-1017, high (DigitalOcean→InferenceNet, ×3)",
     "deepseek/deepseek-v4.1-flash-1017~xhigh": "DeepSeek-V4.1-Flash-1017, xhigh (DigitalOcean→InferenceNet, ×3)",
+    "deepseek/deepseek-v4.1-flash-1017~default": "DeepSeek-V4.1-Flash-1017, без параметра = high по умолчанию DeepSeek (DigitalOcean→InferenceNet, ×3)",
+    "deepseek/deepseek-v4.1-flash-1017~max": "DeepSeek-V4.1-Flash-1017, max, лимит выхода 40k (12 из 66 оборваны по лимиту; DigitalOcean→InferenceNet, ×3)",
     "qwen/qwen3.8-2.4t-a95b~xhigh": "Qwen3.8-Max 2.4T, xhigh (DeepInfra ZDR, потолок 131k)",
     # Hetzner Inference, hard-bench 26.08.2026: бесплатный тестовый OpenAI-compatible endpoint.
     "Qwen/Qwen3.6-35B-A3B-FP8": "Qwen3.6-35B-A3B FP8 (Hetzner Inference, 26.08.2026)",
