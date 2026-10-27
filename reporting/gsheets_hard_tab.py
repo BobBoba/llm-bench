@@ -122,6 +122,10 @@ DISPLAY = {
     "deepseek/deepseek-v4.1-flash-1017~high": "DeepSeek-V4.1-Flash-1017, high (= запросы high и xhigh; DigitalOcean→InferenceNet, ×6)",
     # inception/mercury-3 [[27.10.2026]]: диффузионная модель с очень длинным рассуждением (в среднем
     # 69k токенов); при лимите 40k оборвано 11 из 22, при потолке провайдера 131k — всё ещё 8 из 22.
+    # Закреплённые повторы ×3 [[27.10.2026]]: провайдеры закреплены без обхода (OR_PROVIDER_ORDER), medium по умолчанию клиента.
+    "anthropic/claude-haiku-5.5~pinned": "claude-haiku-5.5 (Google Vertex→Bedrock, ×3)",
+    "reflection/beam-1.0-501b-a23b~pinned": "beam-1.0-501b-a23b (CoreWeave→Nebius, fp4, ×3)",
+    "bytedance-seed/seed-2.0-code": "seed-2.0-code (1 из 22 оборван по лимиту 40k)",
     "inception/mercury-3": "mercury-3 (потолок выхода провайдера 131k; 8 из 22 оборваны по лимиту)",
     "deepseek/deepseek-v4.1-flash-1017~default": "DeepSeek-V4.1-Flash-1017, без параметра = high по умолчанию DeepSeek (DigitalOcean→InferenceNet, ×3)",
     "deepseek/deepseek-v4.1-flash-1017~max": "DeepSeek-V4.1-Flash-1017, max, без лимита выхода (393k; DigitalOcean→InferenceNet, ×3)",
