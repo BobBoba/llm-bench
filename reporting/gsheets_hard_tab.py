@@ -116,12 +116,10 @@ DISPLAY = {
     # первый прогон (medium по умолчанию клиента, провайдеры по автоподбору OpenRouter, 1 прогон
     # на задачу); строки ~effort — три прогона на задачу через закреплённую пару
     # DigitalOcean → InferenceNet (fp8), лимит выхода 40k, ZDR.
-    "deepseek/deepseek-v4.1-flash-1017": "DeepSeek-V4.1-Flash-1017, запрос medium = low (автоподбор провайдеров, ×1)",
+    "deepseek/deepseek-v4.1-flash-1017": "DeepSeek-V4.1-Flash-1017, low (запрос medium; автоподбор провайдеров, ×1)",
     "deepseek/deepseek-v4.1-flash-1017~none": "DeepSeek-V4.1-Flash-1017, без рассуждений (DigitalOcean→InferenceNet, ×3)",
-    "deepseek/deepseek-v4.1-flash-1017~low": "DeepSeek-V4.1-Flash-1017, low (DigitalOcean→InferenceNet, ×3)",
-    "deepseek/deepseek-v4.1-flash-1017~medium": "DeepSeek-V4.1-Flash-1017, запрос medium = low, повтор (DigitalOcean→InferenceNet, ×3)",
-    "deepseek/deepseek-v4.1-flash-1017~high": "DeepSeek-V4.1-Flash-1017, high (DigitalOcean→InferenceNet, ×3)",
-    "deepseek/deepseek-v4.1-flash-1017~xhigh": "DeepSeek-V4.1-Flash-1017, запрос xhigh = high, повтор (DigitalOcean→InferenceNet, ×3)",
+    "deepseek/deepseek-v4.1-flash-1017~low": "DeepSeek-V4.1-Flash-1017, low (= запросы low и medium; DigitalOcean→InferenceNet, ×6)",
+    "deepseek/deepseek-v4.1-flash-1017~high": "DeepSeek-V4.1-Flash-1017, high (= запросы high и xhigh; DigitalOcean→InferenceNet, ×6)",
     "deepseek/deepseek-v4.1-flash-1017~default": "DeepSeek-V4.1-Flash-1017, без параметра = high по умолчанию DeepSeek (DigitalOcean→InferenceNet, ×3)",
     "deepseek/deepseek-v4.1-flash-1017~max": "DeepSeek-V4.1-Flash-1017, max, лимит выхода 40k (12 из 66 оборваны по лимиту; DigitalOcean→InferenceNet, ×3)",
     "qwen/qwen3.8-2.4t-a95b~xhigh": "Qwen3.8-Max 2.4T, xhigh (DeepInfra ZDR, потолок 131k)",
