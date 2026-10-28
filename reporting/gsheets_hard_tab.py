@@ -126,6 +126,18 @@ DISPLAY = {
     "anthropic/claude-haiku-5.5~pinned": "claude-haiku-5.5 (Google Vertex→Bedrock, ×3)",
     "reflection/beam-1.0-501b-a23b~pinned": "beam-1.0-501b-a23b (CoreWeave→Nebius, fp4, ×3)",
     "bytedance-seed/seed-2.0-code": "seed-2.0-code (1 из 22 оборван по лимиту 40k)",
+    # Кампания [[28.10.2026]]. Облако: лимит выхода 100k (прежние облачные строки — 40k).
+    "moonshotai/kimi-k3.1-pro": "kimi-k3.1-pro (лимит выхода 100k)",
+    "z-ai/glm-5.3-flash": "glm-5.3-flash (лимит выхода 100k)",
+    # Локально, gaming-pc (CachyOS, без рабочего стола), Unsloth Studio, окно 131072, KV q4_0, --fit off.
+    "migtissera/Tess-4.5-27B-GGUF:Q4_K_M": "Tess-4.5-27B Q4_K_M (окно 131k, KV q4; лимит 40k: 7 из 22 оборваны)",
+    "nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB-GGUF": "Nemotron-3.5-Bolt 74B-A9B, сборка 24GB (окно 131k, KV q4, 81 т/с, лимит 100k)",
+    "bartowski/Nanbeige_Nanbeige4.3-33B-GGUF:Q4_K_M": "Nanbeige4.3-33B Q4_K_M (окно 131k, KV q4, лимит 40k)",
+    "unsloth/North-Mini-Code-1.0-GGUF:UD-Q4_K_M": "North-Mini-Code-1.0 30B-A3B UD-Q4_K_M (окно 131k, KV q4, лимит 100k)",
+    "unsloth/flint-GGUF:UD-Q3_K_XL": "Flint 40B-A2.5B UD-Q3_K_XL (окно 131k, KV q4, лимит 100k)",
+    "unsloth/LFM2.5-24B-A2B-GGUF:UD-Q5_K_XL": "LFM2.5-24B-A2B UD-Q5_K_XL (окно 131k, KV q4, лимит 100k)",
+    "JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF:Q8_0": "Mellum2.1-12B-A2.5B Thinking Q8_0 (окно 131k, KV q4, лимит 100k)",
+    "xing4": "Xing4.0-29B-A4B Q4_K_M (сборка из PR #29012, окно 131k, KV q8, лимит 100k)",
     "inception/mercury-3": "mercury-3 (потолок выхода провайдера 131k; 8 из 22 оборваны по лимиту)",
     "deepseek/deepseek-v4.1-flash-1017~default": "DeepSeek-V4.1-Flash-1017, без параметра = high по умолчанию DeepSeek (DigitalOcean→InferenceNet, ×3)",
     "deepseek/deepseek-v4.1-flash-1017~max": "DeepSeek-V4.1-Flash-1017, max, без лимита выхода (393k; DigitalOcean→InferenceNet, ×3)",
@@ -152,9 +164,25 @@ INCOMPLETE = set()
 _RENTED_5090 = ("5090", "5090e", "5090n", "5090r")
 
 
+# Локальные модели gaming-pc (кампания [[28.10.2026]]): идентификатор Studio. По голове идентификатора
+# их не отличить от облачных (nvidia/…, JetBrains/…), поэтому точный список.
+LOCAL_GP = {
+    "migtissera/Tess-4.5-27B-GGUF:Q4_K_M",
+    "nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB-GGUF",
+    "bartowski/Nanbeige_Nanbeige4.3-33B-GGUF:Q4_K_M",
+    "unsloth/North-Mini-Code-1.0-GGUF:UD-Q4_K_M",
+    "unsloth/flint-GGUF:UD-Q3_K_XL",
+    "unsloth/LFM2.5-24B-A2B-GGUF:UD-Q5_K_XL",
+    "JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF:Q8_0",
+    "xing4",
+}
+
+
 def platform(model):
     """(GPU, провайдер) для строки таблицы."""
     head = model.split("/")[0]
+    if model in LOCAL_GP:
+        return "RTX 3090", "gaming-pc"
     if head in _RENTED_5090:
         return "RTX 5090", "Clore #114647"
     if head in ("unsloth", "InternScience"):
@@ -165,7 +193,7 @@ def platform(model):
 
 
 def is_local(model):
-    return model.startswith("unsloth/") or model.startswith("InternScience/")
+    return model in LOCAL_GP or model.startswith("unsloth/") or model.startswith("InternScience/")
 
 
 def is_rented(model):
