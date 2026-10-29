@@ -139,6 +139,10 @@ DISPLAY = {
     "unsloth/LFM2.5-24B-A2B-GGUF:UD-Q5_K_XL": "LFM2.5-24B-A2B UD-Q5_K_XL (окно 131k, KV q4, лимит 100k)",
     "JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF:Q8_0": "Mellum2.1-12B-A2.5B Thinking Q8_0 (окно 131k, KV q4, лимит 100k)",
     "xing4": "Xing4.0-29B-A4B Q4_K_M (сборка из PR #29012, окно 131k, KV q8, лимит 100k)",
+    # [[29.10.2026]] Сырой llama.cpp ggml-org v0.8.0 (не Unsloth Studio), gaming-pc 3090, окно 131k, KV q8_0,
+    # спекулятивная генерация включена (Muse: DFlash, Qwen: MTP), рекомендованные параметры карточек.
+    "raw-muse": "Muse-Glimmer-30B UD-Q4_K_XL, сырой llama.cpp v0.8.0, t=1.0/top_p 0.95/top_k 64, DFlash (×3)",
+    "raw-q4-xhigh": "Qwen3.8-27B UD-Q4_K_XL (веса 19.08), сырой llama.cpp v0.8.0, t=1.0/top_p 0.95/top_k 20, xhigh, MTP (×1)",
     "inception/mercury-3": "mercury-3 (потолок выхода провайдера 131k; 8 из 22 оборваны по лимиту)",
     "deepseek/deepseek-v4.1-flash-1017~default": "DeepSeek-V4.1-Flash-1017, без параметра = high по умолчанию DeepSeek (DigitalOcean→InferenceNet, ×3)",
     "deepseek/deepseek-v4.1-flash-1017~max": "DeepSeek-V4.1-Flash-1017, max, без лимита выхода (393k; DigitalOcean→InferenceNet, ×3)",
@@ -177,6 +181,8 @@ LOCAL_GP = {
     "unsloth/LFM2.5-24B-A2B-GGUF:UD-Q5_K_XL",
     "JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF:Q8_0",
     "xing4",
+    "raw-muse",
+    "raw-q4-xhigh",
 }
 
 
