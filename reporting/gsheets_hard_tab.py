@@ -16,6 +16,7 @@
 """
 
 import glob
+import time
 import json
 import os
 import re
@@ -240,6 +241,9 @@ def electricity_eur(latency_seconds):
     return latency_seconds / 3600.0 * STAND_KW * EUR_PER_KWH
 
 
+MODEL_MTIME = {}  # модель -> время последней записи в её файлы результатов (колонка «обновлено»)
+
+
 def gather():
     """Все записи hard-кампании: файлы results-hard*.json, свежий файл побеждает при дубле ключа."""
     recs = {}
@@ -254,6 +258,7 @@ def gather():
                 continue
             key = (r.get("model"), r.get("lang"), r.get("task"), r.get("run", 1))
             recs[key] = r
+            MODEL_MTIME[r.get("model")] = max(MODEL_MTIME.get(r.get("model"), 0), os.path.getmtime(f))
     return collapse_runs(list(recs.values()))
 
 
@@ -430,7 +435,7 @@ def fmt_c(v, local):
 
 
 # 22 задачи: rust/ts/julia/csharp по 4 (с edit-long), bash/pwsh по 3 (без него).
-HEADER = ["Модель", "GPU", "провайдер", "solved %", "решено измерений"]
+HEADER = ["Модель", "обновлено", "GPU", "провайдер", "solved %", "решено измерений"]
 for _lang in LANGS:
     _t = LANG_TITLE[_lang]
     HEADER += [f"{_t} %", f"{_t} t, с", f"{_t} $"]
@@ -459,6 +464,7 @@ def header_notes():
     Заодно словарь переживает ПЕРЕСТАНОВКУ колонок владельцем в самой таблице.
     """
     notes = ["Идентификатор модели. (local) = квант на Unsloth Studio (GPU-стенд), (pilot) = пилотная модель харнесса, в отбор S%>80 не входила.",
+             "Когда строка менялась в последний раз: время последней записи в файлы результатов этой модели (местное время машины, где идёт замер). Помогает увидеть свежие замеры в большой таблице.",
              "Видеокарта, на которой сделан замер. «—» = облачная модель, железо неизвестно. Строки с РАЗНЫМ железом сравнимы по качеству (задачи и оракулы одни и те же), но НЕ по времени и стоимости.",
              "Где исполнялось: `Clore #114647` — арендованная карта (исследовательская), `gaming-pc` — свой стенд, `OpenRouter` — облако.",
              "Доля полностью решённых задач набора, проценты. «Решено» = пройден гейт (компиляция/типы/загрузка) И 100% скрытых тестов.",
@@ -493,7 +499,7 @@ def to_values(rows):
         # сколько задач в наборе, а сырая выборка вынесена в соседнюю колонку
         total = sum(row["langs"][l]["of"] for l in LANGS) or 1
         gpu, prov = platform(row["model"])
-        line = [display(row["model"]), gpu, prov, round(100 * row["solved"] / total),
+        line = [display(row["model"]), time.strftime("%d.%m.%Y %H:%M", time.localtime(MODEL_MTIME.get(row["model"], 0))) if MODEL_MTIME.get(row["model"]) else "n/a", gpu, prov, round(100 * row["solved"] / total),
                 f'{row["solved_raw"]}/{row["measured_raw"]}']
         for lang in LANGS:
             L = row["langs"][lang]
