@@ -142,6 +142,9 @@ DISPLAY = {
     # [[29.10.2026]] Сырой llama.cpp ggml-org v0.8.0 (не Unsloth Studio), gaming-pc 3090, окно 131k, KV q8_0,
     # спекулятивная генерация включена (Muse: DFlash, Qwen: MTP), рекомендованные параметры карточек.
     "raw-muse": "Muse-Glimmer-30B UD-Q4_K_XL, сырой llama.cpp v0.8.0, t=1.0/top_p 0.95/top_k 64, DFlash (×3)",
+    "raw-k-low": "Qwen3.8-27B UD-Q4_K_XL (веса 19.08), сырой llama.cpp v0.8.0, t=1.0/top_p 0.95/top_k 20, low, MTP, окно 229k, KV q4_0, без лимита вывода (×1)",
+    "raw-k-medium": "Qwen3.8-27B UD-Q4_K_XL (веса 19.08), сырой llama.cpp v0.8.0, t=1.0/top_p 0.95/top_k 20, medium, MTP, окно 229k, KV q4_0, без лимита вывода (×1)",
+    "raw-k-xhigh": "Qwen3.8-27B UD-Q4_K_XL (веса 19.08), сырой llama.cpp v0.8.0, t=1.0/top_p 0.95/top_k 20, xhigh, MTP, окно 229k, KV q4_0, без лимита вывода (×1)",
     "raw-q4-xhigh": "Qwen3.8-27B UD-Q4_K_XL (веса 19.08), сырой llama.cpp v0.8.0, t=1.0/top_p 0.95/top_k 20, xhigh, MTP (×1)",
     "inception/mercury-3": "mercury-3 (потолок выхода провайдера 131k; 8 из 22 оборваны по лимиту)",
     "deepseek/deepseek-v4.1-flash-1017~default": "DeepSeek-V4.1-Flash-1017, без параметра = high по умолчанию DeepSeek (DigitalOcean→InferenceNet, ×3)",
@@ -183,6 +186,9 @@ LOCAL_GP = {
     "xing4",
     "raw-muse",
     "raw-q4-xhigh",
+    "raw-k-low",
+    "raw-k-medium",
+    "raw-k-xhigh",
 }
 
 
