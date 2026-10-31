@@ -52,6 +52,10 @@ DISPLAY = {
     # даже после фикса клиента (--system-prompt вместо --append-system-prompt) рантайм Claude
     # Code добавляет ~22k токенов служебной обвязки к каждому вызову (было ~41-46k до фикса,
     # пока system-prompt ещё нёс полную идентичность Claude Code — см. clients/claudecode-client.mjs).
+    # Qwen3-Coder-Next 80B-A3B Q4_K_M на RTX 3090 24 ГиБ (gaming-pc), голый llama-server upstream 8642541,
+    # окно 262144, KV q4_0, -ncmoe 30 (30 из 48 слоёв с экспертами в ОЗУ), --fit off, -ub 2048, без GUI,
+    # сэмплинг по карточке модели (temp 1.0, top_p 0.95, top_k 40), 1 прогон на задачу [[01.11.2026]].
+    "qcn-q4km-ncmoe30-256k": "Coder-Next-80B Q4_K_M, окно 256k, KV q4, -ncmoe 30, без GUI (3090, ×1)",
     "claude-haiku-4-5-20251001": "Haiku 4.5 (via Claude Code CLI, подписка, ~22k harness overhead)",
     "claude-sonnet-5": "Sonnet 5 (via Claude Code CLI, подписка, ~22k harness overhead)",
     "claude-opus-5": "Opus 5 (via Claude Code CLI, подписка, ~22k harness overhead)",
@@ -185,6 +189,7 @@ LOCAL_GP = {
     "unsloth/flint-GGUF:UD-Q3_K_XL",
     "unsloth/LFM2.5-24B-A2B-GGUF:UD-Q5_K_XL",
     "JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF:Q8_0",
+    "qcn-q4km-ncmoe30-256k",
     "xing4",
     "raw-muse",
     "raw-q4-xhigh",
