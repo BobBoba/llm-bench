@@ -406,7 +406,34 @@ def agg(records):
         rows.append(row)
     rows.sort(key=lambda r: (-r["solved"], r["med_t"] if r["med_t"] is not None else 1e9))
     _add_profiles(rows)
+    _add_attractiveness(rows)
     return rows
+
+
+# Цена часа ожидания, $/ч (решение владельца [[02.11.2026]]): вес времени в «полной цене решённой
+# задачи». Это не измерение, а выбор; при 0 побеждает самая дешёвая модель, при очень большом —
+# самая быстрая. Менять только здесь.
+WAIT_USD_PER_HOUR = 30.0
+
+
+def _add_attractiveness(rows):
+    """«Полная цена решённой задачи» = $/решённая + C × время на решённую (часы), и фронт Парето
+    по паре (цена решённой, время на решённую): строка в фронте, если никто не лучше её по обоим
+    показателям сразу. Без решённых задач или времени — n/a, во фронт не входит."""
+    pts = []
+    for r in rows:
+        if r["solved"] and r["wall"]:
+            r["time_per_solved_h"] = r["wall"] / r["solved"] / 3600
+            r["full_price"] = r["cost_per_solved"] + WAIT_USD_PER_HOUR * r["time_per_solved_h"]
+            pts.append(r)
+        else:
+            r["full_price"], r["pareto"] = None, False
+    for r in pts:
+        r["pareto"] = not any(
+            o is not r and o["cost_per_solved"] <= r["cost_per_solved"]
+            and o["time_per_solved_h"] <= r["time_per_solved_h"]
+            and (o["cost_per_solved"] < r["cost_per_solved"] or o["time_per_solved_h"] < r["time_per_solved_h"])
+            for o in pts)
 
 
 def _quartiles(vals):
@@ -462,7 +489,7 @@ HEADER = ["Модель", "обновлено", "GPU", "провайдер", "so
 for _lang in LANGS:
     _t = LANG_TITLE[_lang]
     HEADER += [f"{_t} %", f"{_t} t, с", f"{_t} $"]
-HEADER += ["медиана t, с", "$ всего", "качество %", "$/решённая", "$/час", "решено/час", "edit t, с", "edit-long t, с", "long ×", "профиль", "t всего, мин"]
+HEADER += ["медиана t, с", "$ всего", "качество %", "$/решённая", "$/час", "решено/час", "edit t, с", "edit-long t, с", "long ×", "профиль", "t всего, мин", "полная цена, $", "Парето ✓"]
 
 # Всплывающие подсказки на заголовках (просьба владельца [[04.08.2026]]): помощь живёт в hover,
 # а не в видимом тексте — легенда под таблицей дублирует то же подробнее.
@@ -511,6 +538,8 @@ def header_notes():
         "Цена длинного контекста: медиана отношения времени edit-long/edit по языкам, где решены ОБА варианта. Облако ≈0.3–3.5 (prefill стоит денег, не времени); локальные кванты ≈13 (prefill 63k токенов ≈ 200+ с до первого токена).",
         "Автопрофиль из данных: «силён» = языки, решённые на 100%; «слаб» = решено треть и меньше; «дёшев»/«дорог» и «быстр»/«медлен» — нижний/верхний квартиль по цене и медиане времени.",
         "Суммарное время модели на ВСЕХ задачах набора, минуты: сумма времён вызовов (включая нерешённые) за ОДИН проход набора; при повторах ×N по каждой задаче берётся медиана, поэтому строки сравнимы. Это время вызовов, без сборки и запуска тестов.",
+        f"Полная цена решённой задачи, $: «$/решённая» + C × время на решённую (часы), C = ${WAIT_USD_PER_HOUR:.0f}/ч — цена часа ожидания (выбор владельца, а не измерение; константа WAIT_USD_PER_HOUR в скрипте). Меньше = лучше; качество входит через деление на «решено». При C = 0 побеждает самая дешёвая модель, при очень большом C — самая быстрая. Облако ($) и локальные (€) сравнимы грубо.",
+        "✓ = фронт Парето: никакая другая строка не лучше по ОБОИМ показателям сразу — цене решённой задачи и времени на решённую. Не зависит от C; лидера по «полной цене» выбирать из строк с ✓.",
     ]
     if len(notes) != len(HEADER):
         raise SystemExit(f"подсказок {len(notes)}, колонок {len(HEADER)} — список разошёлся с заголовком")
@@ -539,9 +568,33 @@ def to_values(rows):
                  round(row["solved"] / (row["wall"] / 3600), 1) if row["wall"] else "n/a",
                  fmt_t(row["edit_t"]), fmt_t(row["editlong_t"]),
                  round(row["long_ratio"], 2) if row["long_ratio"] is not None else "n/a",
-                 row["profile"], round(row["wall"] / 60, 1)]
+                 row["profile"], round(row["wall"] / 60, 1),
+                 round(row["full_price"], 4) if row["full_price"] is not None else "n/a",
+                 "✓" if row["pareto"] else ""]
         values.append(line)
     return values
+
+
+CHART_TAB = "Цена vs скорость"   # вкладка-источник точечной диаграммы «цена решённой против решено/час»
+
+
+def write_chart_data(svc, sid, rows):
+    """Данные для диаграммы: десятичные логарифмы (оси логарифмические — значения различаются на
+    порядки; в API Sheets переключателя «log scale» нет, поэтому логарифмируем здесь). Порядок строк
+    тот же, что в основной вкладке. Строки без решённых задач или с нулевой ценой в диаграмму не
+    попадают (lg 0 не существует). Вторая пара колонок — только фронт Парето, рисуется красным.
+    Саму диаграмму создали один раз; скрипт обновляет лишь значения."""
+    import math
+    out = [["Модель", "lg решено/час", "lg $/решённая", "lg решено/час (Парето)", "lg $/решённая (Парето)"]]
+    for r in rows:
+        x = r["solved"] / (r["wall"] / 3600) if r["solved"] and r["wall"] else None
+        y = r["cost_per_solved"]
+        ok = x and y and x > 0 and y > 0
+        lx, ly = (round(math.log10(x), 4), round(math.log10(y), 4)) if ok else ("", "")
+        out.append([display(r["model"]), lx, ly, lx if ok and r.get("pareto") else "", ly if ok and r.get("pareto") else ""])
+    svc.spreadsheets().values().clear(spreadsheetId=sid, range=f"'{CHART_TAB}'!A1:E1000").execute()
+    svc.spreadsheets().values().update(spreadsheetId=sid, range=f"'{CHART_TAB}'!A1",
+                                       valueInputOption="RAW", body={"values": out}).execute()
 
 
 def main():
@@ -698,7 +751,7 @@ def main():
         better_low_by_name[f"{t} t, с"] = True
         better_low_by_name[f"{t} $"] = True
     better_low_by_name.update({"медиана t, с": True, "$ всего": True, "t всего, мин": True, "качество %": False,
-                               "$/решённая": True, "$/час": True, "решено/час": False, "edit t, с": True, "edit-long t, с": True,
+                               "$/решённая": True, "$/час": True, "полная цена, $": True, "решено/час": False, "edit t, с": True, "edit-long t, с": True,
                                "long ×": True})
     wanted = {order.index(n): v for n, v in better_low_by_name.items() if n in order}
 
@@ -711,6 +764,7 @@ def main():
                                OWN_MINPOINTS)
     if reqs:
         svc.spreadsheets().batchUpdate(spreadsheetId=SID, body={"requests": reqs}).execute()
+    write_chart_data(svc, SID, rows)
     print(f"записано: {len(rows)} моделей во вкладку «{TAB}»")
 
 
