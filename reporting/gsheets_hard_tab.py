@@ -134,7 +134,8 @@ DISPLAY = {
     # inception/mercury-3 [[27.10.2026]]: диффузионная модель с очень длинным рассуждением (в среднем
     # 69k токенов); при лимите 40k оборвано 11 из 22, при потолке провайдера 131k — всё ещё 8 из 22.
     # Закреплённые повторы ×3 [[27.10.2026]]: провайдеры закреплены без обхода (OR_PROVIDER_ORDER), medium по умолчанию клиента.
-    "anthropic/claude-haiku-5.5~pinned": "claude-haiku-5.5 (Google Vertex→Bedrock, ×3)",
+    "anthropic/claude-haiku-5.5": "claude-haiku-5.5 (автоподбор провайдеров, ×3; перемер 02.11)",
+    "anthropic/claude-haiku-5.5~pinned": "claude-haiku-5.5 (Google Vertex→Bedrock, ×6)",
     "reflection/beam-1.0-501b-a23b~pinned": "beam-1.0-501b-a23b (CoreWeave→Nebius, fp4, ×3)",
     "bytedance-seed/seed-2.0-code": "seed-2.0-code (1 из 22 оборван по лимиту 40k)",
     # Кампания [[28.10.2026]]. Облако: лимит выхода 100k (прежние облачные строки — 40k).
@@ -352,7 +353,7 @@ def agg(records):
     rows = []
     for model, rs in by_model.items():
         row = {"model": model, "langs": {}, "solved": 0, "cost": 0.0, "times": [],
-               "solved_raw": 0, "measured_raw": 0}
+               "solved_raw": 0, "measured_raw": 0, "wall": 0.0}
         for lang in LANGS:
             lrs = [r for r in rs if r.get("lang") == lang]
             solved = [r for r in lrs if r.get("solved")]
@@ -374,6 +375,7 @@ def agg(records):
             row["solved_raw"] += sum(r.get("solved_raw", 0) for r in lrs)
             row["measured_raw"] += sum(r.get("measured_raw", 0) for r in lrs)
             row["cost"] += cost
+            row["wall"] += wall
             row["times"] += times
         # Контролируемая пара edit → edit-long: замедление считаем по языкам, где решены ОБА
         # варианта (иначе сравнивали бы время решения с временем провала).
@@ -454,7 +456,7 @@ HEADER = ["Модель", "обновлено", "GPU", "провайдер", "so
 for _lang in LANGS:
     _t = LANG_TITLE[_lang]
     HEADER += [f"{_t} %", f"{_t} t, с", f"{_t} $"]
-HEADER += ["медиана t, с", "$ всего", "качество %", "$/решённая", "edit t, с", "edit-long t, с", "long ×", "профиль"]
+HEADER += ["медиана t, с", "$ всего", "качество %", "$/решённая", "edit t, с", "edit-long t, с", "long ×", "профиль", "t всего, мин"]
 
 # Всплывающие подсказки на заголовках (просьба владельца [[04.08.2026]]): помощь живёт в hover,
 # а не в видимом тексте — легенда под таблицей дублирует то же подробнее.
@@ -500,6 +502,7 @@ def header_notes():
         "Медианное время решённых ДЛИННЫХ правок (edit-long, ~63k токенов входа) по тем же языкам, секунды.",
         "Цена длинного контекста: медиана отношения времени edit-long/edit по языкам, где решены ОБА варианта. Облако ≈0.3–3.5 (prefill стоит денег, не времени); локальные кванты ≈13 (prefill 63k токенов ≈ 200+ с до первого токена).",
         "Автопрофиль из данных: «силён» = языки, решённые на 100%; «слаб» = решено треть и меньше; «дёшев»/«дорог» и «быстр»/«медлен» — нижний/верхний квартиль по цене и медиане времени.",
+        "Суммарное время модели на ВСЕХ задачах набора, минуты: сумма времён вызовов (включая нерешённые) за ОДИН проход набора; при повторах ×N по каждой задаче берётся медиана, поэтому строки сравнимы. Это время вызовов, без сборки и запуска тестов.",
     ]
     if len(notes) != len(HEADER):
         raise SystemExit(f"подсказок {len(notes)}, колонок {len(HEADER)} — список разошёлся с заголовком")
@@ -521,12 +524,12 @@ def to_values(rows):
             # Числовой процент вместо строки «4/4»: строке градиент недоступен (просьба владельца).
             pct = round(100 * L["solved"] / L["of"]) if L["of"] else "n/a"
             line += [pct, fmt_t(L["med_t"]), fmt_c(L["cost"], loc)]
-        line += [fmt_t(row["med_t"]), fmt_c(row["cost"], loc),
+        line += [fmt_t(row["med_t"]), fmt_c(row["cost"], loc), 
                  round(row["quality"], 1),
                  round(row["cost_per_solved"], 4) if row["cost_per_solved"] is not None else "n/a",
                  fmt_t(row["edit_t"]), fmt_t(row["editlong_t"]),
                  round(row["long_ratio"], 2) if row["long_ratio"] is not None else "n/a",
-                 row["profile"]]
+                 row["profile"], round(row["wall"] / 60, 1)]
         values.append(line)
     return values
 
@@ -642,17 +645,6 @@ def main():
         spreadsheetId=SID, range=f"'{TAB}'!A{len(values) + 2}",
         valueInputOption="RAW", body={"values": legend}).execute()
 
-    # Сброс числового формата области данных: при сдвиге колонок ячейки наследуют формат
-    # ПРЕЖНЕЙ колонки (целые секунды), и «$/решённая» 0.0566 отображалась как «0».
-    svc.spreadsheets().batchUpdate(spreadsheetId=SID, body={"requests": [{
-        "repeatCell": {
-            "range": {"sheetId": sheet_id, "startRowIndex": 1, "endRowIndex": len(values),
-                      "startColumnIndex": 1, "endColumnIndex": len(HEADER)},
-            "cell": {},
-            "fields": "userEnteredFormat.numberFormat",
-        }
-    }]}).execute()
-
     # Подсказки на заголовках: одна batchUpdate-строка updateCells по row 0 с полем note.
     notes_by_name = header_notes()
     notes = [notes_by_name[name] for name in order]
@@ -695,29 +687,14 @@ def main():
         better_low_by_name[f"{t} %"] = False       # процент решённых: больше = лучше
         better_low_by_name[f"{t} t, с"] = True
         better_low_by_name[f"{t} $"] = True
-    better_low_by_name.update({"медиана t, с": True, "$ всего": True, "качество %": False,
+    better_low_by_name.update({"медиана t, с": True, "$ всего": True, "t всего, мин": True, "качество %": False,
                                "$/решённая": True, "edit t, с": True, "edit-long t, с": True,
                                "long ×": True})
     wanted = {order.index(n): v for n, v in better_low_by_name.items() if n in order}
 
-    # ЕДИНЫЙ ЧИСЛОВОЙ ФОРМАТ (просьба владельца [[21.08.2026]]): деньги — четыре знака,
-    # секунды — один. Round в Python этого не даёт: round(0.0, 4) остаётся 0.0, и таблица
-    # рисует «0» вместо «0.0000». Формат задаётся полем `userEnteredFormat.numberFormat` и
-    # НЕ трогает условное форматирование: градиенты живут в другой части схемы.
-    fmt_by_name = {"solved %": "0"}
-    for lang in LANGS:
-        t = LANG_TITLE[lang]
-        fmt_by_name[f"{t} %"], fmt_by_name[f"{t} t, с"], fmt_by_name[f"{t} $"] = "0", "0.0", "0.0000"
-    fmt_by_name.update({"медиана t, с": "0.0", "$ всего": "0.0000", "качество %": "0.0",
-                        "$/решённая": "0.0000", "edit t, с": "0.0", "edit-long t, с": "0.0",
-                        "long ×": "0.00"})
-    fmt_reqs = [{"repeatCell": {
-        "range": {"sheetId": sheet_id, "startRowIndex": 1, "endRowIndex": len(values),
-                  "startColumnIndex": order.index(n), "endColumnIndex": order.index(n) + 1},
-        "cell": {"userEnteredFormat": {"numberFormat": {"type": "NUMBER", "pattern": pat}}},
-        "fields": "userEnteredFormat.numberFormat"}}
-        for n, pat in fmt_by_name.items() if n in order]
-    svc.spreadsheets().batchUpdate(spreadsheetId=SID, body={"requests": fmt_reqs}).execute()
+    # ЧИСЛОВЫЕ ФОРМАТЫ НЕ ТРОГАЕМ (просьба владельца [[02.11.2026]]): точность колонок задаёт сам
+    # владелец в таблице. values().update с RAW пишет только значения и формат ячеек не меняет,
+    # поэтому ни сброс, ни принудительная установка шаблонов здесь не нужны.
 
     reqs = sync_gradient_rules(ex_rules, sheet_id, wanted,
                                lambda col, better_low: rule(col, better_low),
