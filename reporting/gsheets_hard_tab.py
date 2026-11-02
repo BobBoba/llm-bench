@@ -599,6 +599,61 @@ def write_chart_data(svc, sid, rows):
                                        valueInputOption="RAW", body={"values": out}).execute()
 
 
+QUALITY_TAB = "Цена vs качество"   # вкладка-источник второй диаграммы «цена решённой против доли решённых»
+
+
+def write_quality_chart(svc, sid, rows):
+    """Вторая диаграмма: сколько стоит качество. X — «solved %» (доля решённых задач набора, линейная
+    шкала), Y — $ на решённую задачу (логарифмическая шкала включается вручную в редакторе диаграммы,
+    в API Sheets такого переключателя нет). Красным — фронт Парето: никто не дешевле при том же или
+    более высоком качестве. Строки с нулевой ценой на логарифмическую ось не попадают. Вкладку и
+    диаграмму скрипт создаёт один раз, дальше обновляет только значения."""
+    pts = []
+    for r in rows:
+        if r["solved"] and r["total"] and r["cost_per_solved"] and r["cost_per_solved"] > 0:
+            q = round(100 * r["solved"] / r["total"], 1)
+            pts.append((r, q, round(r["cost_per_solved"], 6)))
+    def dominated(q, c):
+        return any((q2 >= q and c2 <= c) and (q2 > q or c2 < c) for _, q2, c2 in pts)
+    out = [["Модель", "solved %", "$/решённая", "solved % (Парето)", "$/решённая (Парето)", "Короткая подпись"]]
+    for r, q, c in pts:
+        name = display(r["model"])
+        short = re.split(r" \(|, ", name, maxsplit=1)[0][:26]
+        par = not dominated(q, c)
+        out.append([name, q, c, q if par else "", c if par else "", short])
+    meta = svc.spreadsheets().get(spreadsheetId=sid, fields="sheets(properties(sheetId,title),charts(chartId))").execute()
+    sh = next((x for x in meta["sheets"] if x["properties"]["title"] == QUALITY_TAB), None)
+    if sh is None:
+        resp = svc.spreadsheets().batchUpdate(spreadsheetId=sid, body={"requests": [{"addSheet": {"properties": {"title": QUALITY_TAB}}}]}).execute()
+        sh = {"properties": resp["replies"][0]["addSheet"]["properties"], "charts": []}
+    shid = sh["properties"]["sheetId"]
+    svc.spreadsheets().values().clear(spreadsheetId=sid, range=f"'{QUALITY_TAB}'!A1:F1000").execute()
+    svc.spreadsheets().values().update(spreadsheetId=sid, range=f"'{QUALITY_TAB}'!A1",
+                                       valueInputOption="RAW", body={"values": out}).execute()
+    if sh.get("charts"):
+        return
+    n = len(out)
+    def rng(c):
+        return {"sourceRange": {"sources": [{"sheetId": shid, "startRowIndex": 0, "endRowIndex": n, "startColumnIndex": c, "endColumnIndex": c + 1}]}}
+    def ser(c, color, size, lab):
+        return {"series": rng(c), "targetAxis": "LEFT_AXIS", "color": color, "pointStyle": {"size": size},
+                "dataLabel": {"type": "CUSTOM", "placement": "RIGHT", "textFormat": {"fontSize": 7},
+                              "customLabelData": rng(lab)}}
+    dark = {"rgbColor": {"red": 0.2, "green": 0.2, "blue": 0.2}}
+    spec = {"title": "Цена решённой задачи против качества (вертикальная ось логарифмическая)",
+            "basicChart": {"chartType": "SCATTER", "legendPosition": "BOTTOM_LEGEND", "headerCount": 1,
+                           "axis": [{"position": "BOTTOM_AXIS", "title": "solved % — доля решённых задач → лучше",
+                                     "format": {"foregroundColorStyle": dark, "fontSize": 12}},
+                                    {"position": "LEFT_AXIS", "title": "$ на решённую задачу → дороже",
+                                     "format": {"foregroundColorStyle": dark, "fontSize": 12}}],
+                           "domains": [{"domain": rng(1)}],
+                           "series": [ser(2, {"red": 0.26, "green": 0.52, "blue": 0.96}, 6, 5),
+                                      ser(4, {"red": 0.92, "green": 0.26, "blue": 0.21}, 9, 0)]}}
+    svc.spreadsheets().batchUpdate(spreadsheetId=sid, body={"requests": [{"addChart": {"chart": {
+        "spec": spec, "position": {"overlayPosition": {"anchorCell": {"sheetId": shid, "columnIndex": 7},
+                                                       "widthPixels": 1300, "heightPixels": 850}}}}}]}).execute()
+
+
 def main():
     records = gather()
     rows = agg(records)
@@ -767,6 +822,7 @@ def main():
     if reqs:
         svc.spreadsheets().batchUpdate(spreadsheetId=SID, body={"requests": reqs}).execute()
     write_chart_data(svc, SID, rows)
+    write_quality_chart(svc, SID, rows)
     print(f"записано: {len(rows)} моделей во вкладку «{TAB}»")
 
 
