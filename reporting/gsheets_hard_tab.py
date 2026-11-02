@@ -56,6 +56,12 @@ DISPLAY = {
     # окно 262144, KV q4_0, -ncmoe 30 (30 из 48 слоёв с экспертами в ОЗУ), --fit off, -ub 2048, без GUI,
     # сэмплинг по карточке модели (temp 1.0, top_p 0.95, top_k 40), 1 прогон на задачу [[01.11.2026]].
     "qcn-q4km-ncmoe30-256k": "Coder-Next-80B Q4_K_M, окно 256k, KV q4, -ncmoe 30, без GUI (3090, ×1)",
+    # Flash-Next 125B (AD-3.84bpw IQ4_XS, 85 ГБ > ОЗУ): окно 262144, KV q4_0, -ncmoe 34, --fit off, -ub 2048, без GUI,
+    # temp 1.0, top_p 0.95, top_k 20, лимит вывода 100000, дедлайн 80 мин [[01.11.2026]].
+    "fn-ad384-ncmoe34-256k": "Flash-Next-125B AD-3.84bpw IQ4_XS, окно 256k, KV q4, -ncmoe 34, без GUI (3090, ×1)",
+    # Nanbeige4.3-33B (сборка bartowski) IQ4_XS: окно 81920, KV q4_0, -ngl 99, -ub 512, без GUI,
+    # temp 1.0, top_p 0.95 (карточка модели), лимит вывода 60000 [[02.11.2026]].
+    "nb-iq4xs-80k": "Nanbeige4.3-33B IQ4_XS, окно 80k, KV q4, лимит вывода 60k, без GUI (3090, ×1)",
     "claude-haiku-4-5-20251001": "Haiku 4.5 (via Claude Code CLI, подписка, ~22k harness overhead)",
     "claude-sonnet-5": "Sonnet 5 (via Claude Code CLI, подписка, ~22k harness overhead)",
     "claude-opus-5": "Opus 5 (via Claude Code CLI, подписка, ~22k harness overhead)",
@@ -190,6 +196,8 @@ LOCAL_GP = {
     "unsloth/LFM2.5-24B-A2B-GGUF:UD-Q5_K_XL",
     "JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF:Q8_0",
     "qcn-q4km-ncmoe30-256k",
+    "fn-ad384-ncmoe34-256k",
+    "nb-iq4xs-80k",
     "xing4",
     "raw-muse",
     "raw-q4-xhigh",
