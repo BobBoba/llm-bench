@@ -585,14 +585,16 @@ def write_chart_data(svc, sid, rows):
     попадают (lg 0 не существует). Вторая пара колонок — только фронт Парето, рисуется красным.
     Саму диаграмму создали один раз; скрипт обновляет лишь значения."""
     import math
-    out = [["Модель", "lg решено/час", "lg $/решённая", "lg решено/час (Парето)", "lg $/решённая (Парето)"]]
+    out = [["Модель", "lg решено/час", "lg $/решённая", "lg решено/час (Парето)", "lg $/решённая (Парето)", "Короткая подпись"]]
     for r in rows:
         x = r["solved"] / (r["wall"] / 3600) if r["solved"] and r["wall"] else None
         y = r["cost_per_solved"]
         ok = x and y and x > 0 and y > 0
         lx, ly = (round(math.log10(x), 4), round(math.log10(y), 4)) if ok else ("", "")
-        out.append([display(r["model"]), lx, ly, lx if ok and r.get("pareto") else "", ly if ok and r.get("pareto") else ""])
-    svc.spreadsheets().values().clear(spreadsheetId=sid, range=f"'{CHART_TAB}'!A1:E1000").execute()
+        name = display(r["model"])
+        short = re.split(r" \(|, ", name, maxsplit=1)[0][:26]   # подпись на диаграмме: без пояснений в скобках
+        out.append([name, lx, ly, lx if ok and r.get("pareto") else "", ly if ok and r.get("pareto") else "", short])
+    svc.spreadsheets().values().clear(spreadsheetId=sid, range=f"'{CHART_TAB}'!A1:F1000").execute()
     svc.spreadsheets().values().update(spreadsheetId=sid, range=f"'{CHART_TAB}'!A1",
                                        valueInputOption="RAW", body={"values": out}).execute()
 
