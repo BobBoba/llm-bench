@@ -579,41 +579,22 @@ CHART_TAB = "Цена vs скорость"   # вкладка-источник �
 
 
 def write_chart_data(svc, sid, rows):
-    """Данные для диаграммы: десятичные логарифмы (решение владельца [[02.11.2026]]; в API Sheets нет
-    переключателя «log scale», а ручной вариант владелец не выбрал). Порядок строк
+    """Данные для диаграммы: реальные значения (подсказки при наведении показывают их же); логарифмическая
+    шкала осей включена владельцем в редакторе диаграммы (в API Sheets переключателя нет). Порядок строк
     тот же, что в основной вкладке. Строки без решённых задач или с нулевой ценой в диаграмму не
-    попадают (lg 0 не существует). Вторая пара колонок — только фронт Парето, рисуется красным.
+    попадают (логарифм нуля не существует). Вторая пара колонок — только фронт Парето, рисуется красным.
     Саму диаграмму создали один раз; скрипт обновляет лишь значения."""
     import math
-    out = [["Модель", "lg решено/час", "lg $/решённая", "lg решено/час (Парето)", "lg $/решённая (Парето)", "Короткая подпись"]]
+    out = [["Модель", "решено/час", "$/решённая", "решено/час (Парето)", "$/решённая (Парето)", "Короткая подпись"]]
     for r in rows:
         x = r["solved"] / (r["wall"] / 3600) if r["solved"] and r["wall"] else None
         y = r["cost_per_solved"]
         ok = x and y and x > 0 and y > 0
-        lx, ly = (round(math.log10(x), 4), round(math.log10(y), 4)) if ok else ("", "")
+        lx, ly = (round(x, 2), round(y, 6)) if ok else ("", "")
         name = display(r["model"])
         short = re.split(r" \(|, ", name, maxsplit=1)[0][:26]   # подпись на диаграмме: без пояснений в скобках
         out.append([name, lx, ly, lx if ok and r.get("pareto") else "", ly if ok and r.get("pareto") else "", short])
-    # Подписи делений осей — настоящие числа: родные подписи осей скрыты (в API Sheets нет формата
-    # «10^x»), вместо них рисуются невидимые точки с подписями. G/I — y-координаты точек-делений,
-    # H — их текст; строки идут сразу после данных, чтобы попасть в общую область домена.
-    start = len(out)
-    pad = [""] * 6
-    out += [pad[:] for _ in range(1)]               # пустая строка-разделитель
-    out[-1][0] = "— деления осей (служебные) —"
-    ycap = {-4: "$0,0001", -3: "$0,001", -2: "$0,01", -1: "$0,1", 0: "$1", 1: "$10"}
-    xcap = {0: "1", 1: "10", 2: "100", 3: "1000"}
-    ticks = []
-    for y, t in ycap.items():
-        ticks.append([0, y, "", t, ""])             # x, y для левых подписей
-    for x, t in xcap.items():
-        ticks.append([x, "", -4, t, ""])
-    for i, (x, gy, ix, t, _) in enumerate(ticks):
-        out.append(["", x, "", "", "", "", gy, t, ix])
-    for row in out:
-        row += [""] * (9 - len(row))
-    out[0] += ["lg $ (деления Y)", "подпись деления", "lg $ (деления X)"][: 9 - len(out[0])]
-    svc.spreadsheets().values().clear(spreadsheetId=sid, range=f"'{CHART_TAB}'!A1:I1000").execute()
+    svc.spreadsheets().values().clear(spreadsheetId=sid, range=f"'{CHART_TAB}'!A1:F1000").execute()
     svc.spreadsheets().values().update(spreadsheetId=sid, range=f"'{CHART_TAB}'!A1",
                                        valueInputOption="RAW", body={"values": out}).execute()
 
