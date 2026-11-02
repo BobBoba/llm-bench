@@ -594,7 +594,26 @@ def write_chart_data(svc, sid, rows):
         name = display(r["model"])
         short = re.split(r" \(|, ", name, maxsplit=1)[0][:26]   # подпись на диаграмме: без пояснений в скобках
         out.append([name, lx, ly, lx if ok and r.get("pareto") else "", ly if ok and r.get("pareto") else "", short])
-    svc.spreadsheets().values().clear(spreadsheetId=sid, range=f"'{CHART_TAB}'!A1:F1000").execute()
+    # Подписи делений осей — настоящие числа: родные подписи осей скрыты (в API Sheets нет формата
+    # «10^x»), вместо них рисуются невидимые точки с подписями. G/I — y-координаты точек-делений,
+    # H — их текст; строки идут сразу после данных, чтобы попасть в общую область домена.
+    start = len(out)
+    pad = [""] * 6
+    out += [pad[:] for _ in range(1)]               # пустая строка-разделитель
+    out[-1][0] = "— деления осей (служебные) —"
+    ycap = {-4: "$0,0001", -3: "$0,001", -2: "$0,01", -1: "$0,1", 0: "$1", 1: "$10"}
+    xcap = {0: "1", 1: "10", 2: "100", 3: "1000"}
+    ticks = []
+    for y, t in ycap.items():
+        ticks.append([0, y, "", t, ""])             # x, y для левых подписей
+    for x, t in xcap.items():
+        ticks.append([x, "", -4, t, ""])
+    for i, (x, gy, ix, t, _) in enumerate(ticks):
+        out.append(["", x, "", "", "", "", gy, t, ix])
+    for row in out:
+        row += [""] * (9 - len(row))
+    out[0] += ["lg $ (деления Y)", "подпись деления", "lg $ (деления X)"][: 9 - len(out[0])]
+    svc.spreadsheets().values().clear(spreadsheetId=sid, range=f"'{CHART_TAB}'!A1:I1000").execute()
     svc.spreadsheets().values().update(spreadsheetId=sid, range=f"'{CHART_TAB}'!A1",
                                        valueInputOption="RAW", body={"values": out}).execute()
 
