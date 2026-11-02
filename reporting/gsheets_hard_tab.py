@@ -134,8 +134,14 @@ DISPLAY = {
     # inception/mercury-3 [[27.10.2026]]: диффузионная модель с очень длинным рассуждением (в среднем
     # 69k токенов); при лимите 40k оборвано 11 из 22, при потолке провайдера 131k — всё ещё 8 из 22.
     # Закреплённые повторы ×3 [[27.10.2026]]: провайдеры закреплены без обхода (OR_PROVIDER_ORDER), medium по умолчанию клиента.
-    "anthropic/claude-haiku-5.5": "claude-haiku-5.5 (автоподбор провайдеров, ×3; перемер 02.11)",
-    "anthropic/claude-haiku-5.5~pinned": "claude-haiku-5.5 (Google Vertex→Bedrock, ×6)",
+    "anthropic/claude-haiku-5.5": "claude-haiku-5.5, medium (автоподбор провайдеров, ×3; перемер 02.11)",
+    "anthropic/claude-haiku-5.5~none": "claude-haiku-5.5, без рассуждений (Google Vertex→Bedrock, ×3)",
+    "anthropic/claude-haiku-5.5~low": "claude-haiku-5.5, low (Google Vertex→Bedrock, ×3)",
+    "anthropic/claude-haiku-5.5~high": "claude-haiku-5.5, high (Google Vertex→Bedrock, ×3)",
+    "anthropic/claude-haiku-5.5~xhigh": "claude-haiku-5.5, xhigh (Google Vertex→Bedrock, ×3; 7 из 66 оборваны лимитом 40k)",
+    "anthropic/claude-sonnet-5.5": "claude-sonnet-5.5, medium (×1)",
+    "anthropic/claude-sonnet-5.5~low": "claude-sonnet-5.5, low (автоподбор провайдеров, ×3)",
+    "anthropic/claude-haiku-5.5~pinned": "claude-haiku-5.5, medium (Google Vertex→Bedrock, ×6)",
     "reflection/beam-1.0-501b-a23b~pinned": "beam-1.0-501b-a23b (CoreWeave→Nebius, fp4, ×3)",
     "bytedance-seed/seed-2.0-code": "seed-2.0-code (1 из 22 оборван по лимиту 40k)",
     # Кампания [[28.10.2026]]. Облако: лимит выхода 100k (прежние облачные строки — 40k).
