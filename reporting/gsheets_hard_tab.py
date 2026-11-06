@@ -577,6 +577,28 @@ def to_values(rows):
     return values
 
 
+def fit_charts_to_data(svc, sid, tab, nrows):
+    """Диапазоны диаграмм заданы фиксированным числом строк — при появлении новых моделей они не
+    растут сами (владелец заметил [[06.11.2026]]: Ling и MiMo не попали на диаграммы). Поэтому после
+    каждой записи значений растягиваем конец диапазона у всех рядов, доменов и подписей до `nrows`."""
+    meta = svc.spreadsheets().get(spreadsheetId=sid, fields="sheets(properties(title),charts)").execute()
+    sh = next((x for x in meta["sheets"] if x["properties"]["title"] == tab), None)
+    reqs = []
+    for ch in (sh or {}).get("charts", []):
+        spec = ch["spec"]; b = spec["basicChart"]
+        def fix(node):
+            for src in node.get("sourceRange", {}).get("sources", []):
+                src["endRowIndex"] = nrows
+        for d in b.get("domains", []):
+            fix(d["domain"])
+        for sr in b.get("series", []):
+            fix(sr["series"])
+            fix(sr.get("dataLabel", {}).get("customLabelData", {}))
+        reqs.append({"updateChartSpec": {"chartId": ch["chartId"], "spec": spec}})
+    if reqs:
+        svc.spreadsheets().batchUpdate(spreadsheetId=sid, body={"requests": reqs}).execute()
+
+
 CHART_TAB = "Цена vs скорость"   # вкладка-источник точечной диаграммы «цена решённой против решено/час»
 
 
@@ -599,6 +621,7 @@ def write_chart_data(svc, sid, rows):
     svc.spreadsheets().values().clear(spreadsheetId=sid, range=f"'{CHART_TAB}'!A1:F1000").execute()
     svc.spreadsheets().values().update(spreadsheetId=sid, range=f"'{CHART_TAB}'!A1",
                                        valueInputOption="RAW", body={"values": out}).execute()
+    fit_charts_to_data(svc, sid, CHART_TAB, len(out))
 
 
 QUALITY_TAB = "Цена vs качество"   # вкладка-источник второй диаграммы «цена решённой против доли решённых»
@@ -633,6 +656,7 @@ def write_quality_chart(svc, sid, rows):
     svc.spreadsheets().values().update(spreadsheetId=sid, range=f"'{QUALITY_TAB}'!A1",
                                        valueInputOption="RAW", body={"values": out}).execute()
     if sh.get("charts"):
+        fit_charts_to_data(svc, sid, QUALITY_TAB, len(out))
         return
     n = len(out)
     def rng(c):
