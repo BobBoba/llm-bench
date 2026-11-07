@@ -141,8 +141,18 @@ DISPLAY = {
     "anthropic/claude-haiku-5.5~xhigh": "claude-haiku-5.5, xhigh (Google Vertex→Bedrock, ×3; 7 из 66 оборваны лимитом 40k)",
     "anthropic/claude-sonnet-5.5": "claude-sonnet-5.5, medium (×1)",
     "anthropic/claude-sonnet-5.5~low": "claude-sonnet-5.5, low (автоподбор провайдеров, ×3)",
-    "inclusionai/ling-3.1-flash": "ling-3.1-flash (Novita, ×3; 12 из 66 оборваны лимитом 40k)",
-    "xiaomi/mimo-v2.6-flash": "mimo-v2.6-flash (автоподбор провайдеров, ×3; 12 из 65 оборваны лимитом 40k, один срок 1200 с)",
+    # ling-3.1-flash / mimo-v2.6-flash / hy4 [[06.11.2026]]: лестница уровней рассуждения.
+    # Первая строка каждого семейства — medium (умолчание клиента), строки ~effort — тот же
+    # прогон ×3 с другим reasoning.effort. Уровень у этих моделей работает почти как
+    # переключатель: none даёт 0 токенов рассуждения, low/medium/high — близкие объёмы.
+    "inclusionai/ling-3.1-flash": "ling-3.1-flash, medium (Novita, ×3; 12 из 66 оборваны лимитом 40k)",
+    "inclusionai/ling-3.1-flash~low": "ling-3.1-flash, low (Novita, ×3; 8 из 66 оборваны лимитом 40k)",
+    "inclusionai/ling-3.1-flash~none": "ling-3.1-flash, без рассуждений (Novita, ×3)",
+    "xiaomi/mimo-v2.6-flash": "mimo-v2.6-flash, medium (автоподбор провайдеров, ×3; 12 из 65 оборваны лимитом 40k, один срок 1200 с)",
+    "xiaomi/mimo-v2.6-flash~low": "mimo-v2.6-flash, low (автоподбор провайдеров, ×3; 17 из 63 оборваны лимитом 40k, 2 срока 1200 с, 1 ошибка 502)",
+    "xiaomi/mimo-v2.6-flash~none": "mimo-v2.6-flash, без рассуждений (автоподбор провайдеров, ×3)",
+    "tencent/hy4": "hy4, medium (автоподбор провайдеров, ×3; 25 из 66 оборваны лимитом 40k)",
+    "tencent/hy4~low": "hy4, low (автоподбор провайдеров, ×3; 22 из 66 оборваны лимитом 40k)",
     "anthropic/claude-haiku-5.5~pinned": "claude-haiku-5.5, medium (Google Vertex→Bedrock, ×6)",
     "reflection/beam-1.0-501b-a23b~pinned": "beam-1.0-501b-a23b (CoreWeave→Nebius, fp4, ×3)",
     "bytedance-seed/seed-2.0-code": "seed-2.0-code (1 из 22 оборван по лимиту 40k)",
