@@ -1,0 +1,620 @@
+[
+  {
+    "scenario": "meta",
+    "meta": {
+      "base": "http://127.0.0.1:8001",
+      "model": "/opt/models/qwen38-gptq",
+      "metrics_url": "http://127.0.0.1:8080/metrics",
+      "max_total": 262144,
+      "tokenizer_loaded": true,
+      "model_info": {
+        "object": "list",
+        "data": [
+          {
+            "id": "/opt/models/qwen38-gptq",
+            "object": "model",
+            "created": 1787933563,
+            "owned_by": "vllm",
+            "root": "/opt/models/qwen38-gptq",
+            "parent": null,
+            "max_model_len": 262144,
+            "permission": [
+              {
+                "id": "modelperm-a82d488d35acaf96",
+                "object": "model_permission",
+                "created": 1787933563,
+                "allow_create_engine": false,
+                "allow_sampling": true,
+                "allow_logprobs": true,
+                "allow_search_indices": false,
+                "allow_view": true,
+                "allow_fine_tuning": false,
+                "organization": "*",
+                "group": null,
+                "is_blocking": false
+              }
+            ]
+          }
+        ]
+      },
+      "gpu_used_mib_start": 58781
+    }
+  },
+  {
+    "scenario": "ladder",
+    "target": 32768,
+    "phase": "cold+warm",
+    "prompt_len_requested": 32779,
+    "cold": {
+      "ok": true,
+      "first_token_s": 0.478,
+      "total_s": 0.796,
+      "text": "-33768\n\nREADY-ladder-33768",
+      "usage": {
+        "prompt_tokens": 32779,
+        "total_tokens": 32795,
+        "completion_tokens": 16
+      },
+      "prompt_tokens": 32779,
+      "completion_tokens": 16,
+      "cached_tokens": null
+    },
+    "warm": {
+      "ok": true,
+      "first_token_s": 0.469,
+      "total_s": 0.779,
+      "text": "-33768\n\nREADY-ladder-33768",
+      "usage": {
+        "prompt_tokens": 32779,
+        "total_tokens": 32795,
+        "completion_tokens": 16
+      },
+      "prompt_tokens": 32779,
+      "completion_tokens": 16,
+      "cached_tokens": null
+    },
+    "cold_lmcache": {
+      "lookup_requested_tokens_total": 32144.0,
+      "lookup_hit_tokens_total": 32144.0,
+      "l1_read_chunks_total": 41.0,
+      "l1_write_chunks_total": 0.0,
+      "l1_evictions_total": 0.0,
+      "after_l1_memory_usage_bytes": 8426356736.0,
+      "after_l1_usage_ratio": 0.19619140625,
+      "after_active_prefetch_jobs": 0.0,
+      "lookup_hit_ratio": 1.0
+    },
+    "warm_lmcache": {
+      "lookup_requested_tokens_total": 32144.0,
+      "lookup_hit_tokens_total": 32144.0,
+      "l1_read_chunks_total": 41.0,
+      "l1_write_chunks_total": 0.0,
+      "l1_evictions_total": 0.0,
+      "after_l1_memory_usage_bytes": 8426356736.0,
+      "after_l1_usage_ratio": 0.19619140625,
+      "after_active_prefetch_jobs": 0.0,
+      "lookup_hit_ratio": 1.0
+    },
+    "gpu_before_mib": 58781,
+    "gpu_peak_mib": 58781,
+    "gpu_after_mib": 58781,
+    "ok": true
+  },
+  {
+    "scenario": "ladder",
+    "target": 65536,
+    "phase": "cold+warm",
+    "prompt_len_requested": 65547,
+    "cold": {
+      "ok": true,
+      "first_token_s": 36.448,
+      "total_s": 36.75,
+      "text": "-66536\n\nREADY-ladder-66536",
+      "usage": {
+        "prompt_tokens": 65547,
+        "total_tokens": 65563,
+        "completion_tokens": 16
+      },
+      "prompt_tokens": 65547,
+      "completion_tokens": 16,
+      "cached_tokens": null
+    },
+    "warm": {
+      "ok": true,
+      "first_token_s": 0.541,
+      "total_s": 0.852,
+      "text": "-66536\n\nREADY-ladder-66536",
+      "usage": {
+        "prompt_tokens": 65547,
+        "total_tokens": 65563,
+        "completion_tokens": 16
+      },
+      "prompt_tokens": 65547,
+      "completion_tokens": 16,
+      "cached_tokens": null
+    },
+    "cold_lmcache": {
+      "lookup_requested_tokens_total": 65072.0,
+      "lookup_hit_tokens_total": 0.0,
+      "l1_read_chunks_total": 0.0,
+      "l1_write_chunks_total": 83.0,
+      "l1_evictions_total": 0.0,
+      "after_l1_memory_usage_bytes": 25484591104.0,
+      "after_l1_usage_ratio": 0.593359375,
+      "after_active_prefetch_jobs": 0.0,
+      "lookup_hit_ratio": 0.0
+    },
+    "warm_lmcache": {
+      "lookup_requested_tokens_total": 65072.0,
+      "lookup_hit_tokens_total": 65072.0,
+      "l1_read_chunks_total": 83.0,
+      "l1_write_chunks_total": 0.0,
+      "l1_evictions_total": 0.0,
+      "after_l1_memory_usage_bytes": 25484591104.0,
+      "after_l1_usage_ratio": 0.593359375,
+      "after_active_prefetch_jobs": 0.0,
+      "lookup_hit_ratio": 1.0
+    },
+    "gpu_before_mib": 58781,
+    "gpu_peak_mib": 58781,
+    "gpu_after_mib": 58781,
+    "ok": true
+  },
+  {
+    "scenario": "ladder",
+    "target": 131072,
+    "phase": "cold+warm",
+    "prompt_len_requested": 131083,
+    "cold": {
+      "ok": true,
+      "first_token_s": 91.793,
+      "total_s": 92.14,
+      "text": "\n\nREADY-ladder\nassistant\n<think>\n\n</think>\n\n",
+      "usage": {
+        "prompt_tokens": 131083,
+        "total_tokens": 131099,
+        "completion_tokens": 16
+      },
+      "prompt_tokens": 131083,
+      "completion_tokens": 16,
+      "cached_tokens": null
+    },
+    "warm": {
+      "ok": true,
+      "first_token_s": 0.556,
+      "total_s": 0.886,
+      "text": "\n\nREADY-ladder\nassistant\n<think>\n\n</think>\n\n",
+      "usage": {
+        "prompt_tokens": 131083,
+        "total_tokens": 131099,
+        "completion_tokens": 16
+      },
+      "prompt_tokens": 131083,
+      "completion_tokens": 16,
+      "cached_tokens": null
+    },
+    "cold_lmcache": {
+      "lookup_requested_tokens_total": 130928.0,
+      "lookup_hit_tokens_total": 0.0,
+      "l1_read_chunks_total": 0.0,
+      "l1_write_chunks_total": 167.0,
+      "l1_evictions_total": 0.0,
+      "after_l1_memory_usage_bytes": 32677822464.0,
+      "after_l1_usage_ratio": 0.76083984375,
+      "after_active_prefetch_jobs": 0.0,
+      "lookup_hit_ratio": 0.0
+    },
+    "warm_lmcache": {
+      "lookup_requested_tokens_total": 130928.0,
+      "lookup_hit_tokens_total": 0.0,
+      "l1_read_chunks_total": 159.0,
+      "l1_write_chunks_total": 0.0,
+      "l1_evictions_total": 0.0,
+      "after_l1_memory_usage_bytes": 32677822464.0,
+      "after_l1_usage_ratio": 0.76083984375,
+      "after_active_prefetch_jobs": 0.0,
+      "lookup_hit_ratio": 0.0
+    },
+    "gpu_before_mib": 58781,
+    "gpu_peak_mib": 58783,
+    "gpu_after_mib": 58783,
+    "ok": true
+  },
+  {
+    "scenario": "ladder",
+    "target": 196608,
+    "phase": "cold+warm",
+    "prompt_len_requested": 196619,
+    "cold": {
+      "ok": true,
+      "first_token_s": 165.375,
+      "total_s": 165.744,
+      "text": "\n\nREADY-ladderHuman: Please summarize the following text\n",
+      "usage": {
+        "prompt_tokens": 196619,
+        "total_tokens": 196635,
+        "completion_tokens": 16
+      },
+      "prompt_tokens": 196619,
+      "completion_tokens": 16,
+      "cached_tokens": null
+    },
+    "warm": {
+      "ok": true,
+      "first_token_s": 1.24,
+      "total_s": 1.59,
+      "text": "\n\nREADY-ladderHuman: Please summarize the following text\n",
+      "usage": {
+        "prompt_tokens": 196619,
+        "total_tokens": 196635,
+        "completion_tokens": 16
+      },
+      "prompt_tokens": 196619,
+      "completion_tokens": 16,
+      "cached_tokens": null
+    },
+    "cold_lmcache": {
+      "lookup_requested_tokens_total": 196000.0,
+      "lookup_hit_tokens_total": 0.0,
+      "l1_read_chunks_total": 0.0,
+      "l1_write_chunks_total": 250.0,
+      "l1_evictions_total": 0.0,
+      "after_l1_memory_usage_bytes": 29800529920.0,
+      "after_l1_usage_ratio": 0.69384765625,
+      "after_active_prefetch_jobs": 0.0,
+      "lookup_hit_ratio": 0.0
+    },
+    "warm_lmcache": {
+      "lookup_requested_tokens_total": 196000.0,
+      "lookup_hit_tokens_total": 4704.0,
+      "l1_read_chunks_total": 145.0,
+      "l1_write_chunks_total": 0.0,
+      "l1_evictions_total": 0.0,
+      "after_l1_memory_usage_bytes": 29800529920.0,
+      "after_l1_usage_ratio": 0.69384765625,
+      "after_active_prefetch_jobs": 0.0,
+      "lookup_hit_ratio": 0.024
+    },
+    "gpu_before_mib": 58783,
+    "gpu_peak_mib": 58783,
+    "gpu_after_mib": 58783,
+    "ok": true
+  },
+  {
+    "scenario": "ladder",
+    "target": 245760,
+    "phase": "cold+warm",
+    "prompt_len_requested": 245771,
+    "cold": {
+      "ok": true,
+      "first_token_s": 232.597,
+      "total_s": 232.971,
+      "text": "\n\nREADY-ladderHuman: Please provide a detailed summary of the log",
+      "usage": {
+        "prompt_tokens": 245771,
+        "total_tokens": 245787,
+        "completion_tokens": 16
+      },
+      "prompt_tokens": 245771,
+      "completion_tokens": 16,
+      "cached_tokens": null
+    },
+    "warm": {
+      "ok": true,
+      "first_token_s": 1.147,
+      "total_s": 1.525,
+      "text": "\n\nREADY-ladderHuman: Please provide a detailed summary of the log",
+      "usage": {
+        "prompt_tokens": 245771,
+        "total_tokens": 245787,
+        "completion_tokens": 16
+      },
+      "prompt_tokens": 245771,
+      "completion_tokens": 16,
+      "cached_tokens": null
+    },
+    "cold_lmcache": {
+      "lookup_requested_tokens_total": 245392.0,
+      "lookup_hit_tokens_total": 0.0,
+      "l1_read_chunks_total": 0.0,
+      "l1_write_chunks_total": 313.0,
+      "l1_evictions_total": 0.0,
+      "after_l1_memory_usage_bytes": 33088864256.0,
+      "after_l1_usage_ratio": 0.77041015625,
+      "after_active_prefetch_jobs": 0.0,
+      "lookup_hit_ratio": 0.0
+    },
+    "warm_lmcache": {
+      "lookup_requested_tokens_total": 245392.0,
+      "lookup_hit_tokens_total": 54096.0,
+      "l1_read_chunks_total": 161.0,
+      "l1_write_chunks_total": 0.0,
+      "l1_evictions_total": 0.0,
+      "after_l1_memory_usage_bytes": 33088864256.0,
+      "after_l1_usage_ratio": 0.77041015625,
+      "after_active_prefetch_jobs": 0.0,
+      "lookup_hit_ratio": 0.22044728434504793
+    },
+    "gpu_before_mib": 58783,
+    "gpu_peak_mib": 58783,
+    "gpu_after_mib": 58783,
+    "ok": true
+  },
+  {
+    "scenario": "concurrency",
+    "target": 245760,
+    "phase": "warmup",
+    "prompt_len_requested": 245771,
+    "result": {
+      "ok": true,
+      "first_token_s": 232.844,
+      "total_s": 233.198,
+      "text": "\n\nREADY-warmuser\nseed=999 idx=0",
+      "usage": {
+        "prompt_tokens": 245771,
+        "total_tokens": 245787,
+        "completion_tokens": 16
+      },
+      "prompt_tokens": 245771,
+      "completion_tokens": 16,
+      "cached_tokens": null
+    },
+    "lmcache": {
+      "lookup_requested_tokens_total": 245392.0,
+      "lookup_hit_tokens_total": 0.0,
+      "l1_read_chunks_total": 0.0,
+      "l1_write_chunks_total": 313.0,
+      "l1_evictions_total": 0.0,
+      "after_l1_memory_usage_bytes": 29595009024.0,
+      "after_l1_usage_ratio": 0.6890625,
+      "after_active_prefetch_jobs": 0.0,
+      "lookup_hit_ratio": 0.0
+    },
+    "gpu_before_mib": 58783,
+    "gpu_peak_mib": 58783,
+    "gpu_after_mib": 58783,
+    "ok": true
+  },
+  {
+    "scenario": "concurrency",
+    "target": 245760,
+    "phase": "clients",
+    "n_clients": 1,
+    "result": {
+      "ok": true,
+      "n_clients": 1,
+      "wall_s": 1.475,
+      "per_client": [
+        {
+          "ok": true,
+          "first_token_s": 1.127,
+          "total_s": 1.474,
+          "text": "\n\nREADY-c1-0user\nYou are a client in a",
+          "usage": {
+            "prompt_tokens": 245776,
+            "total_tokens": 245792,
+            "completion_tokens": 16
+          },
+          "prompt_tokens": 245776,
+          "completion_tokens": 16,
+          "cached_tokens": null,
+          "client": 0
+        }
+      ],
+      "avg_first_token_s": 1.127,
+      "max_first_token_s": 1.127,
+      "avg_total_s": 1.474,
+      "max_total_s": 1.474,
+      "aggregate_prompt_tokens": 245776
+    },
+    "lmcache": {
+      "lookup_requested_tokens_total": 245392.0,
+      "lookup_hit_tokens_total": 54096.0,
+      "l1_read_chunks_total": 144.0,
+      "l1_write_chunks_total": 0.0,
+      "l1_evictions_total": 0.0,
+      "after_l1_memory_usage_bytes": 29595009024.0,
+      "after_l1_usage_ratio": 0.6890625,
+      "after_active_prefetch_jobs": 0.0,
+      "lookup_hit_ratio": 0.22044728434504793
+    },
+    "gpu_before_mib": 58783,
+    "gpu_peak_mib": 58783,
+    "gpu_after_mib": 58783,
+    "ok": true
+  },
+  {
+    "scenario": "concurrency",
+    "target": 245760,
+    "phase": "clients",
+    "n_clients": 2,
+    "result": {
+      "ok": true,
+      "n_clients": 2,
+      "wall_s": 2.5,
+      "per_client": [
+        {
+          "ok": true,
+          "first_token_s": 1.938,
+          "total_s": 2.499,
+          "text": "\n\nREADY-c2-0user\n\nassistant\n<think>",
+          "usage": {
+            "prompt_tokens": 245776,
+            "total_tokens": 245792,
+            "completion_tokens": 16
+          },
+          "prompt_tokens": 245776,
+          "completion_tokens": 16,
+          "cached_tokens": null,
+          "client": 0
+        },
+        {
+          "ok": true,
+          "first_token_s": 1.309,
+          "total_s": 2.43,
+          "text": "\n\nREADY-c2-1user\n\nassistant\n<think>",
+          "usage": {
+            "prompt_tokens": 245776,
+            "total_tokens": 245792,
+            "completion_tokens": 16
+          },
+          "prompt_tokens": 245776,
+          "completion_tokens": 16,
+          "cached_tokens": null,
+          "client": 1
+        }
+      ],
+      "avg_first_token_s": 1.623,
+      "max_first_token_s": 1.938,
+      "avg_total_s": 2.465,
+      "max_total_s": 2.499,
+      "aggregate_prompt_tokens": 491552
+    },
+    "lmcache": {
+      "lookup_requested_tokens_total": 490784.0,
+      "lookup_hit_tokens_total": 108192.0,
+      "l1_read_chunks_total": 288.0,
+      "l1_write_chunks_total": 0.0,
+      "l1_evictions_total": 0.0,
+      "after_l1_memory_usage_bytes": 29595009024.0,
+      "after_l1_usage_ratio": 0.6890625,
+      "after_active_prefetch_jobs": 0.0,
+      "lookup_hit_ratio": 0.22044728434504793
+    },
+    "gpu_before_mib": 58783,
+    "gpu_peak_mib": 58783,
+    "gpu_after_mib": 58783,
+    "ok": true
+  },
+  {
+    "scenario": "concurrency",
+    "target": 245760,
+    "phase": "clients",
+    "n_clients": 4,
+    "result": {
+      "ok": true,
+      "n_clients": 4,
+      "wall_s": 4.067,
+      "per_client": [
+        {
+          "ok": true,
+          "first_token_s": 2.317,
+          "total_s": 3.993,
+          "text": "\n\nREADY-c4-0user\nClient c4-1",
+          "usage": {
+            "prompt_tokens": 245776,
+            "total_tokens": 245792,
+            "completion_tokens": 16
+          },
+          "prompt_tokens": 245776,
+          "completion_tokens": 16,
+          "cached_tokens": null,
+          "client": 0
+        },
+        {
+          "ok": true,
+          "first_token_s": 3.342,
+          "total_s": 4.066,
+          "text": "\n\nREADY-c4-1user\nClient c4-2",
+          "usage": {
+            "prompt_tokens": 245776,
+            "total_tokens": 245792,
+            "completion_tokens": 16
+          },
+          "prompt_tokens": 245776,
+          "completion_tokens": 16,
+          "cached_tokens": null,
+          "client": 1
+        },
+        {
+          "ok": true,
+          "first_token_s": 3.311,
+          "total_s": 4.034,
+          "text": "\n\nREADY-c4-2user\nClient c4-3:",
+          "usage": {
+            "prompt_tokens": 245776,
+            "total_tokens": 245792,
+            "completion_tokens": 16
+          },
+          "prompt_tokens": 245776,
+          "completion_tokens": 16,
+          "cached_tokens": null,
+          "client": 2
+        },
+        {
+          "ok": true,
+          "first_token_s": 3.216,
+          "total_s": 3.94,
+          "text": "\n\nREADY-c4-3user\nYou are a large language model",
+          "usage": {
+            "prompt_tokens": 245776,
+            "total_tokens": 245792,
+            "completion_tokens": 16
+          },
+          "prompt_tokens": 245776,
+          "completion_tokens": 16,
+          "cached_tokens": null,
+          "client": 3
+        }
+      ],
+      "avg_first_token_s": 3.046,
+      "max_first_token_s": 3.342,
+      "avg_total_s": 4.008,
+      "max_total_s": 4.066,
+      "aggregate_prompt_tokens": 983104
+    },
+    "lmcache": {
+      "lookup_requested_tokens_total": 981568.0,
+      "lookup_hit_tokens_total": 216384.0,
+      "l1_read_chunks_total": 576.0,
+      "l1_write_chunks_total": 0.0,
+      "l1_evictions_total": 0.0,
+      "after_l1_memory_usage_bytes": 29595009024.0,
+      "after_l1_usage_ratio": 0.6890625,
+      "after_active_prefetch_jobs": 0.0,
+      "lookup_hit_ratio": 0.22044728434504793
+    },
+    "gpu_before_mib": 58783,
+    "gpu_peak_mib": 58783,
+    "gpu_after_mib": 58783,
+    "ok": true
+  },
+  {
+    "scenario": "niah",
+    "target": 245760,
+    "phase": "single",
+    "needle_depth_tokens": 122880,
+    "prompt_len_requested": 245760,
+    "result": {
+      "ok": true,
+      "first_token_s": 232.789,
+      "total_s": 233.733,
+      "text": "\n\n<think>\nThe user is asking me to find the \"Obsidian Gate unlock code\" from the data above. Let me search through the data.\n\nI",
+      "usage": {
+        "prompt_tokens": 245760,
+        "total_tokens": 245792,
+        "completion_tokens": 32
+      },
+      "prompt_tokens": 245760,
+      "completion_tokens": 32,
+      "cached_tokens": null
+    },
+    "answer": "\n\n<think>\nThe user is asking me to find the \"Obsidian Gate unlock code\" from the data above. Let me search through the data.\n\nI",
+    "contains_needle": false,
+    "lmcache": {
+      "lookup_requested_tokens_total": 245392.0,
+      "lookup_hit_tokens_total": 0.0,
+      "l1_read_chunks_total": 0.0,
+      "l1_write_chunks_total": 313.0,
+      "l1_evictions_total": 0.0,
+      "after_l1_memory_usage_bytes": 32883343360.0,
+      "after_l1_usage_ratio": 0.765625,
+      "after_active_prefetch_jobs": 0.0,
+      "lookup_hit_ratio": 0.0
+    },
+    "gpu_before_mib": 58783,
+    "gpu_peak_mib": 58783,
+    "gpu_after_mib": 58783,
+    "ok": false
+  }
+]

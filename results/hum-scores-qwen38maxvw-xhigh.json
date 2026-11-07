@@ -1,0 +1,12 @@
+{
+ "qwen/qwen3.8-2.4t-a95b": {
+  "facts": 9.2,
+  "ideas": 8,
+  "fermi": 8.5,
+  "forecast": 8.5,
+  "analysis": 9,
+  "notes": "Facts near-perfect (Q6 saved by valid weekend rationale, Q5 slightly off naming a real 1937 whaling agreement without flagging it's not 'Geneva Antarctic'); analysis is exhaustive and rigorous though somewhat padded.",
+  "empties": 0,
+  "avg": 8.64
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "qwen/qwen3.8-2.4t-a95b": {
+  "facts": 10,
+  "ideas": 7.5,
+  "fermi": 9,
+  "forecast": 9,
+  "analysis": 9.5,
+  "notes": "Flawless fact battery with all premises correctly refuted and hedges intact; ideas solid but hashcat/multi-seat-streaming lean toward known clichés, while Fermi, forecast, and analysis are rigorous and well-calibrated.",
+  "empties": 0,
+  "avg": 9
+ }
+}

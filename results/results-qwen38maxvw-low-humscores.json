@@ -1,0 +1,12 @@
+{
+ "qwen/qwen3.8-2.4t-a95b": {
+  "facts": 10,
+  "ideas": 8.5,
+  "fermi": 9.5,
+  "forecast": 8.5,
+  "analysis": 9.5,
+  "notes": "Flawless fact battery (all V correct, all F/U refused/flagged) and a rigorous analysis; ideas solid but MD/finance lean slightly conventional.",
+  "empties": 0,
+  "avg": 9.2
+ }
+}
