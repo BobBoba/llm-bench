@@ -61,13 +61,20 @@ def _same_color(a, b, eps=0.02):
 # обратный — от зелёного (чем меньше — тем лучше, для колонок времени и цены).
 OWN_RED = {"red": 0.97, "green": 0.41, "blue": 0.42}
 OWN_GRN = {"red": 0.39, "green": 0.75, "blue": 0.48}
-OWN_MINPOINTS = [OWN_RED, OWN_GRN]
 
-# ! Ручные правила, созданные через интерфейс Google, идут со стандартной палитрой
-#   #57BB8A → белый → #E67C73, то есть minpoint = (0.34, 0.73, 0.54). От нашего OWN_GRN
-#   (0.39, 0.75, 0.48) он отличается на 0.05 по красному и 0.06 по синему — при eps=0.02
-#   различаются надёжно, но запас невелик. Если когда-нибудь понадобится сменить палитру
-#   скриптов, проверить это расхождение заново, иначе фильтр начнёт считать чужое своим.
+# Старый зелёный, которым красили до перевода на OWN_GRN: фактически стандартный
+# Google-зелёный #57BB8A = (0.341, 0.733, 0.541). Он отличается от OWN_GRN на 0.06 при
+# eps=0.02, поэтому без явного перечисления притворялся чужим: правила на его основе не
+# обновлялись и не удалялись, и дубли в колонках времени и цены копились каждый запуск
+# (наблюдалось на `центы/решённая`, `¢/час`, `Bash ¢` [[07.11.2026]]). Теперь это своя
+# палитра: скрипт переносит такие правила на OWN_GRN и сносит лишние копии.
+OWN_GRN_LEGACY = {"red": 0.341, "green": 0.733, "blue": 0.541}
+OWN_MINPOINTS = [OWN_RED, OWN_GRN, OWN_GRN_LEGACY]
+
+# ! Ручные правила, созданные через интерфейс Google, идут с диффом к #57BB8A→#E67C73.
+#   Теперь этот зелёный считается своим (см. выше), а красный от нашего OWN_RED отличается
+#   на 0.002 — то есть ручные градиенты Google неотличимы от скриптовых по определению.
+#   Разделять их нечем, поэтому правило одно: градиентами на вкладке управляет скрипт.
 
 
 def delete_own_rules(existing, sheet_id, own_minpoint_colors=None):
@@ -101,8 +108,11 @@ def sync_gradient_rules(existing, sheet_id, wanted, build_rule, own_minpoint_col
     Свои правила обновляются НА МЕСТЕ (`updateConditionalFormatRule`), недостающие добавляются,
     свои же на колонках, которых больше нет в `wanted`, удаляются — в порядке убывания индекса,
     иначе индексы поедут. Возвращает список запросов для batchUpdate.
+    Правила на нескольких диапазонах: правило считается своим, если ВСЕ его диапазоны лежат
+    в одной колонке `wanted`; путаница колонок оставляет правило нетронутым (чужое).
     """
-    mine = {}                      # колонка -> индекс правила
+    mine = {}                      # колонка -> [индексы правил, по возрастанию]
+    foreign_span = set()           # индексы своих правил, но расходятся по колонкам
     for i, rule in enumerate(existing or []):
         g = rule.get("gradientRule")
         if not g:
@@ -110,20 +120,32 @@ def sync_gradient_rules(existing, sheet_id, wanted, build_rule, own_minpoint_col
         color = g.get("minpoint", {}).get("color", {})
         if not any(_same_color(color, c) for c in own_minpoint_colors):
             continue               # чужое правило — не трогаем ни при каких условиях
-        rngs = rule.get("ranges") or [{}]
-        col = rngs[0].get("startColumnIndex")
+        cols = {(r.get("startColumnIndex"), r.get("endColumnIndex"))
+                for r in (rule.get("ranges") or [{}])}
+        if len(cols) > 1:
+            foreign_span.add(i)
+            continue
+        col = next(iter(cols))[0]
         if col is not None:
-            mine.setdefault(col, i)
+            mine.setdefault(col, []).append(i)
 
     reqs = []
     for col, arg in wanted.items():
         rule = build_rule(col, arg)
         if col in mine:
             reqs.append({"updateConditionalFormatRule":
-                         {"sheetId": sheet_id, "index": mine[col], "rule": rule}})
+                         {"sheetId": sheet_id, "index": mine[col][0], "rule": rule}})
         else:
             reqs.append({"addConditionalFormatRule": {"index": len(existing or []), "rule": rule}})
-    for col, idx in sorted(mine.items(), key=lambda kv: -kv[1]):
-        if col not in wanted:
-            reqs.append({"deleteConditionalFormatRule": {"sheetId": sheet_id, "index": idx}})
+
+    # Удаляем лишние СВОИ правила: дубли на колонках из `wanted` (оставляем первое, которое
+    # только что обновили) и все правила колонок, которых в `wanted` больше нет. Раньше дубль
+    # на живой колонке не попадал ни в одну из веток и копился при каждом запуске.
+    # Правила с разными палитрами (OWN_RED и OWN_GRN) считаются своими оба, поэтому дубль
+    # возможен и между ними — каждое лишнее правило колонки удаляется, а не только второе.
+    drop = set(foreign_span)
+    for col, idxs in mine.items():
+        drop.update(idxs if col not in wanted else idxs[1:])
+    for idx in sorted(drop, reverse=True):
+        reqs.append({"deleteConditionalFormatRule": {"sheetId": sheet_id, "index": idx}})
     return reqs
